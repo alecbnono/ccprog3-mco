@@ -1,6 +1,9 @@
 # Compiled class file
 *.class
+
+# Ignore everything inside bin/ But keep the bin/ directory itself
 bin/*
+!bin/.gitkeepin/*
 
 # Log file
 *.log
