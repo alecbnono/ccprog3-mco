@@ -3,7 +3,7 @@
 
 # Ignore everything inside bin/ But keep the bin/ directory itself
 bin/*
-!bin/.gitkeepin/*
+!bin/.gitkeep
 
 # Log file
 *.log
