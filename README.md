@@ -2,8 +2,6 @@
 
 ☕ _Mobile Coffee Vendor Simulation_ | 🚚 _OOP Design Project_
 
----
-
 ## 📌 Project Overview
 
 **JavaJeeps** simulates a mobile coffee truck business inspired by Filipino "Jolli-jeeps". This Java application models:
@@ -17,15 +15,15 @@
 ✅ Sales transaction processing  
 ✅ Business analytics dashboard
 
-# How to use
+## How to use
 
-## Clone Repository
+### Clone Repository
 
 ```
 git clone https://github.com/alecbnono/ccprog3-mco.git
 ```
 
-## Compile and run (Java 17+ required)
+### Compile and run (Java 17+ required)
 
 ```
 cd ccprog3-mco
@@ -33,7 +31,7 @@ javac -d bin src/*.java src/view/*.java src/model/*.java src/controller/*.java
 java -cp bin Driver
 ```
 
-# Project organization
+## Project organization
 
 The MVC structure is in `src` folder. In it, there are three folders and one files.
 
