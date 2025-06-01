@@ -19,4 +19,18 @@ public class ConsoleView {
         System.out.println("============================");
     }
 
+    public void displaySelectTruck() {
+        System.out.println("============================");
+        System.out.println("|    Select Coffee Truck   |");
+        System.out.println("============================");
+        System.out.println("[1] Regular Truck (JavaJeep)");
+        System.out.println("[2] Special Truck (JavaJeep+)");
+        System.out.println("[3] Exit");
+        System.out.println("============================");
+    }
+
+    public int getMenuInput() {
+        System.out.print("Enter choice: ");
+        return scanner.nextInt();
+    }
 }
