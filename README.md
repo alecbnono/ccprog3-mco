@@ -1,5 +1,3 @@
-# ccprog3-mco
-
 # JavaJeeps: Coffee Truck Business Simulation
 
 ☕ _Mobile Coffee Vendor Simulation_ | 🚚 _OOP Design Project_
