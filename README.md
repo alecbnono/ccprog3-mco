@@ -30,6 +30,12 @@ cd ccprog3-mco
 javac -d bin src/*.java src/view/*.java src/model/*.java src/controller/*.java
 java -cp bin Driver
 ```
+### How to generate javadoc
+
+```
+cd ccprog3-mco
+javadoc -d doc -sourcepath src -subpackages model:view:controller
+```
 
 ## Project organization
 
@@ -52,3 +58,4 @@ The MVC structure is in `src` folder. In it, there are three folders and one fil
 | model           | `Directory` | Contains all application model classes         |
 | view            | `Directory` | Contains all application view classes          |
 | Driver&#46;java | `File`      | Class responsible for starting the application |
+
