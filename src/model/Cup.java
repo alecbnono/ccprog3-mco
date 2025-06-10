@@ -1,8 +1,7 @@
 package model;
 
 public interface Cup {
-    SmallCup SmallCup = new SmallCup();
-    MediumCup MediumCup = new MediumCup();
-    LargeCup LargeCup = new LargeCup();
-
+    double getVolumeinflOz();
+    int getQuantity();
+    void setQuantity(int quantity);
 }
