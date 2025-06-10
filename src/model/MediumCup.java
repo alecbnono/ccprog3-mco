@@ -13,6 +13,4 @@ public class MediumCup {
         public void setQuantity(int quantity) {
             this.quantity = quantity;
         }
-
-
 }
