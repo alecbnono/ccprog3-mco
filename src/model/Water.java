@@ -1,6 +1,6 @@
 package model;
 
-public final class Water {
+public class Water {
     private final double volumeinflOz = 640;
 
     public double getVolumeinflOz() {

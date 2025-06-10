@@ -1,6 +1,6 @@
 package model;
 
-public final class Milk {
+public class Milk {
     private final double volumeinflOz = 640;
 
     public double getVolumeinflOz() {
