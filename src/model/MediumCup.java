@@ -1,19 +1,8 @@
 package model;
 
-public class MediumCup implements Cup {
-        private final double VolumeinflOz = 12;
-        private int quantity;
+public class MediumCup extends Cup {
 
-        @Override
-        public double getVolumeinflOz() {
-            return VolumeinflOz;
-        }
-        @Override
-        public int  getQuantity() {
-            return quantity;
-        }
-        @Override
-        public void setQuantity(int quantity) {
-            this.quantity = quantity;
+        public MediumCup(int quantity, double VolumeinflOz) {
+                super(quantity, VolumeinflOz);
         }
 }

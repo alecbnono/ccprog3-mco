@@ -6,6 +6,7 @@ import java.util.Scanner;
  * RegularCoffeeTruck
  */
 public class RegularCoffeeTruck extends CoffeeTruck {
+
     private int smallCup, mediumCup, largeCup;
     private float coffeeBeans, milk, water;
     public RegularCoffeeTruck() {
