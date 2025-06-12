@@ -1,10 +1,8 @@
 package model;
 
-public class Water implements Liquid{
-    private final double volumeinflOz = 640;
+public class Water extends Liquid{
 
-    @Override
-    public double getVolumeinflOz() {
-        return volumeinflOz;
+    public Water(double VolumeinflOz) {
+        super(VolumeinflOz);
     }
 }
