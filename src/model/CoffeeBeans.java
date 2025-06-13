@@ -1,11 +1,12 @@
 package model;
 
 public class CoffeeBeans {
-    private double WeightInGrams;
-    public double getWeightInGrams() {
-        return WeightInGrams;
+    private int quantity;
+
+    public CoffeeBeans(int quantity) {
+        this.quantity = quantity;
     }
-    public void setWeightInGrams(double weightInGrams) {
-        this.WeightInGrams = weightInGrams;
+    public int getQuantity() {
+        return quantity;
     }
 }
