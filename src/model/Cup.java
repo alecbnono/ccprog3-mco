@@ -1,11 +1,14 @@
 package model;
 
-public class Cup {
+import java.io.Serializable;
+
+public class Cup extends Item{
 
     private String size;
     private int capacity;
 
     public Cup(String size, int capacity) {
+        super();
         this.size = size;
         this.capacity = capacity;
     }

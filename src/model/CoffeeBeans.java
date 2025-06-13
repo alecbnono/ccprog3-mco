@@ -1,12 +1,9 @@
 package model;
 
-public class CoffeeBeans {
-    private int quantity;
+public class CoffeeBeans extends Item{
 
-    public CoffeeBeans(int quantity) {
-        this.quantity = quantity;
+    public CoffeeBeans(double quantity) {
+        super();
     }
-    public int getQuantity() {
-        return quantity;
-    }
+
 }
