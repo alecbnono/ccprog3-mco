@@ -1,24 +1,18 @@
 package model;
 
 public class Cup {
-    private int quantity;
-    private double VolumeinflOz;
 
-    public Cup(int quantity, double  VolumeinflOz) {
-        this.quantity = quantity;
-        this.VolumeinflOz = VolumeinflOz;
-    }
+    private String size;
+    private int capacity;
 
-    public int getQuantity(){
-        return quantity;
+    public Cup(String size, int capacity) {
+        this.size = size;
+        this.capacity = capacity;
     }
-    public void setQuantity(int quantity){
-        this.quantity = quantity;
+    public String getSize() {
+        return size;
     }
-    public double getVolumeinflOz(){
-        return VolumeinflOz;
-    }
-    public void setVolumeinflOz(double VolumeinflOz){
-        this.VolumeinflOz = VolumeinflOz;
+    public int  getCapacity() {
+        return capacity;
     }
 }
