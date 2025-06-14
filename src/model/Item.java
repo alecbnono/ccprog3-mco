@@ -7,7 +7,9 @@ public abstract class Item {
     private double quantity;
 
     public Item(){
-
+        this.name = "";
+        this.unit = "";
+        this.quantity = 0;
     }
     public String getName() {
         return name;
@@ -19,15 +21,24 @@ public abstract class Item {
         return unit;
     }
     public boolean isDepleted(){
-        return true;
-        //fill
+        return quantity <= 0;
     }
-    public boolean restock(){
-        return true;
-        //fill
+    public boolean restock(double amount){
+        if(amount <= 0){
+            return false;
+        }
+        else {
+            quantity += amount;
+            return true;
+        }
     }
-    public boolean consume(){
-        return true;
-        //fill
+    public boolean consume(double amount){
+        if(amount <= 0 || quantity < amount){
+            return false;
+        }
+        else {
+            quantity -= amount;
+            return true;
+        }
     }
 }
