@@ -8,8 +8,15 @@ public class Cup extends Item{
     private int capacity;
 
     public Cup(String size, int capacity) {
-        super();
         this.size = size;
+        this.name = size + " Cup";
+        this.unit = "pcs";
+        this.quantity = switch(size.toLowerCase()){
+            case "large" -> 40;
+            case "medium" -> 64;
+            case "small" -> 80;
+            default -> 50;
+        };
         this.capacity = capacity;
     }
     public String getSize() {

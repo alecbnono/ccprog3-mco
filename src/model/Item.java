@@ -2,11 +2,11 @@ package model;
 
 public abstract class Item {
 
-    private String name;
-    private String unit;
-    private double quantity;
+    protected String name;
+    protected String unit;
+    protected double quantity;
 
-    public Item(){
+    public Item() {
         this.name = "";
         this.unit = "";
         this.quantity = 0;

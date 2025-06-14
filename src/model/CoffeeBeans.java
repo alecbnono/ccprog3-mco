@@ -3,7 +3,9 @@ package model;
 public class CoffeeBeans extends Item{
 
     public CoffeeBeans(double quantity) {
-        super();
+        this.name = "Coffee Beans";
+        this.quantity = quantity;
+        this.unit = "grams";
     }
 
 }

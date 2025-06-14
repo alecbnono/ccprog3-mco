@@ -3,6 +3,8 @@ package model;
 public class Liquid extends Item{
 
     public Liquid(String name, double quantity) {
-        super();
+        this.name = name;
+        this.quantity = quantity;
+        this.unit = "fl. oz.";
     }
 }
