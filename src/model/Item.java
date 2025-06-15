@@ -1,6 +1,6 @@
 package model;
 
-public abstract class Item {
+public class Item {
 
     protected String name;
     protected String unit;

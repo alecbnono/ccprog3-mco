@@ -1,8 +1,12 @@
 package model;
 
-public class StorageBox {
+public class StorageBin {
     private Item storedItem;
-
+    private int maxQuantity;
+    public StorageBin(Item storedItem, int maxQuantity) {
+        this.storedItem = storedItem;
+        this.maxQuantity = maxQuantity;
+    }
     public boolean emptyBox() {
         return storedItem == null;
     }
