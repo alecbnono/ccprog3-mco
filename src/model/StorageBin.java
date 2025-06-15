@@ -3,6 +3,7 @@ package model;
 public class StorageBin {
     private Item storedItem;
     private int maxQuantity;
+
     public StorageBin(Item storedItem, int maxQuantity) {
         this.storedItem = storedItem;
         this.maxQuantity = maxQuantity;
