@@ -6,7 +6,7 @@ public class CoffeeRecipe {
     private final double BEAN_RATIO = 1.0 / 19.0;
     private final double  FLOZ_TO_GRAMS = 28.34962;
 
-    private double getFlOz(String size){
+    private double getCupOz(String size){
         return switch(size.toLowerCase()){
             case "small" -> 8;
             case "medium" -> 12;
@@ -14,14 +14,38 @@ public class CoffeeRecipe {
             default -> 0;
         };
     }
+    private boolean consume(StorageBin[] inventory, String[] itemNames, double[] amounts) {
+        for (int i = 0; i < itemNames.length; i++) {
+            if (!consumeChecker(inventory, itemNames[i], amounts[i], false)) {
+                return false;
+            }
+        }
 
-    private boolean brewEspresso(StorageBin[] inventory, double fluidOz){
-        double EspressoGrams = fluidOz * FLOZ_TO_GRAMS;
-        double CoffeeGrams = EspressoGrams * BEAN_RATIO;
-        double WaterGrams = EspressoGrams - CoffeeGrams;
+        for (int i = 0; i < itemNames.length; i++) {
+            consumeChecker(inventory, itemNames[i], amounts[i], true);
+        }
 
+        return true;
     }
-    public boolean makeAmericano(StorageBin[] inventory, String size){
-        double cupSize = getFlOz(size);
+    private boolean consumeChecker(StorageBin[] inventory, String itemName, double amount, boolean doConsume) {
+        for (StorageBin bin : inventory) {
+            if (bin.hasItem(itemName)) {
+                if (doConsume) {
+                    return bin.consume(amount);
+                } else {
+                    return bin.canConsume(amount);
+                }
+            }
+        }
+        return false;
+    }
+
+
+    public boolean makeAmericano(StorageBin[] inventory, String itemName, double amount) {
+        double cupOunces = getCupOz(itemName);
+        double espresso = cupOunces / 3;
+        double CBgrams = espresso * BEAN_RATIO * FLOZ_TO_GRAMS;
+        double water =  (cupOunces - espresso) + (1 - FLOZ_TO_GRAMS) * espresso;
+        return consume(inventory, new String[]{"coffee beans", "water"}, new double[]{CBgrams, water});
     }
 }

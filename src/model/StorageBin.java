@@ -40,6 +40,9 @@ public class StorageBin {
         if (storedItem == null) return false;
         return storedItem.consume(amount);
     }
+    public boolean canConsume(double amount) {
+        return storedItem != null && storedItem.getQuantity() >= amount;
+    }
 
     public boolean hasItem(String itemName) {
         return storedItem != null && storedItem.getName().equalsIgnoreCase(itemName);
