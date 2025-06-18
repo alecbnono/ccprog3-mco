@@ -15,7 +15,7 @@ public class Cup extends Item{
             case "large" -> 40;
             case "medium" -> 64;
             case "small" -> 80;
-            default -> 50;
+            default -> 0;
         };
         this.capacity = capacity;
     }

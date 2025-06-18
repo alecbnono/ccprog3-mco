@@ -18,9 +18,20 @@ public class StorageBin {
         }
         else return false;
     }
-
     public Item getBox() {
         return storedItem;
     }
 
+    public boolean consume(double amount){
+        if (storedItem == null) {
+            return false;
+        }
+        else {
+            return storedItem.consume(amount);
+        }
+    }
+
+    public boolean hasItem(String itemName){
+        return storedItem != null && storedItem.getName().equals(itemName);
+    }
 }

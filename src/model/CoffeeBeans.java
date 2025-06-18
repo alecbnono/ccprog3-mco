@@ -9,5 +9,13 @@ public class CoffeeBeans extends Item{
         this.quantity = quantity;
         this.unit = "grams";
     }
-
+    public boolean consume(double amount){
+        if(amount * ozToGrams <= 0 || quantity < amount * ozToGrams){
+            return false;
+        }
+        else {
+            quantity -= amount * ozToGrams;
+            return true;
+        }
+    }
 }
