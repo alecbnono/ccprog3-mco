@@ -9,29 +9,39 @@ public class StorageBin {
         this.maxQuantity = maxQuantity;
     }
     public boolean emptyBox() {
-        return storedItem == null;
+        storedItem = null;
+        return true;
     }
+
     public boolean setBox(Item item) {
-        if (storedItem == null) {
-            storedItem = item;
-            return true;
-        }
-        else return false;
+        if (storedItem != null) return false;
+        storedItem = item;
+        return true;
     }
+
     public Item getBox() {
         return storedItem;
     }
 
-    public boolean consume(double amount){
-        if (storedItem == null) {
-            return false;
-        }
-        else {
-            return storedItem.consume(amount);
-        }
+    public boolean isEmpty() {
+        return storedItem == null;
     }
 
-    public boolean hasItem(String itemName){
-        return storedItem != null && storedItem.getName().equals(itemName);
+    public boolean isDepleted() {
+        return storedItem != null && storedItem.isDepleted();
+    }
+
+    public boolean restock(double amount) {
+        if (storedItem == null) return false;
+        return storedItem.restock(amount);
+    }
+
+    public boolean consume(double amount) {
+        if (storedItem == null) return false;
+        return storedItem.consume(amount);
+    }
+
+    public boolean hasItem(String itemName) {
+        return storedItem != null && storedItem.getName().equalsIgnoreCase(itemName);
     }
 }
