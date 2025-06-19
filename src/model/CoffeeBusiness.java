@@ -8,5 +8,4 @@ import java.util.ArrayList;
 public class CoffeeBusiness {
 
     private ArrayList<CoffeeTruck> Trucks;
-
 }
