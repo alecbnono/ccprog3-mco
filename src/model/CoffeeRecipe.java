@@ -39,14 +39,14 @@ public class CoffeeRecipe {
         return false;
     }
 
-    public boolean makeAmericano(StorageBin[] inventory, String itemName, double amount) {
+    public boolean makeAmericano(StorageBin[] inventory, String itemName) {
         double cupOunces = getCupOz(itemName);
         double espresso = cupOunces / 3;
         double CBgrams = espresso * BEAN_RATIO * FLOZ_TO_GRAMS;
         double water =  (cupOunces - espresso) + (1 - BEAN_RATIO) * espresso;
         return consume(inventory, new String[]{"coffee beans", "water"}, new double[]{CBgrams, water});
     }
-    public boolean makeLatte(StorageBin[] inventory, String itemName, double amount) {
+    public boolean makeLatte(StorageBin[] inventory, String itemName) {
         double cupOunces = getCupOz(itemName);
         double espresso = cupOunces / 5;
         double CBgrams =  espresso * BEAN_RATIO * FLOZ_TO_GRAMS;
@@ -54,7 +54,7 @@ public class CoffeeRecipe {
         double milk = cupOunces - espresso;
         return consume(inventory, new String[]{"coffee beans", "water", "milk"}, new double[]{CBgrams, water, milk});
     }
-    public boolean makeCappuccino(StorageBin[] inventory, String itemName, double amount) {
+    public boolean makeCappuccino(StorageBin[] inventory, String itemName) {
         double cupOunces = getCupOz(itemName);
         double espresso = cupOunces / 3;
         double CBgrams = espresso * BEAN_RATIO * FLOZ_TO_GRAMS;

@@ -2,7 +2,7 @@ package model;
 
 public class CoffeeBeans extends Item{
 
-    private final double ozToGrams = 28.34952;
+    private final double OZ_TO_GRAMS = 28.34952;
 
     public CoffeeBeans(double quantity) {
         this.name = "Coffee Beans";
@@ -10,11 +10,11 @@ public class CoffeeBeans extends Item{
         this.unit = "grams";
     }
     public boolean consume(double amount){
-        if(amount * ozToGrams <= 0 || quantity < amount * ozToGrams){
+        if(amount * OZ_TO_GRAMS <= 0 || quantity < amount * OZ_TO_GRAMS){
             return false;
         }
         else {
-            quantity -= amount * ozToGrams;
+            quantity -= amount * OZ_TO_GRAMS;
             return true;
         }
     }
