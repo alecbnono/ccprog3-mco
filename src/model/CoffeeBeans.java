@@ -10,6 +10,12 @@ public class CoffeeBeans extends Item {
         this.unit = "grams";
     }
 
+    public CoffeeBeans() {
+        super(0, 1008);
+        this.name = "Coffee Beans";
+        this.unit = "grams";
+    }
+
     @Override
     public boolean consume(double amount) {
         if (amount * OZ_TO_GRAMS <= 0 || quantity < amount * OZ_TO_GRAMS) {

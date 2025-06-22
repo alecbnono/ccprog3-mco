@@ -9,6 +9,11 @@ public class StorageBin {
         this.storedItem = item;
     }
 
+    public StorageBin() {
+        this.maxQuantity = 0;
+        this.storedItem = null;
+    }
+
     public boolean emptyBox() {
         this.maxQuantity = 0;
         storedItem = null;

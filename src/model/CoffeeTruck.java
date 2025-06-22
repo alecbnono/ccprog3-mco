@@ -14,7 +14,7 @@ public class CoffeeTruck {
 
     public CoffeeTruck(String location) {
         this.location = location;
-        this.inventory = new ArrayList<StorageBin>(maxBins);
+        this.inventory = new ArrayList<StorageBin>();
         this.coffeeRecipe = new CoffeeRecipe();
     }
 

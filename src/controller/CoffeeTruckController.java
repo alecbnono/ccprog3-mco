@@ -70,26 +70,26 @@ public class CoffeeTruckController {
 
     }
 
-    private Item chooseItem(String input, double quantity) {
+    private Item chooseItem(String input) {
         switch (input) {
             case "C":
             case "c":
-                return new CoffeeBeans(quantity);
+                return new CoffeeBeans();
             case "F":
             case "f":
-                return new Liquid("Milk", quantity);
+                return new Liquid("Milk");
             case "W":
             case "w":
-                return new Liquid("Water", quantity);
+                return new Liquid("Water");
             case "S":
             case "s":
-                return new Cup("Small", (int) quantity);
+                return new Cup("Small");
             case "M":
             case "m":
-                return new Cup("Medium", (int) quantity);
+                return new Cup("Medium");
             case "L":
             case "l":
-                return new Cup("Large", (int) quantity);
+                return new Cup("Large");
             default:
                 return null;
         }
@@ -121,17 +121,23 @@ public class CoffeeTruckController {
         for (int i = 0; i < truck.getBinCount(); i++) {
 
             do {
-                System.out.printf("Set bin #%d content: ", i);
+                System.out.printf("\n>>> Set bin #%d content: ", i + 1);
                 input = view.getTextInput();
-                if (linearSearch(validInputs, MAX_INPUTS, input)) {
+                if (!linearSearch(validInputs, MAX_INPUTS, input)) {
                     System.out.println("Invalid Input");
                 }
-            } while (linearSearch(validInputs, MAX_INPUTS, input));
+            } while (!linearSearch(validInputs, MAX_INPUTS, input));
 
-            System.out.printf("Set quantity for bin #%d (%s): ", i, truck.getBin(i).getBox().getUnit());
+            truck.getBin(i).setBox(chooseItem(input));
+
+            System.out.printf("Set quantity for bin #%d (%s) capped at (%d %s): ",
+                    i + 1,
+                    truck.getBin(i).getBox().getUnit(),
+                    (int) truck.getBin(i).getBox().getMaxQuantity(),
+                    truck.getBin(i).getBox().getUnit());
             quantity = view.getNumInput();
 
-            truck.getBin(i).setBox(chooseItem(input, quantity));
+            truck.getBin(i).restock(quantity);
 
             input = null;
             quantity = 0;
@@ -144,6 +150,7 @@ public class CoffeeTruckController {
         int binCount = 0;
         int truckNo = 0;
 
+        System.out.println();
         view.displaySetTruckLoc();
         location = view.getTextInput();
         model.createTruck(location, type);
@@ -151,11 +158,9 @@ public class CoffeeTruckController {
         truckNo = model.getTruckCount() - 1;
         binCount = model.getTruck(truckNo).getBinCount();
 
+        System.out.println();
         System.out.printf(">>> %s Coffee Truck created at %s with %d storage bins.\n", typeString, location, binCount);
         System.out.println("Please set initial loadout.\n");
-
-        view.displayTruckRestock();
-        System.out.println();
 
         setInventory(model.getTruck(truckNo));
     }

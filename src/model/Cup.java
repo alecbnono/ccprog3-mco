@@ -31,6 +31,19 @@ public class Cup extends Item {
         };
     }
 
+    public Cup(String size) {
+        super(0, getMaxQuantity(size));
+        this.size = size;
+        this.name = size + " Cup";
+        this.unit = "pcs";
+        this.capacity = switch (size.toLowerCase()) {
+            case "large" -> 8;
+            case "medium" -> 12;
+            case "small" -> 14;
+            default -> 0;
+        };
+    }
+
     // truncates decimals
     @Override
     public double getQuantity() {
@@ -48,7 +61,7 @@ public class Cup extends Item {
     public boolean restock(double amount) {
         int intAmount = (int) amount;
 
-        if (intAmount <= 0) {
+        if (intAmount <= 0 && maxQuantity >= quantity + amount) {
             return false;
         } else {
             quantity += intAmount;

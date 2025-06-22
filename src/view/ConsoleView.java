@@ -47,7 +47,7 @@ public class ConsoleView {
         System.out.println("|       Coffee Truck       |");
         System.out.println("============================");
 
-        for (int i = 0; i <= business.getTruckCount(); i++) {
+        for (int i = 0; i < business.getTruckCount(); i++) {
             System.out.printf("[%d] %s\n", i + 1, business.getTruck(i).getLocation());
         }
 
@@ -112,16 +112,20 @@ public class ConsoleView {
 
     public int getMenuInput() {
         System.out.print("Enter choice: ");
-        return scanner.nextInt();
+        int input = scanner.nextInt();
+        scanner.nextLine(); // flushes the leftover newline
+        System.out.println();
+        return input;
     }
 
     public String getTextInput() {
-        System.out.println(">>>");
         return scanner.nextLine();
     }
 
     public double getNumInput() {
-        return scanner.nextDouble();
+        double input = scanner.nextDouble();
+        scanner.nextLine(); // flushes the leftover newline
+        return input;
     }
 
 }

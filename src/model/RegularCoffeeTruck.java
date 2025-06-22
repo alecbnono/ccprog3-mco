@@ -9,6 +9,10 @@ public class RegularCoffeeTruck extends CoffeeTruck {
         super(location);
         this.type = "regular";
         this.maxBins = 6;
+
+        for (int i = 0; i < maxBins; i++) {
+            inventory.add(new StorageBin());
+        }
     }
 
 }
