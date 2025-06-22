@@ -1,26 +1,23 @@
 package model;
+
 import java.util.ArrayList;
+
 /**
  * CoffeeTruck
  */
 public class CoffeeTruck {
     protected String location;
     protected String type;
-    protected ArrayList<StorageBin> storageBins;
+    protected ArrayList<StorageBin> inventory;
     protected int maxBins;
     protected CoffeeRecipe coffeeRecipe;
 
-    public CoffeeTruck(String location, String type) {
+    public CoffeeTruck(String location) {
         this.location = location;
-        this.type = type;
-        this.maxBins = switch (type.toLowerCase()){
-            case "regular" -> 8;
-            case "special" -> 10;
-            default -> 0;
-        };
-        this.storageBins = new ArrayList<>(maxBins);
+        this.inventory = new ArrayList<StorageBin>(maxBins);
         this.coffeeRecipe = new CoffeeRecipe();
     }
+
     public String getLocation() {
         return location;
     }
@@ -31,14 +28,13 @@ public class CoffeeTruck {
 
     public StorageBin getBin(int boxNo) {
         if (boxNo >= 0 && boxNo < maxBins) {
-            return inventory[boxNo];
+            return inventory.get(boxNo);
         }
         return null;
     }
 
-
-
-
-
+    public int getBinCount() {
+        return maxBins;
+    }
 
 }
