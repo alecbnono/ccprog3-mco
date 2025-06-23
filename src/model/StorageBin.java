@@ -2,19 +2,28 @@ package model;
 
 public class StorageBin {
     private Item storedItem;
-    private int maxQuantity;
+    private double maxQuantity;
 
-    public StorageBin(Item storedItem, int maxQuantity) {
-        this.storedItem = storedItem;
-        this.maxQuantity = maxQuantity;
+    public StorageBin(Item item) {
+        this.maxQuantity = item.getMaxQuantity();
+        this.storedItem = item;
     }
+
+    public StorageBin() {
+        this.maxQuantity = 0;
+        this.storedItem = null;
+    }
+
     public boolean emptyBox() {
+        this.maxQuantity = 0;
         storedItem = null;
         return true;
     }
 
     public boolean setBox(Item item) {
-        if (storedItem != null) return false;
+        this.maxQuantity = item.getMaxQuantity();
+        if (storedItem != null)
+            return false;
         storedItem = item;
         return true;
     }
@@ -32,14 +41,17 @@ public class StorageBin {
     }
 
     public boolean restock(double amount) {
-        if (storedItem == null) return false;
+        if (storedItem == null)
+            return false;
         return storedItem.restock(amount);
     }
 
     public boolean consume(double amount) {
-        if (storedItem == null) return false;
+        if (storedItem == null)
+            return false;
         return storedItem.consume(amount);
     }
+
     public boolean canConsume(double amount) {
         return storedItem != null && storedItem.getQuantity() >= amount;
     }

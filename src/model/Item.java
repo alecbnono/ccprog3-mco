@@ -5,38 +5,58 @@ public abstract class Item {
     protected String name;
     protected String unit;
     protected double quantity;
+    protected double maxQuantity;
 
-    public Item() {
-        this.name = "";
-        this.unit = "";
-        this.quantity = 0;
+    public Item(double quantity, double maxQuantity) {
+        this.maxQuantity = maxQuantity;
+
+        if (quantity >= 0 && quantity <= maxQuantity) {
+            this.quantity = quantity;
+        } else if (quantity > maxQuantity) {
+            this.quantity = maxQuantity;
+        } else if (quantity < 0) {
+            this.quantity = 0;
+        }
     }
+
+    public Item(double maxQuantity) {
+        this.maxQuantity = maxQuantity;
+
+    }
+
     public String getName() {
         return name;
     }
+
     public double getQuantity() {
         return quantity;
     }
+
     public String getUnit() {
         return unit;
     }
-    public boolean isDepleted(){
+
+    public double getMaxQuantity() {
+        return maxQuantity;
+    }
+
+    public boolean isDepleted() {
         return quantity <= 0;
     }
-    public boolean restock(double amount){
-        if(amount <= 0){
+
+    public boolean restock(double amount) {
+        if (amount <= 0 && maxQuantity >= quantity + amount) {
             return false;
-        }
-        else {
+        } else {
             quantity += amount;
             return true;
         }
     }
-    public boolean consume(double amount){
-        if(amount <= 0 || quantity < amount){
+
+    public boolean consume(double amount) {
+        if (amount <= 0 || quantity < amount) {
             return false;
-        }
-        else {
+        } else {
             quantity -= amount;
             return true;
         }
