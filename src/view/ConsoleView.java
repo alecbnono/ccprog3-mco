@@ -71,7 +71,36 @@ public class ConsoleView {
 
     }
 
-    public void displayTruckInfo(CoffeeTruck truck) {
+    public void displayTruckInfo(CoffeeTruck truck, int truckNo) {
+        System.out.printf("Truck #%d\n", truckNo);
+        System.out.printf("%-8s: %s\n", "Type",
+                truck.getType().substring(0, 1).toUpperCase() + truck.getType().substring(1));
+        System.out.printf("%-8s: %s\n\n", "Location", truck.getLocation());
+        System.out.println("Menu Prices: ");
+        System.out.println("============================");
+        System.out.println("|   Drink     Size   Price |");
+        System.out.println("============================");
+        System.out.println("  Cappuccino   S    100.00  ");
+        System.out.println("  Cappuccino   M    100.00  ");
+        System.out.println("  Cappuccino   L    100.00  ");
+        System.out.println("  Americano    S    100.00  ");
+        System.out.println("  Americano    M    100.00  ");
+        System.out.println("  Americano    L    100.00  ");
+        System.out.println("    Latte      S    100.00  ");
+        System.out.println("    Latte      M    100.00  ");
+        System.out.println("    Latte      L    100.00  ");
+        System.out.println("============================");
+        System.out.println("");
+        System.out.println("Total Inventory: ");
+        System.out.println("============================");
+        for (int i = 0; i < truck.getBinCount(); i++) {
+            System.out.printf("[%d] %-12s %4.2f %-6s\n",
+                    i + 1,
+                    truck.getBin(i).getBox().getName(),
+                    truck.getBin(i).getBox().getQuantity(),
+                    truck.getBin(i).getBox().getUnit());
+        }
+        System.out.println("============================\n");
 
     }
 
