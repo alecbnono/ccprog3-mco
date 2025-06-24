@@ -5,7 +5,7 @@ public class PriceEntry {
     private String type;
     private String truck;
     private double price;
-    
+
     public PriceEntry(String product, double price) {
         this.product = product;
         this.price = price;
