@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.desktop.PrintFilesEvent;
+
 import model.*;
 import view.ConsoleView;
 
@@ -195,56 +197,57 @@ public class CoffeeTruckController {
 
     private int runExistingTrucks() {
 
-        while (selectTruckState != 0) {
-            view.displayExistingTrucks(model);
+        view.displayExistingTrucks(model);
 
-            do {
-                selectTruckState = view.getMenuInput();
+        do {
+            selectTruckState = view.getMenuInput();
 
-                if (selectTruckState < 0 || selectTruckState > model.getTruckCount()) {
-                    System.out.println("Invalid Input");
-                }
-            } while (selectTruckState < 0 || selectTruckState > model.getTruckCount());
-
-            resetState("selectTruck");
-        }
+            if (selectTruckState < 0 || selectTruckState > model.getTruckCount()) {
+                System.out.println("Invalid Input");
+            }
+        } while (selectTruckState < 0 || selectTruckState > model.getTruckCount());
 
         return selectTruckState;
     }
 
     private void runTruckInteractions() {
 
+        int selectedTruck;
+
         while (truckInteractionState != 0) {
             view.displayTruckInteractions();
             do {
                 truckInteractionState = view.getMenuInput();
 
-                if (truckInteractionState < 0 || truckInteractionState > model.getTruckCount()) {
+                if (truckInteractionState < 0 || truckInteractionState > 4) {
                     System.out.println("Invalid Input");
                 }
-            } while (truckInteractionState < 0 || truckInteractionState > model.getTruckCount());
+            } while (truckInteractionState < 0 || truckInteractionState > 4);
 
-            int selectedTruck = runExistingTrucks();
+            selectedTruck = runExistingTrucks();
+
+            if (selectedTruck != 0) {
+                switch (truckInteractionState) {
+                    case 1:
+                        // simulate truck
+                        break;
+                    case 2:
+                        // view truck and prices
+                        view.displayTruckInfo(model.getTruck(selectedTruck - 1), selectedTruck);
+                        break;
+                    case 3:
+                        // restock truck
+
+                        break;
+                    case 4:
+                        // update prices
+                        break;
+                    default:
+                        break;
+                }
+            }
 
             resetState("truckInteraction");
-
-            switch (truckInteractionState) {
-                case 1:
-                    // simulate truck
-                    break;
-                case 2:
-                    // view truck and prices
-                    break;
-                case 3:
-                    // restock truck
-                    break;
-                case 4:
-                    // update prices
-                    break;
-                default:
-
-                    break;
-            }
         }
     }
 

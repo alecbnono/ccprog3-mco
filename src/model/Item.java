@@ -21,7 +21,6 @@ public abstract class Item {
 
     public Item(double maxQuantity) {
         this.maxQuantity = maxQuantity;
-
     }
 
     public String getName() {
