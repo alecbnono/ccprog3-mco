@@ -19,7 +19,7 @@ public class PriceList {
         }
         return regularList;
     }
-    
+
     public void updateRegularPrices() {
         for (PriceEntry entry : Prices) {
             if (entry.getType() != null && entry.getType().equals("regular")) {
