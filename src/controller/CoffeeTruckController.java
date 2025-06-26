@@ -1,7 +1,5 @@
 package controller;
 
-import java.awt.desktop.PrintFilesEvent;
-
 import model.*;
 import view.ConsoleView;
 
@@ -110,15 +108,16 @@ public class CoffeeTruckController {
 
         String input = null;
         double quantity = 0;
-        final int MAX_INPUTS = 12;
+        final int MAX_INPUTS = 14;
         String[] validInputs = { "C", "c",
                 "F", "f",
                 "W", "w",
                 "S", "s",
                 "M", "m",
-                "L", "l" };
+                "L", "l",
+                "E", "e" };
 
-        view.displayTruckRestock();
+        view.displayRestockLegend();
 
         for (int i = 0; i < truck.getBinCount(); i++) {
 
@@ -130,16 +129,21 @@ public class CoffeeTruckController {
                 }
             } while (!linearSearch(validInputs, MAX_INPUTS, input));
 
-            truck.getBin(i).setBox(chooseItem(input));
+            if (input.equalsIgnoreCase("e")) {
+                truck.getBin(i).emptyBox();
 
-            System.out.printf("Set quantity for bin #%d (%s) capped at (%d %s): ",
-                    i + 1,
-                    truck.getBin(i).getBox().getUnit(),
-                    (int) truck.getBin(i).getBox().getMaxQuantity(),
-                    truck.getBin(i).getBox().getUnit());
-            quantity = view.getNumInput();
+            } else {
+                truck.getBin(i).setBox(chooseItem(input));
 
-            truck.getBin(i).restock(quantity);
+                System.out.printf("Set quantity for bin #%d (%s) capped at (%d %s): ",
+                        i + 1,
+                        truck.getBin(i).getBox().getUnit(),
+                        (int) truck.getBin(i).getBox().getMaxQuantity(),
+                        truck.getBin(i).getBox().getUnit());
+                quantity = view.getNumInput();
+
+                truck.getBin(i).restock(quantity);
+            }
 
             input = null;
             quantity = 0;
@@ -195,6 +199,82 @@ public class CoffeeTruckController {
         }
     }
 
+    private void runTruckRestock(CoffeeTruck truck) {
+
+        int input = -1;
+        String charInput = null;
+        String loop = "Y";
+        String quantity;
+        final int MAX_INPUTS = 14;
+        String[] validInputs = { "C", "c",
+                "F", "f",
+                "W", "w",
+                "S", "s",
+                "M", "m",
+                "L", "l",
+                "E", "e" };
+
+        view.displayRestockLegend();
+
+        while (loop.equalsIgnoreCase("Y")) {
+            do {
+                System.out.printf("\n>>> Which bin no. would you like to restock?: ");
+                input = view.getIntInput();
+                if (input < 0 || input > truck.getBinCount()) {
+                    System.out.println("Invalid Input");
+                }
+            } while (input < 0 || input > truck.getBinCount());
+
+            if (truck.getBin(input - 1).isEmpty()) {
+                view.displayRestockLegend();
+                do {
+                    System.out.printf("\n>>> Set bin #%d content: ", input);
+                    charInput = view.getTextInput();
+                    if (!linearSearch(validInputs, MAX_INPUTS, charInput)) {
+                        System.out.println("Invalid Input");
+                    }
+                } while (!linearSearch(validInputs, MAX_INPUTS, charInput));
+
+                truck.getBin(input - 1).setBox(chooseItem(charInput));
+            }
+
+            System.out.printf("Current Item: %s\n", truck.getBin(input - 1).getBox().getName());
+
+            do {
+                System.out.printf("Add quantity or enter \"E\" to empty (Max capacity: %d %s): ",
+                        (int) truck.getBin(input - 1).getBox().getMaxQuantity(),
+                        truck.getBin(input - 1).getBox().getUnit());
+                quantity = view.getTextInput();
+                if (Double.parseDouble(quantity) < 0 || quantity.equalsIgnoreCase("E")) {
+                    System.out.println("Invalid Input");
+                }
+            } while (Double.parseDouble(quantity) < 0 || quantity.equalsIgnoreCase("E"));
+
+            if (quantity.equalsIgnoreCase("e")) {
+                truck.getBin(input - 1).emptyBox();
+
+            } else {
+                truck.getBin(input - 1).restock(Double.parseDouble(quantity));
+            }
+
+            System.out.printf(">>> Bin #%d updated: %s - %.2f %s\n", input,
+                    truck.getBin(input - 1).getBox().getName(),
+                    truck.getBin(input - 1).getBox().getQuantity(),
+                    truck.getBin(input - 1).getBox().getUnit());
+
+            do {
+                System.out.printf("\n>>> Restock Again? : ");
+                input = view.getIntInput();
+                if (!loop.equalsIgnoreCase("Y") || !loop.equalsIgnoreCase("N")) {
+                    System.out.println("Invalid Input");
+                }
+            } while (!loop.equalsIgnoreCase("Y") || !loop.equalsIgnoreCase("N"));
+
+            input = -1;
+            quantity = null;
+        }
+    }
+
     private int runExistingTrucks() {
 
         view.displayExistingTrucks(model);
@@ -226,6 +306,8 @@ public class CoffeeTruckController {
 
             selectedTruck = runExistingTrucks();
 
+            // if exit not selected then proceed
+            // with truck interactions
             if (selectedTruck != 0) {
                 switch (truckInteractionState) {
                     case 1:
@@ -237,7 +319,7 @@ public class CoffeeTruckController {
                         break;
                     case 3:
                         // restock truck
-
+                        runTruckRestock(model.getTruck(selectedTruck - 1));
                         break;
                     case 4:
                         // update prices

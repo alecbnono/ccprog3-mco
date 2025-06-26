@@ -44,8 +44,11 @@ public abstract class Item {
     }
 
     public boolean restock(double amount) {
-        if (amount <= 0 && maxQuantity >= quantity + amount) {
+        if (amount <= 0) {
             return false;
+        } else if (maxQuantity < quantity + amount) {
+            quantity = maxQuantity;
+            return true;
         } else {
             quantity += amount;
             return true;

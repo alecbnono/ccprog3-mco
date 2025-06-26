@@ -91,17 +91,34 @@ public class ConsoleView {
         System.out.println("    Latte      L    100.00  ");
         System.out.println("============================");
         System.out.println("");
+        displayRestockTruck(truck);
+    }
+
+    public void displayRestockTruck(CoffeeTruck truck) {
         System.out.println("Total Inventory: ");
         System.out.println("============================");
         for (int i = 0; i < truck.getBinCount(); i++) {
-            System.out.printf("[%d] %-12s %4.2f %-6s\n",
-                    i + 1,
-                    truck.getBin(i).getBox().getName(),
-                    truck.getBin(i).getBox().getQuantity(),
-                    truck.getBin(i).getBox().getUnit());
+            if (!truck.getBin(i).isEmpty()) {
+                // omit decimals on cup count
+                if (truck.getBin(i).getBox().getUnit().equals("pcs")) {
+                    System.out.printf("[%d] %-12s %2d %-6s\n",
+                            i + 1,
+                            truck.getBin(i).getBox().getName(),
+                            (int) truck.getBin(i).getBox().getQuantity(),
+                            truck.getBin(i).getBox().getUnit());
+
+                } else {
+                    System.out.printf("[%d] %-12s %4.2f %-6s\n",
+                            i + 1,
+                            truck.getBin(i).getBox().getName(),
+                            truck.getBin(i).getBox().getQuantity(),
+                            truck.getBin(i).getBox().getUnit());
+                }
+            } else {
+                System.out.printf("[%d] Empty\n");
+            }
         }
         System.out.println("============================\n");
-
     }
 
     public void displayRestockItem(int binNo) {
@@ -112,7 +129,7 @@ public class ConsoleView {
         System.out.printf("Set quantity for bin #%d", binNo);
     }
 
-    public void displayTruckRestock() {
+    public void displayRestockLegend() {
         System.out.println("============================");
         System.out.println("|   Enter 1 of the items   |");
         System.out.println("============================");
@@ -122,21 +139,28 @@ public class ConsoleView {
         System.out.println("[S]mall Cup");
         System.out.println("[M]edium Cup");
         System.out.println("[L]arge Cup");
+        System.out.println("[E]mpty Box");
         System.out.println("============================");
     }
 
     public void displayDashboard(CoffeeBusiness business) {
         System.out.println("===== JavaJeeps Business Dashboard =====\n");
-        System.out.println();
-        System.out.println("Truck Summary:");
+        System.out.println("============================");
+        System.out.println("|       Truck Summary      |");
+        System.out.println("============================");
         System.out.printf(" - Total Trucks: %d\n", business.getTruckCount());
-        System.out.printf(" - Regular Trucks: %d\n", business.getSpecificTruckCount("regular"));
-        System.out.printf(" - Special Trucks: %d\n", business.getSpecificTruckCount("special"));
+        System.out.printf("    * Regular Trucks: %d\n", business.getSpecificTruckCount("regular"));
+        System.out.printf("    * Special Trucks: %d\n", business.getSpecificTruckCount("special"));
+        System.out.println("============================");
         System.out.println();
-        System.out.println("Truck Locations:");
+        System.out.println("============================");
+        System.out.println("|      Truck Locations     |");
+        System.out.println("============================");
         for (int i = 0; i < business.getTruckCount(); i++) {
-            System.out.printf("- %s", business.getTruck(i));
+            System.out.printf("[%d] %s", i + 1, business.getTruck(i));
         }
+        System.out.println("============================");
+
     }
 
     public int getMenuInput() {
@@ -153,6 +177,12 @@ public class ConsoleView {
 
     public double getNumInput() {
         double input = scanner.nextDouble();
+        scanner.nextLine(); // flushes the leftover newline
+        return input;
+    }
+
+    public int getIntInput() {
+        int input = scanner.nextInt();
         scanner.nextLine(); // flushes the leftover newline
         return input;
     }

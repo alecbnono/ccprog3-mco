@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class CoffeeRecipe {
     private final double BEAN_RATIO = 1.0 / 19.0;
     private final double FLOZ_TO_GRAMS = 28.34962;
@@ -13,7 +15,7 @@ public class CoffeeRecipe {
         };
     }
 
-    private boolean consumeChecker(StorageBin[] inventory, String itemName, double amount, boolean doConsume) {
+    private boolean consumeChecker(ArrayList<StorageBin> inventory, String itemName, double amount, boolean doConsume) {
         for (StorageBin bin : inventory) {
             if (bin.hasItem(itemName)) {
                 if (doConsume) {
@@ -26,7 +28,7 @@ public class CoffeeRecipe {
         return false;
     }
 
-    private boolean consume(StorageBin[] inventory, String[] itemNames, double[] amounts) {
+    private boolean consume(ArrayList<StorageBin> inventory, String[] itemNames, double[] amounts) {
         for (int i = 0; i < itemNames.length; i++) {
             if (!consumeChecker(inventory, itemNames[i], amounts[i], false)) {
                 return false;
@@ -39,7 +41,7 @@ public class CoffeeRecipe {
         return true;
     }
 
-    public boolean makeAmericano(StorageBin[] inventory, String drinkSize) {
+    public boolean makeAmericano(ArrayList<StorageBin> inventory, String drinkSize) {
         double cupOunces = getCupOz(drinkSize);
         double espresso = cupOunces / 3;
         double CBgrams = espresso * BEAN_RATIO * FLOZ_TO_GRAMS;
@@ -47,7 +49,7 @@ public class CoffeeRecipe {
         return consume(inventory, new String[] { "coffee beans", "water" }, new double[] { CBgrams, water });
     }
 
-    public boolean makeLatte(StorageBin[] inventory, String drinkSize) {
+    public boolean makeLatte(ArrayList<StorageBin> inventory, String drinkSize) {
         double cupOunces = getCupOz(drinkSize);
         double espresso = cupOunces / 5;
         double CBgrams = espresso * BEAN_RATIO * FLOZ_TO_GRAMS;
@@ -57,7 +59,7 @@ public class CoffeeRecipe {
                 new double[] { CBgrams, water, milk });
     }
 
-    public boolean makeCappuccino(StorageBin[] inventory, String drinkSize) {
+    public boolean makeCappuccino(ArrayList<StorageBin> inventory, String drinkSize) {
         double cupOunces = getCupOz(drinkSize);
         double espresso = cupOunces / 3;
         double CBgrams = espresso * BEAN_RATIO * FLOZ_TO_GRAMS;

@@ -61,8 +61,11 @@ public class Cup extends Item {
     public boolean restock(double amount) {
         int intAmount = (int) amount;
 
-        if (intAmount <= 0 && maxQuantity >= quantity + amount) {
+        if (intAmount <= 0) {
             return false;
+        } else if (maxQuantity < quantity + intAmount) {
+            quantity = maxQuantity;
+            return true;
         } else {
             quantity += intAmount;
             return true;
