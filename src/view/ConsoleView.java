@@ -186,5 +186,14 @@ public class ConsoleView {
         scanner.nextLine(); // flushes the leftover newline
         return input;
     }
-
+    public void displayPriceMenu(){
+        System.out.println("============================");
+        System.out.println("|      Price List Menu      |");
+        System.out.println("============================");
+        System.out.println("[1] Add new price entry");
+        System.out.println("[2] View All prices");
+        System.out.println("[3] Update regular prices (Increase 5%)");
+        System.out.println("[0] Exit");
+        System.out.println("============================");
+    }
 }

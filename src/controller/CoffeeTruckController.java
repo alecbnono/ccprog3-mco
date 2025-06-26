@@ -290,6 +290,20 @@ public class CoffeeTruckController {
         return selectTruckState;
     }
 
+    private void runTruckPriceMenu(CoffeeTruck truck) {
+        PriceList priceList = truck.getPriceList();
+        view.displayPriceMenu();
+        int choice = 0;
+        do {
+            System.out.println("What would you like to do?");
+
+            if (choice < 0 || choice > 3) {
+                System.out.println("Invalid Input");
+                choice = view.getMenuInput();
+            }
+        } while (choice < 0 || choice > 3);
+
+    }
     private void runTruckInteractions() {
 
         int selectedTruck;
@@ -323,6 +337,7 @@ public class CoffeeTruckController {
                         break;
                     case 4:
                         // update prices
+                        runTruckPriceMenu(model.getTruck(selectedTruck - 1));
                         break;
                     default:
                         break;
