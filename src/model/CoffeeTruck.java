@@ -37,4 +37,18 @@ public class CoffeeTruck {
         return maxBins;
     }
 
+    // for type: "cappuccino", "americano", "latte"
+    // for size: "small", "medium", "large"
+    public boolean serveCoffee(String type, String size) {
+        switch (type.toLowerCase()) {
+            case "americano":
+                return coffeeRecipe.makeAmericano(inventory, size);
+            case "cappuccino":
+                return coffeeRecipe.makeCappuccino(inventory, size);
+            case "latte":
+                return coffeeRecipe.makeLatte(inventory, size);
+            default:
+                return false;
+        }
+    }
 }
