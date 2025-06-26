@@ -265,10 +265,10 @@ public class CoffeeTruckController {
             do {
                 System.out.printf("\n>>> Restock Again? : ");
                 loop = view.getTextInput();
-                if (!loop.equalsIgnoreCase("Y") || !loop.equalsIgnoreCase("N")) {
+                if (!loop.equalsIgnoreCase("Y") && !loop.equalsIgnoreCase("N")) {
                     System.out.println("Invalid Input");
                 }
-            } while (!loop.equalsIgnoreCase("Y") || !loop.equalsIgnoreCase("N"));
+            } while (!loop.equalsIgnoreCase("Y") && !loop.equalsIgnoreCase("N"));
 
             input = -1;
             quantity = null;
