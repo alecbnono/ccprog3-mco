@@ -184,7 +184,7 @@ public class CoffeeTruckController {
                 } else if (createTruckState == 2) {
                     System.out.println("Special Coffee Trucks Coming Soon");
                 }
-            } while (createTruckState < 0 || createTruckState > 3);
+            } while (createTruckState < 0 || createTruckState > 2);
 
             resetState("createTruck");
 
@@ -214,7 +214,7 @@ public class CoffeeTruckController {
                 "L", "l",
                 "E", "e" };
 
-        view.displayRestockLegend();
+        view.displayRestockTruck(truck);
 
         while (loop.equalsIgnoreCase("Y")) {
             do {
@@ -264,7 +264,7 @@ public class CoffeeTruckController {
 
             do {
                 System.out.printf("\n>>> Restock Again? : ");
-                input = view.getIntInput();
+                loop = view.getTextInput();
                 if (!loop.equalsIgnoreCase("Y") || !loop.equalsIgnoreCase("N")) {
                     System.out.println("Invalid Input");
                 }
