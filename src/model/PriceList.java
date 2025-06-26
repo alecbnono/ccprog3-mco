@@ -27,4 +27,7 @@ public class PriceList {
             }
         }
     }
+    public ArrayList<PriceEntry> getPrices() {
+        return Prices;
+    }
 }

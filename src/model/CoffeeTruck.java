@@ -11,11 +11,13 @@ public class CoffeeTruck {
     protected ArrayList<StorageBin> inventory;
     protected int maxBins;
     protected CoffeeRecipe coffeeRecipe;
+    private PriceList priceList;
 
     public CoffeeTruck(String location) {
         this.location = location;
         this.inventory = new ArrayList<StorageBin>();
         this.coffeeRecipe = new CoffeeRecipe();
+        this.priceList = new PriceList();
     }
 
     public String getLocation() {
@@ -24,6 +26,10 @@ public class CoffeeTruck {
 
     public String getType() {
         return type;
+    }
+
+    public PriceList getPriceList() {
+        return priceList;
     }
 
     public StorageBin getBin(int boxNo) {
