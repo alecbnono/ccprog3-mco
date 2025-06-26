@@ -184,7 +184,7 @@ public class CoffeeTruckController {
                 } else if (createTruckState == 2) {
                     System.out.println("Special Coffee Trucks Coming Soon");
                 }
-            } while (createTruckState < 0 || createTruckState > 2);
+            } while (createTruckState < 0 || createTruckState > 1);
 
             resetState("createTruck");
 
