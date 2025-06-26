@@ -263,7 +263,7 @@ public class CoffeeTruckController {
                     truck.getBin(input - 1).getBox().getUnit());
 
             do {
-                System.out.printf("\n>>> Restock Again? : ");
+                System.out.printf("\n>>> Restock Again? [Y/N]: ");
                 loop = view.getTextInput();
                 if (!loop.equalsIgnoreCase("Y") && !loop.equalsIgnoreCase("N")) {
                     System.out.println("Invalid Input");
