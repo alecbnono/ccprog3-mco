@@ -98,20 +98,24 @@ public class ConsoleView {
         System.out.println("Total Inventory: ");
         System.out.println("============================");
         for (int i = 0; i < truck.getBinCount(); i++) {
-            // omit decimals on cup count
-            if (truck.getBin(i).getBox().getUnit().equals("pcs")) {
-                System.out.printf("[%d] %-12s %2f %-6s\n",
-                        i + 1,
-                        truck.getBin(i).getBox().getName(),
-                        truck.getBin(i).getBox().getQuantity(),
-                        truck.getBin(i).getBox().getUnit());
+            if (!truck.getBin(i).isEmpty()) {
+                // omit decimals on cup count
+                if (truck.getBin(i).getBox().getUnit().equals("pcs")) {
+                    System.out.printf("[%d] %-12s %2d %-6s\n",
+                            i + 1,
+                            truck.getBin(i).getBox().getName(),
+                            (int) truck.getBin(i).getBox().getQuantity(),
+                            truck.getBin(i).getBox().getUnit());
 
+                } else {
+                    System.out.printf("[%d] %-12s %4.2f %-6s\n",
+                            i + 1,
+                            truck.getBin(i).getBox().getName(),
+                            truck.getBin(i).getBox().getQuantity(),
+                            truck.getBin(i).getBox().getUnit());
+                }
             } else {
-                System.out.printf("[%d] %-12s %4.2f %-6s\n",
-                        i + 1,
-                        truck.getBin(i).getBox().getName(),
-                        truck.getBin(i).getBox().getQuantity(),
-                        truck.getBin(i).getBox().getUnit());
+                System.out.printf("[%d] Empty\n");
             }
         }
         System.out.println("============================\n");

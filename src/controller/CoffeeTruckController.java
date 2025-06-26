@@ -202,6 +202,7 @@ public class CoffeeTruckController {
     private void runTruckRestock(CoffeeTruck truck) {
 
         int input = -1;
+        String charInput = null;
         String loop = "Y";
         String quantity;
         final int MAX_INPUTS = 14;
@@ -223,6 +224,19 @@ public class CoffeeTruckController {
                     System.out.println("Invalid Input");
                 }
             } while (input < 0 || input > truck.getBinCount());
+
+            if (truck.getBin(input - 1).isEmpty()) {
+                view.displayRestockLegend();
+                do {
+                    System.out.printf("\n>>> Set bin #%d content: ", input);
+                    charInput = view.getTextInput();
+                    if (!linearSearch(validInputs, MAX_INPUTS, charInput)) {
+                        System.out.println("Invalid Input");
+                    }
+                } while (!linearSearch(validInputs, MAX_INPUTS, charInput));
+
+                truck.getBin(input - 1).setBox(chooseItem(charInput));
+            }
 
             System.out.printf("Current Item: %s\n", truck.getBin(input - 1).getBox().getName());
 
