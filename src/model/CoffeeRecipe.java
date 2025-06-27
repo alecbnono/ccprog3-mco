@@ -16,16 +16,29 @@ public class CoffeeRecipe {
     }
 
     private boolean consumeChecker(ArrayList<StorageBin> inventory, String itemName, double amount, boolean doConsume) {
-        for (StorageBin bin : inventory) {
-            if (bin.hasItem(itemName)) {
-                if (doConsume) {
-                    return bin.consume(amount);
-                } else {
-                    return bin.canConsume(amount);
+        if (!doConsume) {
+            // CHECK phase: sum all matching quantities
+            double totalAvailable = 0;
+            for (StorageBin bin : inventory) {
+                if (bin.hasItem(itemName)) {
+                    totalAvailable += bin.getBox().getQuantity();
                 }
             }
+            return totalAvailable >= amount;
+        } else {
+            // CONSUME phase: subtract progressively across bins
+            double remaining = amount;
+            for (StorageBin bin : inventory) {
+                if (bin.hasItem(itemName)) {
+                    double available = bin.getBox().getQuantity();
+                    double toConsume = Math.min(remaining, available);
+                    bin.consume(toConsume);
+                    remaining -= toConsume;
+                    if (remaining <= 0) return true;  // done consuming
+                }
+            }
+            return false; // not enough total
         }
-        return false;
     }
 
     private boolean consume(ArrayList<StorageBin> inventory, String[] itemNames, double[] amounts) {
@@ -46,7 +59,7 @@ public class CoffeeRecipe {
         double espresso = cupOunces / 3;
         double CBgrams = espresso * BEAN_RATIO * FLOZ_TO_GRAMS;
         double water = (cupOunces - espresso) + (1 - BEAN_RATIO) * espresso;
-        return consume(inventory, new String[] { "coffee beans", "water", drinkSize }, new double[] { CBgrams, water });
+        return consume(inventory, new String[] { "coffee beans", "water", drinkSize.toLowerCase() }, new double[] { CBgrams, water, 1 });
     }
 
     public boolean makeLatte(ArrayList<StorageBin> inventory, String drinkSize) {
@@ -55,8 +68,8 @@ public class CoffeeRecipe {
         double CBgrams = espresso * BEAN_RATIO * FLOZ_TO_GRAMS;
         double water = espresso * (1 - BEAN_RATIO);
         double milk = cupOunces - espresso;
-        return consume(inventory, new String[] { "coffee beans", "water", "milk" },
-                new double[] { CBgrams, water, milk });
+        return consume(inventory, new String[] { "coffee beans", "water", "milk", drinkSize.toLowerCase() },
+                new double[] { CBgrams, water, milk, 1 });
     }
 
     public boolean makeCappuccino(ArrayList<StorageBin> inventory, String drinkSize) {
@@ -65,7 +78,7 @@ public class CoffeeRecipe {
         double CBgrams = espresso * BEAN_RATIO * FLOZ_TO_GRAMS;
         double water = espresso * (1 - BEAN_RATIO);
         double milk = cupOunces - espresso;
-        return consume(inventory, new String[] { "coffee beans", "water", "milk" },
-                new double[] { CBgrams, water, milk });
+        return consume(inventory, new String[] { "coffee beans", "water", "milk", drinkSize.toLowerCase() },
+                new double[] { CBgrams, water, milk, 1 });
     }
 }
