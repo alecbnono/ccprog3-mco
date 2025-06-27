@@ -150,6 +150,31 @@ public class CoffeeTruckController {
         }
     }
 
+    private void setPrices() {
+        double input;
+
+        System.out.println("\nSet Pricing: ");
+        view.displayPricingHeader();
+
+        for (int i = 0; i < model.getPriceList().size(); i++) {
+
+            do {
+                System.out.printf("  %10s   %1s : ",
+                        model.getPriceList().get(i).getProduct(),
+                        model.getPriceList().get(i).getSize());
+                input = view.getNumInput();
+                if (input <= 0) {
+                    System.out.println("Invalid Input");
+                }
+
+            } while (input <= 0);
+
+            model.getPriceList().get(i).updatePrice(input);
+        }
+
+        System.out.println("============================\n");
+    }
+
     private void createTruck(String type) {
         String typeString = type.substring(0, 1).toUpperCase() + type.substring(1);
         String location;
@@ -158,6 +183,7 @@ public class CoffeeTruckController {
 
         System.out.println();
         view.displaySetTruckLoc();
+        view.getTextInput(); // input flush
         location = view.getTextInput();
         model.createTruck(location, type);
 
@@ -169,6 +195,7 @@ public class CoffeeTruckController {
         System.out.println("Please set initial loadout.\n");
 
         setInventory(model.getTruck(truckNo));
+        setPrices();
     }
 
     private void runCreateTruck() {
@@ -220,10 +247,10 @@ public class CoffeeTruckController {
             do {
                 System.out.printf("\n>>> Which bin no. would you like to restock?: ");
                 input = view.getIntInput();
-                if (input < 0 || input > truck.getBinCount()) {
+                if (input < 1 || input > truck.getBinCount()) {
                     System.out.println("Invalid Input");
                 }
-            } while (input < 0 || input > truck.getBinCount());
+            } while (input < 1 || input > truck.getBinCount());
 
             if (truck.getBin(input - 1).isEmpty()) {
                 view.displayRestockLegend();
@@ -252,15 +279,15 @@ public class CoffeeTruckController {
 
             if (quantity.equalsIgnoreCase("e")) {
                 truck.getBin(input - 1).emptyBox();
+                System.out.printf(">>> Bin #%d updated: Empty\n", input);
 
             } else {
                 truck.getBin(input - 1).restock(Double.parseDouble(quantity));
+                System.out.printf(">>> Bin #%d updated: %s - %.2f %s\n", input,
+                        truck.getBin(input - 1).getBox().getName(),
+                        truck.getBin(input - 1).getBox().getQuantity(),
+                        truck.getBin(input - 1).getBox().getUnit());
             }
-
-            System.out.printf(">>> Bin #%d updated: %s - %.2f %s\n", input,
-                    truck.getBin(input - 1).getBox().getName(),
-                    truck.getBin(input - 1).getBox().getQuantity(),
-                    truck.getBin(input - 1).getBox().getUnit());
 
             do {
                 System.out.printf("\n>>> Restock Again? [Y/N]: ");
@@ -290,20 +317,56 @@ public class CoffeeTruckController {
         return selectTruckState;
     }
 
-    private void runTruckPriceMenu(CoffeeTruck truck) {
-        PriceList priceList = truck.getPriceList();
-        view.displayPriceMenu();
-        int choice = 0;
-        do {
-            System.out.println("What would you like to do?");
+    private void runTruckUpdatePrice() {
 
-            if (choice < 0 || choice > 3) {
-                System.out.println("Invalid Input");
-                choice = view.getMenuInput();
-            }
-        } while (choice < 0 || choice > 3);
+        String loop = "Y";
+        int input;
+        double price;
 
+        view.displayUpdatePrices(model);
+
+        while (loop.equalsIgnoreCase("Y")) {
+
+            do {
+                System.out.printf("\n>>> Which item would you like its price updated: ");
+                input = view.getIntInput();
+                if (input < 1 || input > model.getPriceList().size()) {
+                    System.out.println("Invalid Input");
+                }
+            } while (input < 1 || input > model.getPriceList().size());
+
+            do {
+                System.out.printf("\nSet price: ");
+                price = view.getNumInput();
+                if (price <= 0) {
+                    System.out.println("Invalid Input");
+                }
+            } while (price <= 0);
+
+            model.getPriceList().get(input - 1).updatePrice(price);
+
+            do {
+                System.out.printf("\n>>> Update Price Again? [Y/N]: ");
+                loop = view.getTextInput();
+                if (!loop.equalsIgnoreCase("Y") && !loop.equalsIgnoreCase("N")) {
+                    System.out.println("Invalid Input");
+                }
+            } while (!loop.equalsIgnoreCase("Y") && !loop.equalsIgnoreCase("N"));
+
+            input = -1;
+            price = -1;
+        }
     }
+
+    private void runChangeLocation(CoffeeTruck truck) {
+        String input = null;
+
+        System.out.println(">>> Current Truck Location - %s\n");
+        System.out.printf("New Location: ");
+        input = view.getTextInput();
+        truck.setLocation(input);
+    }
+
     private void runTruckInteractions() {
 
         int selectedTruck;
@@ -329,7 +392,7 @@ public class CoffeeTruckController {
                         break;
                     case 2:
                         // view truck and prices
-                        view.displayTruckInfo(model.getTruck(selectedTruck - 1), selectedTruck);
+                        view.displayTruckInfo(model, model.getTruck(selectedTruck - 1), selectedTruck);
                         break;
                     case 3:
                         // restock truck
@@ -337,7 +400,11 @@ public class CoffeeTruckController {
                         break;
                     case 4:
                         // update prices
-                        runTruckPriceMenu(model.getTruck(selectedTruck - 1));
+                        runTruckUpdatePrice();
+                        break;
+                    case 5:
+                        // change location
+                        runChangeLocation(model.getTruck(selectedTruck - 1));
                         break;
                     default:
                         break;
