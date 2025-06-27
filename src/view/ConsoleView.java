@@ -1,6 +1,7 @@
 package view;
 
 import java.util.Scanner;
+import java.util.InputMismatchException;
 import model.*;
 
 /**
@@ -71,26 +72,13 @@ public class ConsoleView {
 
     }
 
-    public void displayTruckInfo(CoffeeTruck truck, int truckNo) {
+    public void displayTruckInfo(CoffeeBusiness business, CoffeeTruck truck, int truckNo) {
         System.out.printf("Truck #%d\n", truckNo);
         System.out.printf("%-8s: %s\n", "Type",
                 truck.getType().substring(0, 1).toUpperCase() + truck.getType().substring(1));
         System.out.printf("%-8s: %s\n\n", "Location", truck.getLocation());
         System.out.println("Menu Prices: ");
-        System.out.println("============================");
-        System.out.println("|   Drink     Size   Price |");
-        System.out.println("============================");
-        System.out.println("  Cappuccino   S    100.00  ");
-        System.out.println("  Cappuccino   M    100.00  ");
-        System.out.println("  Cappuccino   L    100.00  ");
-        System.out.println("  Americano    S    100.00  ");
-        System.out.println("  Americano    M    100.00  ");
-        System.out.println("  Americano    L    100.00  ");
-        System.out.println("    Latte      S    100.00  ");
-        System.out.println("    Latte      M    100.00  ");
-        System.out.println("    Latte      L    100.00  ");
-        System.out.println("============================");
-        System.out.println("");
+        displayPrices(business);
         displayRestockTruck(truck);
     }
 
@@ -115,7 +103,7 @@ public class ConsoleView {
                             truck.getBin(i).getBox().getUnit());
                 }
             } else {
-                System.out.printf("[%d] Empty\n");
+                System.out.printf("[%d] Empty\n", i + 1);
             }
         }
         System.out.println("============================\n");
@@ -163,11 +151,47 @@ public class ConsoleView {
 
     }
 
+    public void displayPricingHeader() {
+        System.out.println("============================");
+        System.out.println("|   Drink     Size   Price |");
+        System.out.println("============================");
+    }
+
+    public void displayUpdatePrices(CoffeeBusiness business) {
+        displayPricingHeader();
+        for (int i = 0; i < business.getPriceList().size(); i++) {
+            System.out.printf("[%d]%11s %1s   %.2f\n", i + 1,
+                    business.getPriceList().get(i).getProduct(),
+                    business.getPriceList().get(i).getSize(),
+                    business.getPriceList().get(i).getPrice());
+        }
+        System.out.println("============================");
+    }
+
+    public void displayPrices(CoffeeBusiness business) {
+        displayPricingHeader();
+        for (int i = 0; i < business.getPriceList().size(); i++) {
+            System.out.printf("  %10s   %1s   %.2f\n",
+                    business.getPriceList().get(i).getProduct(),
+                    business.getPriceList().get(i).getSize(),
+                    business.getPriceList().get(i).getPrice());
+        }
+        System.out.println("============================");
+    }
+
     public int getMenuInput() {
-        System.out.print("Enter choice: ");
-        int input = scanner.nextInt();
-        scanner.nextLine(); // flushes the leftover newline
-        System.out.println();
+        boolean valid = false;
+        int input = 0;
+        while (!valid) {
+            try {
+                System.out.print("Enter choice: ");
+                input = scanner.nextInt();
+                valid = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid Input");
+                scanner.nextLine(); // flushes the leftover newline
+            }
+        }
         return input;
     }
 
@@ -176,24 +200,34 @@ public class ConsoleView {
     }
 
     public double getNumInput() {
-        double input = scanner.nextDouble();
-        scanner.nextLine(); // flushes the leftover newline
+        boolean valid = false;
+        double input = 0;
+        while (!valid) {
+            try {
+                input = scanner.nextDouble();
+                scanner.nextLine();
+                valid = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid Input");
+                scanner.nextLine(); // flushes the leftover newline
+            }
+        }
         return input;
     }
 
     public int getIntInput() {
-        int input = scanner.nextInt();
-        scanner.nextLine(); // flushes the leftover newline
+        boolean valid = false;
+        int input = 0;
+        while (!valid) {
+            try {
+                input = scanner.nextInt();
+                scanner.nextLine();
+                valid = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid Input");
+                scanner.nextLine(); // flushes the leftover newline
+            }
+        }
         return input;
-    }
-    public void displayPriceMenu(){
-        System.out.println("============================");
-        System.out.println("|      Price List Menu      |");
-        System.out.println("============================");
-        System.out.println("[1] Add new price entry");
-        System.out.println("[2] View All prices");
-        System.out.println("[3] Update regular prices (Increase 5%)");
-        System.out.println("[0] Exit");
-        System.out.println("============================");
     }
 }

@@ -9,10 +9,16 @@ public class CoffeeBusiness {
 
     private double sales;
     private ArrayList<CoffeeTruck> Trucks;
+    private PriceList priceList;
 
     public CoffeeBusiness() {
         this.Trucks = new ArrayList<CoffeeTruck>();
+        this.priceList = new PriceList();
         this.sales = 0;
+    }
+
+    public ArrayList<PriceEntry> getPriceList() {
+        return this.priceList.getPriceEntries();
     }
 
     public CoffeeTruck getTruck(int truckNo) {

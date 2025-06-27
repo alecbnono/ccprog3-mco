@@ -2,13 +2,21 @@ package model;
 
 public class PriceEntry {
     private String product;
-    private String type;
+    private String size;
     private String truck;
     private double price;
 
-    public PriceEntry(String product, double price) {
+    public PriceEntry(String product, String size, double price) {
         this.product = product;
+        this.size = size;
         this.price = price;
+    }
+
+    public PriceEntry(String product, String size) {
+        this.product = product;
+        this.size = size;
+        this.price = 0;
+        this.truck = "regular";
     }
 
     public boolean updatePrice(double price) {
@@ -27,16 +35,16 @@ public class PriceEntry {
         return product;
     }
 
-    public String getType() {
-        return type;
+    public String getSize() {
+        return size;
     }
 
     public String getTruck() {
         return truck;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setSize(String size) {
+        this.size = size;
     }
 
     public void setTruck(String truck) {
