@@ -15,14 +15,5 @@ public class CoffeeBeans extends Item {
         this.name = "Coffee Beans";
         this.unit = "grams";
     }
-
-    @Override
-    public boolean consume(double amount) {
-        if (amount * OZ_TO_GRAMS <= 0 || quantity < amount * OZ_TO_GRAMS) {
-            return false;
-        } else {
-            quantity -= amount * OZ_TO_GRAMS;
-            return true;
-        }
-    }
+    
 }
