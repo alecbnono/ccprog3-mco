@@ -46,7 +46,7 @@ public class CoffeeRecipe {
         double espresso = cupOunces / 3;
         double CBgrams = espresso * BEAN_RATIO * FLOZ_TO_GRAMS;
         double water = (cupOunces - espresso) + (1 - BEAN_RATIO) * espresso;
-        return consume(inventory, new String[] { "coffee beans", "water" }, new double[] { CBgrams, water });
+        return consume(inventory, new String[] { "coffee beans", "water", drinkSize }, new double[] { CBgrams, water });
     }
 
     public boolean makeLatte(ArrayList<StorageBin> inventory, String drinkSize) {
