@@ -20,6 +20,16 @@ public class CoffeeTruckController {
     private int selectTruckState;
     private int truckInteractionState;
 
+    /**
+     * Constructs a new CoffeeTruckController instance.
+     * 
+     * Initializes the controller with default state values and links it to the
+     * provided ConsoleView instance for user interaction. Also initializes the
+     * CoffeeBusiness model which manages all trucks and business data.
+     * 
+     * @param view the ConsoleView instance responsible for displaying menus and
+     *             reading user input
+     */
     public CoffeeTruckController(ConsoleView view) {
         this.mainMenuState = -1;
         this.createTruckState = -1;
@@ -29,6 +39,14 @@ public class CoffeeTruckController {
         this.view = view;
     }
 
+    /**
+     * Runs the main loop of the coffee truck application.
+     * 
+     * Continuously displays the main menu and processes user input until the user
+     * chooses to exit. Depending on the selected menu option, this method routes
+     * the user to create a new truck, manage existing trucks, or view the
+     * dashboard.
+     */
     public void run() {
         while (mainMenuState != 0) {
             view.displayMainMenu();
@@ -57,6 +75,17 @@ public class CoffeeTruckController {
         }
     }
 
+    /**
+     * Resets the controller state variables except for the one specified to keep.
+     * 
+     * Each state variable controls the flow within a specific section of the
+     * application. This method resets all unused states to their default value
+     * (-1),
+     * while preserving the state specified by the parameter.
+     * 
+     * @param keep the name of the state to preserve (e.g. "mainMenu",
+     *             "createTruck")
+     */
     private void resetState(String keep) {
 
         if (!keep.equals("mainMenu"))
@@ -70,6 +99,22 @@ public class CoffeeTruckController {
 
     }
 
+    /**
+     * Returns an Item object based on the given input code.
+     * 
+     * The input corresponds to a predefined item type:
+     * C/c - Coffee Beans
+     * F/f - Full Cream Milk
+     * W/w - Water
+     * S/s - Small Cup
+     * M/m - Medium Cup
+     * L/l - Large Cup
+     * 
+     * If the input does not match any known item code, the method returns null.
+     * 
+     * @param input the item code entered by the user
+     * @return the corresponding Item instance, or null if input is invalid
+     */
     private Item chooseItem(String input) {
         switch (input) {
             case "C":
@@ -95,6 +140,17 @@ public class CoffeeTruckController {
         }
     }
 
+    /**
+     * Performs a linear search on the given array to check for a matching string.
+     * 
+     * This method searches the first n elements of the array for a string equal to
+     * the key.
+     * 
+     * @param A   the array to search
+     * @param n   the number of elements to search within the array
+     * @param key the string to search for
+     * @return true if the key is found, false otherwise
+     */
     private boolean linearSearch(String[] A, int n, String key) {
         for (int i = 0; i < n; i++) {
             if (key.equals(A[i])) {
@@ -104,6 +160,19 @@ public class CoffeeTruckController {
         return false;
     }
 
+    /**
+     * Sets the initial inventory for a given coffee truck by assigning items and
+     * quantities
+     * to each of its storage bins.
+     * 
+     * Prompts the user for each bin to select an item type or to empty the bin. If
+     * an item
+     * is selected, the user is also prompted to enter the quantity, which must not
+     * exceed the
+     * maximum capacity of the bin.
+     * 
+     * @param truck the CoffeeTruck instance whose bins are being initialized
+     */
     private void setInventory(CoffeeTruck truck) {
 
         String input = null;
@@ -153,6 +222,12 @@ public class CoffeeTruckController {
         }
     }
 
+    /**
+     * Allows the user to set or update the pricing of drinks in the business.
+     * 
+     * Prompts the user for a valid price for each drink in the price list.
+     * Prices must be greater than zero. Invalid inputs are rejected.
+     */
     private void setPrices() {
         double input;
 
@@ -178,6 +253,16 @@ public class CoffeeTruckController {
         System.out.println("============================\n");
     }
 
+    /**
+     * Creates a new coffee truck of the specified type and sets its location,
+     * inventory, and prices.
+     * 
+     * After creating the truck, the user is prompted to set up the truck's initial
+     * inventory loadout
+     * and drink pricing. The number of bins is based on the truck type.
+     * 
+     * @param type the type of truck to create (e.g., "regular" or "special")
+     */
     private void createTruck(String type) {
         String typeString = type.substring(0, 1).toUpperCase() + type.substring(1);
         String location;
@@ -201,6 +286,14 @@ public class CoffeeTruckController {
         setPrices();
     }
 
+    /**
+     * Runs the menu for creating a new coffee truck.
+     * 
+     * Allows the user to choose between creating a Regular Coffee Truck or exiting.
+     * Special Coffee Trucks are currently not implemented but are mentioned in the
+     * menu.
+     * If a valid selection is made, the truck creation process is initiated.
+     */
     private void runCreateTruck() {
 
         while (createTruckState != 0) {
@@ -229,6 +322,21 @@ public class CoffeeTruckController {
         }
     }
 
+    /**
+     * Handles the restocking process for a specific coffee truck.
+     * 
+     * The user is prompted to choose a bin to restock. If the selected bin is
+     * empty,
+     * the user must select an item type from a list of valid item codes. Once the
+     * bin
+     * has a defined item, the user is prompted to enter a quantity to add or type
+     * "E"
+     * to empty the bin. All input is validated, and the process repeats until the
+     * user
+     * chooses not to continue.
+     * 
+     * @param truck the CoffeeTruck instance whose inventory is being restocked
+     */
     private void runTruckRestock(CoffeeTruck truck) {
 
         int input = -1;
@@ -316,6 +424,17 @@ public class CoffeeTruckController {
         }
     }
 
+    /**
+     * Displays the list of existing coffee trucks and prompts the user to select
+     * one.
+     * 
+     * The method validates the user’s input to ensure it corresponds to a valid
+     * truck
+     * index. It returns the selected truck number (1-based index) or 0 if the user
+     * exits.
+     * 
+     * @return the index of the selected truck or 0 if the user chooses to exit
+     */
     private int runExistingTrucks() {
 
         view.displayExistingTrucks(model);
@@ -331,6 +450,14 @@ public class CoffeeTruckController {
         return selectTruckState;
     }
 
+    /**
+     * Allows the user to update the price of drinks in the price list.
+     * 
+     * The user is prompted to select an item by its number and provide a new price.
+     * Input is validated to ensure the item number is within range and the new
+     * price is greater than zero.
+     * After updating, the user is asked if they want to update another item.
+     */
     private void runTruckUpdatePrice() {
 
         String loop = "Y";
@@ -372,6 +499,14 @@ public class CoffeeTruckController {
         }
     }
 
+    /**
+     * Prompts the user to set a new location for the specified coffee truck.
+     * 
+     * The current location is displayed, and the user is asked to enter a new one.
+     * The truck's location is then updated to the new input.
+     * 
+     * @param truck the CoffeeTruck instance whose location is to be changed
+     */
     private void runChangeLocation(CoffeeTruck truck) {
         String input = null;
 
@@ -381,6 +516,17 @@ public class CoffeeTruckController {
         truck.setLocation(input);
     }
 
+    /**
+     * Simulates coffee sales for a given truck.
+     * 
+     * Displays the drink price list and allows the user to select a drink to order.
+     * The method checks inventory availability and either serves the drink or
+     * displays a cancellation message.
+     * After a successful sale, the receipt is shown and sales data is recorded.
+     * The user is prompted whether to place another order.
+     * 
+     * @param truck the CoffeeTruck instance used in the simulation
+     */
     private void runTruckSimulation(CoffeeTruck truck) {
 
         int input;
@@ -432,6 +578,23 @@ public class CoffeeTruckController {
         }
     }
 
+    /**
+     * Runs the truck interaction menu for managing a specific coffee truck.
+     * 
+     * Displays options that allow the user to:
+     * 1. Simulate a coffee sale
+     * 2. View truck information and prices
+     * 3. Restock or maintain truck inventory
+     * 4. Update drink prices
+     * 5. Change the truck's location
+     * 
+     * The user is first prompted to choose an interaction option, followed by
+     * selecting
+     * a specific truck from the list. If a valid truck is selected, the
+     * corresponding
+     * operation is performed. The loop continues until the user selects the exit
+     * option.
+     */
     private void runTruckInteractions() {
 
         int selectedTruck;
