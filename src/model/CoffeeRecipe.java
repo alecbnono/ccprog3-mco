@@ -20,9 +20,8 @@ public class CoffeeRecipe {
             // CHECK phase: sum all matching quantities
             double totalAvailable = 0;
             for (StorageBin bin : inventory) {
-                if (bin.hasItem(itemName)) {
+                if (bin.hasItem(itemName))
                     totalAvailable += bin.getBox().getQuantity();
-                }
             }
             return totalAvailable >= amount;
         } else {
@@ -34,24 +33,30 @@ public class CoffeeRecipe {
                     double toConsume = Math.min(remaining, available);
                     bin.consume(toConsume);
                     remaining -= toConsume;
-                    if (remaining <= 0) return true;  // done consuming
+                    if (remaining <= 0)
+                        return true; // done consuming
                 }
             }
+            System.out.println("1");
             return false; // not enough total
         }
     }
 
     private boolean consume(ArrayList<StorageBin> inventory, String[] itemNames, double[] amounts) {
+        boolean valid = true;
+
         for (int i = 0; i < itemNames.length; i++) {
             if (!consumeChecker(inventory, itemNames[i], amounts[i], false)) {
-                return false;
+                System.out.println("2");
+                valid = false;
             }
         }
+
         for (int i = 0; i < itemNames.length; i++) {
             consumeChecker(inventory, itemNames[i], amounts[i], true);
         }
 
-        return true;
+        return valid;
     }
 
     public boolean makeAmericano(ArrayList<StorageBin> inventory, String drinkSize) {
@@ -59,7 +64,8 @@ public class CoffeeRecipe {
         double espresso = cupOunces / 3;
         double CBgrams = espresso * BEAN_RATIO * FLOZ_TO_GRAMS;
         double water = (cupOunces - espresso) + (1 - BEAN_RATIO) * espresso;
-        return consume(inventory, new String[] { "coffee beans", "water", drinkSize.toLowerCase() }, new double[] { CBgrams, water, 1 });
+        return consume(inventory, new String[] { "coffee beans", "water", drinkSize.toLowerCase() },
+                new double[] { CBgrams, water, 1 });
     }
 
     public boolean makeLatte(ArrayList<StorageBin> inventory, String drinkSize) {

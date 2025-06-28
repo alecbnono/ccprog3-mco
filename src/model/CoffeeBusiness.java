@@ -47,4 +47,12 @@ public class CoffeeBusiness {
             // insert special coffee truck
         }
     }
+
+    public void addSales(double money) {
+        sales += money;
+    }
+
+    public double getSales() {
+        return sales;
+    }
 }

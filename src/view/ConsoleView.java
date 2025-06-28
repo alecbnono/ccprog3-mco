@@ -165,7 +165,7 @@ public class ConsoleView {
                     business.getPriceList().get(i).getSize(),
                     business.getPriceList().get(i).getPrice());
         }
-        System.out.println("============================");
+        System.out.println("============================\n");
     }
 
     public void displayPrices(CoffeeBusiness business) {
@@ -176,6 +176,28 @@ public class ConsoleView {
                     business.getPriceList().get(i).getSize(),
                     business.getPriceList().get(i).getPrice());
         }
+        System.out.println("============================\n");
+    }
+
+    public void displayReceipt(CoffeeBusiness business, CoffeeTruck truck, int input, double total) {
+        System.out.println("============================");
+        System.out.println("|      Order Complete      |");
+        System.out.println("============================");
+        System.out.printf("| Truck: %-18s|\n", truck.getLocation());
+        System.out.printf("| Drink: %-18s|\n", business.getPriceList().get(input).getProduct());
+        System.out.printf("| Size: %-18s|\n", business.getPriceList().get(input).getSize());
+        System.out.printf("| Price: %-18.2f|\n", total);
+        System.out.println("============================");
+
+    }
+
+    public void displayCancelledOrder() {
+        System.out.println("============================");
+        System.out.println("|      Order Cancelled     |");
+        System.out.println("|     due to incomplete    |");
+        System.out.println("|        ingredients       |");
+        System.out.println("============================");
+        System.out.println("|      Please  Restock     |");
         System.out.println("============================");
     }
 
@@ -188,8 +210,7 @@ public class ConsoleView {
                 input = scanner.nextInt();
                 valid = true;
             } catch (InputMismatchException e) {
-                System.out.println("Invalid Input");
-                scanner.nextLine(); // flushes the leftover newline
+                scanner.nextLine();
             }
         }
         return input;
@@ -205,12 +226,10 @@ public class ConsoleView {
         while (!valid) {
             try {
                 input = scanner.nextDouble();
-                scanner.nextLine();
                 valid = true;
             } catch (InputMismatchException e) {
-                System.out.println("Invalid Input");
-                scanner.nextLine(); // flushes the leftover newline
             }
+            scanner.nextLine();
         }
         return input;
     }
@@ -221,12 +240,10 @@ public class ConsoleView {
         while (!valid) {
             try {
                 input = scanner.nextInt();
-                scanner.nextLine();
                 valid = true;
             } catch (InputMismatchException e) {
-                System.out.println("Invalid Input");
-                scanner.nextLine(); // flushes the leftover newline
             }
+            scanner.nextLine();
         }
         return input;
     }

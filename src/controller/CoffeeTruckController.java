@@ -121,13 +121,16 @@ public class CoffeeTruckController {
 
         for (int i = 0; i < truck.getBinCount(); i++) {
 
+            boolean valid;
+
             do {
                 System.out.printf("\n>>> Set bin #%d content: ", i + 1);
                 input = view.getTextInput();
-                if (!linearSearch(validInputs, MAX_INPUTS, input)) {
+                valid = linearSearch(validInputs, MAX_INPUTS, input);
+                if (!valid) {
                     System.out.println("Invalid Input");
                 }
-            } while (!linearSearch(validInputs, MAX_INPUTS, input));
+            } while (!valid);
 
             if (input.equalsIgnoreCase("e")) {
                 truck.getBin(i).emptyBox();
@@ -232,6 +235,7 @@ public class CoffeeTruckController {
         String charInput = null;
         String loop = "Y";
         String quantity;
+        double parsedQuantity;
         final int MAX_INPUTS = 14;
         String[] validInputs = { "C", "c",
                 "F", "f",
@@ -272,10 +276,20 @@ public class CoffeeTruckController {
                         (int) truck.getBin(input - 1).getBox().getMaxQuantity(),
                         truck.getBin(input - 1).getBox().getUnit());
                 quantity = view.getTextInput();
-                if (Double.parseDouble(quantity) < 0 || quantity.equalsIgnoreCase("E")) {
-                    System.out.println("Invalid Input");
+                if (quantity.equalsIgnoreCase("E")) {
+                    break; // valid input, will handle "empty" logic after loop
                 }
-            } while (Double.parseDouble(quantity) < 0 || quantity.equalsIgnoreCase("E"));
+
+                try {
+                    parsedQuantity = Double.parseDouble(quantity);
+                    if (parsedQuantity < 0) {
+                        System.out.println("❌ Quantity cannot be negative.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("❌ Invalid input. Enter a number or 'E'.");
+                    parsedQuantity = -1; // force loop to repeat
+                }
+            } while (parsedQuantity < 0 && !quantity.equalsIgnoreCase("E"));
 
             if (quantity.equalsIgnoreCase("e")) {
                 truck.getBin(input - 1).emptyBox();
@@ -367,6 +381,59 @@ public class CoffeeTruckController {
         truck.setLocation(input);
     }
 
+    private void runTruckSimulation(CoffeeTruck truck) {
+
+        int input;
+        String coffee;
+        String size;
+        double price;
+        boolean completeOrder;
+        String loop = "Y";
+
+        while (loop.equalsIgnoreCase("Y")) {
+
+            completeOrder = true;
+            view.displayUpdatePrices(model);
+
+            do {
+                System.out.printf("Select Drink: ");
+                input = view.getIntInput();
+                if (input < 1 || input > model.getPriceList().size()) {
+                    System.out.println("Invalid Input");
+                }
+            } while (input < 1 || input > model.getPriceList().size());
+
+            coffee = model.getPriceList().get(input - 1).getProduct().toLowerCase();
+            size = model.getPriceList().get(input - 1).getSizeFull();
+            price = model.getPriceList().get(input - 1).getPrice();
+
+            System.out.println(coffee);
+            System.out.println(size);
+            System.out.println(price);
+
+            if (!truck.serveCoffee(coffee, size)) {
+                completeOrder = false;
+            }
+
+            if (completeOrder) {
+                view.displayReceipt(model, truck, input, price);
+                model.addSales(price);
+            } else {
+                view.displayCancelledOrder();
+            }
+
+            do {
+                System.out.printf("\n>>> Order Again? [Y/N]: ");
+                loop = view.getTextInput();
+                if (!loop.equalsIgnoreCase("Y") && !loop.equalsIgnoreCase("N")) {
+                    System.out.println("Invalid Input");
+                }
+            } while (!loop.equalsIgnoreCase("Y") && !loop.equalsIgnoreCase("N"));
+
+            input = -1;
+        }
+    }
+
     private void runTruckInteractions() {
 
         int selectedTruck;
@@ -389,6 +456,7 @@ public class CoffeeTruckController {
                 switch (truckInteractionState) {
                     case 1:
                         // simulate truck
+                        runTruckSimulation(model.getTruck(selectedTruck - 1));
                         break;
                     case 2:
                         // view truck and prices
