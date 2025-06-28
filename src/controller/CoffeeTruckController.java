@@ -416,7 +416,7 @@ public class CoffeeTruckController {
             }
 
             if (completeOrder) {
-                view.displayReceipt(model, truck, input, price);
+                view.displayReceipt(model, truck, input - 1, price);
                 model.addSales(price);
             } else {
                 view.displayCancelledOrder();

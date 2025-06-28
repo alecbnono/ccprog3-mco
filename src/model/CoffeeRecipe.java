@@ -21,9 +21,11 @@ public class CoffeeRecipe {
             for (StorageBin bin : inventory) {
                 if (bin.hasItem(itemName)) {
                     double q = bin.getBox().getQuantity();
+                    System.out.println("[CHECK] Found: " + itemName + " in bin with " + q);
                     totalAvailable += q;
                 }
             }
+            System.out.println("[CHECK] Total available for " + itemName + ": " + totalAvailable + " | Needed: " + amount);
             return totalAvailable >= amount;
         } else {
             double remaining = amount;
@@ -33,11 +35,13 @@ public class CoffeeRecipe {
                     double toConsume = Math.min(remaining, available);
                     if (toConsume > 0) {
                         bin.consume(toConsume);
+                        System.out.println("[CONSUME] " + toConsume + " of " + itemName + " from bin. Remaining: " + (remaining - toConsume));
                         remaining -= toConsume;
                         if (remaining <= 0) return true;
                     }
                 }
             }
+            System.out.println("[FAIL] Could not consume enough of " + itemName);
             return false;
         }
     }
@@ -46,6 +50,7 @@ public class CoffeeRecipe {
         // Step 1: Check all items are available
         for (int i = 0; i < itemNames.length; i++) {
             if (!consumeChecker(inventory, itemNames[i], amounts[i], false)) {
+                System.out.println("Not enough " + itemNames[i]);
                 return false;
             }
         }
@@ -54,6 +59,7 @@ public class CoffeeRecipe {
         for (int i = 0; i < itemNames.length; i++) {
             boolean success = consumeChecker(inventory, itemNames[i], amounts[i], true);
             if (!success) {
+                System.out.println("Unexpected failure during consumption of: " + itemNames[i]);
                 return false;
             }
         }
