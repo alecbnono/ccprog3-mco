@@ -7,7 +7,7 @@ public class Liquid extends Item {
         super(quantity, 640);
 
         // defaults to water if wrong name passed
-        if (name.toLowerCase().equals("milk") &&
+        if (name.toLowerCase().equals("milk") ||
                 name.toLowerCase().equals("water")) {
             this.name = name;
         } else {
@@ -22,7 +22,7 @@ public class Liquid extends Item {
         super(0, 640);
 
         // defaults to water if wrong name passed
-        if (name.toLowerCase().equals("milk") &&
+        if (name.toLowerCase().equals("milk") ||
                 name.toLowerCase().equals("water")) {
             this.name = name;
         } else {
