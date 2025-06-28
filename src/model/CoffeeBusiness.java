@@ -7,14 +7,18 @@ import java.util.ArrayList;
  */
 public class CoffeeBusiness {
 
-    private double sales;
+    private double cappuccinoSales;
+    private double americanoSales;
+    private double latteSales;
     private ArrayList<CoffeeTruck> Trucks;
     private PriceList priceList;
 
     public CoffeeBusiness() {
         this.Trucks = new ArrayList<CoffeeTruck>();
         this.priceList = new PriceList();
-        this.sales = 0;
+        this.cappuccinoSales = 0;
+        this.americanoSales = 0;
+        this.latteSales = 0;
     }
 
     public ArrayList<PriceEntry> getPriceList() {
@@ -48,11 +52,34 @@ public class CoffeeBusiness {
         }
     }
 
-    public void addSales(double money) {
-        sales += money;
+    public double getTotalSales() {
+        double sales = cappuccinoSales + americanoSales + latteSales;
+        return sales;
     }
 
-    public double getSales() {
-        return sales;
+    public void addSales(String name, double price) {
+
+        switch (name.toLowerCase()) {
+            case "americano":
+                americanoSales += price;
+            case "cappuccino":
+                cappuccinoSales += price;
+            case "latte":
+                latteSales += price;
+        }
+    }
+
+    public double getSales(String name) {
+
+        switch (name.toLowerCase()) {
+            case "americano":
+                return americanoSales;
+            case "cappuccino":
+                return cappuccinoSales;
+            case "latte":
+                return latteSales;
+            default:
+                return 0;
+        }
     }
 }
