@@ -1,6 +1,7 @@
 package view;
 
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import model.*;
 
@@ -132,6 +133,34 @@ public class ConsoleView {
     }
 
     public void displayDashboard(CoffeeBusiness business) {
+
+        ArrayList<String> itemNames = new ArrayList<>();
+        ArrayList<Double> itemQuantities = new ArrayList<>();
+        ArrayList<String> itemUnits = new ArrayList<>();
+
+        for (int i = 0; i < business.getTruckCount(); i++) {
+            for (int j = 0; j < business.getTruck(i).getBinCount(); j++) {
+                Item item = business.getTruck(i).getBin(j).getBox();
+                if (item == null)
+                    continue;
+
+                String name = item.getName().toLowerCase();
+                double qty = item.getQuantity();
+                String unit = item.getUnit();
+
+                int index = itemNames.indexOf(name);
+                if (index != -1) {
+                    // item already exists in list
+                    itemQuantities.set(index, itemQuantities.get(index) + qty);
+                } else {
+                    // new item
+                    itemNames.add(name);
+                    itemQuantities.add(qty);
+                    itemUnits.add(unit);
+                }
+            }
+        }
+
         System.out.println("===== JavaJeeps Business Dashboard =====\n");
         System.out.println("============================");
         System.out.println("|       Truck Summary      |");
@@ -139,16 +168,36 @@ public class ConsoleView {
         System.out.printf(" - Total Trucks: %d\n", business.getTruckCount());
         System.out.printf("    * Regular Trucks: %d\n", business.getSpecificTruckCount("regular"));
         System.out.printf("    * Special Trucks: %d\n", business.getSpecificTruckCount("special"));
-        System.out.println("============================");
-        System.out.println();
+        System.out.println("============================\n");
         System.out.println("============================");
         System.out.println("|      Truck Locations     |");
         System.out.println("============================");
         for (int i = 0; i < business.getTruckCount(); i++) {
-            System.out.printf("[%d] %s", i + 1, business.getTruck(i));
+            System.out.printf("[%d] %s\n", i + 1, business.getTruck(i).getLocation());
         }
+        System.out.println("============================\n");
+
+        System.out.println("============================");
+        System.out.println("|       Sales Revenue      |");
         System.out.println("============================");
 
+        System.out.printf("%s %.2f\n", "Cappuccino", business.getSales("cappuccino"));
+        System.out.printf("%s %.2f\n", "Americano", business.getSales("americano"));
+        System.out.printf("%s %.2f\n", "Latte", business.getSales("latte"));
+        System.out.printf("%s %.2f\n", "Total", business.getTotalSales());
+
+        System.out.println("============================\n");
+
+        System.out.println("============================");
+        System.out.println("|    Aggregate Inventory   |");
+        System.out.println("============================");
+
+        System.out.printf("%-18s| %-10s| %s\n", "Item", "Quantity", "Unit");
+        System.out.println("------------------|-----------|--------");
+        for (int i = 0; i < itemNames.size(); i++) {
+            System.out.printf("%-18s| %-10.2f| %s\n", itemNames.get(i), itemQuantities.get(i), itemUnits.get(i));
+        }
+        System.out.println("============================\n");
     }
 
     public void displayPricingHeader() {

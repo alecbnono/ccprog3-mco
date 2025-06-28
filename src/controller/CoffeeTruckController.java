@@ -407,17 +407,15 @@ public class CoffeeTruckController {
             size = model.getPriceList().get(input - 1).getSizeFull();
             price = model.getPriceList().get(input - 1).getPrice();
 
-            System.out.println(coffee);
-            System.out.println(size);
-            System.out.println(price);
-
             if (!truck.serveCoffee(coffee, size)) {
                 completeOrder = false;
             }
 
             if (completeOrder) {
+
                 view.displayReceipt(model, truck, input - 1, price);
-                model.addSales(price);
+                model.addSales(coffee, price);
+
             } else {
                 view.displayCancelledOrder();
             }

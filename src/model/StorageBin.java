@@ -57,7 +57,6 @@ public class StorageBin {
     }
 
     public boolean hasItem(String itemName) {
-        System.out.println(storedItem.getName());
         return storedItem != null && storedItem.getName().toLowerCase().equalsIgnoreCase(itemName);
     }
 }
