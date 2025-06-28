@@ -95,18 +95,22 @@ public class CoffeeBusiness {
         switch (name.toLowerCase()) {
             case "americano":
                 americanoSales += price;
+                break;
             case "cappuccino":
                 cappuccinoSales += price;
+                break;
             case "latte":
                 latteSales += price;
+                break;
         }
     }
-    
+
     /**
      * Returns the total sales accumulated for a specific coffee product.
      *
      * @param name the name of the product ("americano", "cappuccino", or "latte")
-     * @return the total sales for the specified product, or 0 if the name is invalid
+     * @return the total sales for the specified product, or 0 if the name is
+     *         invalid
      */
     public double getSales(String name) {
 
