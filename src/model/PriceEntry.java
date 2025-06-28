@@ -39,6 +39,16 @@ public class PriceEntry {
         return size;
     }
 
+    public String getSizeFull() {
+
+        return switch (size) {
+            case "S" -> "small";
+            case "M" -> "medium";
+            case "L" -> "large";
+            default -> "small";
+        };
+    }
+
     public String getTruck() {
         return truck;
     }
