@@ -1,17 +1,34 @@
 package model;
 
+/**
+ * Represents a pricing entry for a coffee product.
+ */
 public class PriceEntry {
     private String product;
     private String size;
     private String truck;
     private double price;
 
+    /**
+     * Constructs a PriceEntry with a product, size, and price.
+     *
+     * @param product product name
+     * @param size    size of product
+     * @param price   price value
+     */
     public PriceEntry(String product, String size, double price) {
         this.product = product;
         this.size = size;
         this.price = price;
     }
 
+    /**
+     * Constructs a PriceEntry with a product and size.
+     * Price is set to 0 and truck is "regular".
+     *
+     * @param product product name
+     * @param size    size of product
+     */
     public PriceEntry(String product, String size) {
         this.product = product;
         this.size = size;

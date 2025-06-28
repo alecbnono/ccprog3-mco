@@ -1,5 +1,7 @@
 package model;
-
+/**
+ * Represents a cup item with a specific size and capacity.
+ */
 public class Cup extends Item {
 
     private String size;
@@ -18,6 +20,12 @@ public class Cup extends Item {
         return temp;
     }
 
+    /**
+     * Constructs a Cup with a specific size and quantity.
+     *
+     * @param size     cup size ("small", "medium", "large")
+     * @param quantity quantity of cups
+     */
     public Cup(String size, int quantity) {
         super(quantity, getMaxQuantity(size));
         this.size = size;
@@ -31,6 +39,11 @@ public class Cup extends Item {
         };
     }
 
+    /**
+     * Constructs a Cup with a specific size and zero quantity.
+     *
+     * @param size cup size
+     */
     public Cup(String size) {
         super(0, getMaxQuantity(size));
         this.size = size;

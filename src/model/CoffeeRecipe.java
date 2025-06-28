@@ -2,10 +2,19 @@ package model;
 
 import java.util.ArrayList;
 
+/**
+ * Defines recipes and logic for preparing different coffee drinks.
+ */
 public class CoffeeRecipe {
     private final double BEAN_RATIO = 1.0 / 19.0;
     private final double FLOZ_TO_GRAMS = 28.34962;
 
+    /**
+     * Converts a cup size to its corresponding volume in fluid ounces.
+     *
+     * @param size the cup size ("small", "medium", "large")
+     * @return fluid ounces for the given size
+     */
     private double getCupOz(String size) {
         return switch (size.toLowerCase()) {
             case "small" -> 8;
@@ -15,6 +24,15 @@ public class CoffeeRecipe {
         };
     }
 
+    /**
+     * Checks and optionally consumes the required amount of a specific item.
+     *
+     * @param inventory list of storage bins
+     * @param itemName  name of the item
+     * @param amount    quantity to consume
+     * @param doConsume whether to actually consume the item
+     * @return true if sufficient quantity exists (and optionally consumed), false otherwise
+     */
     private boolean consumeChecker(ArrayList<StorageBin> inventory, String itemName, double amount, boolean doConsume) {
         if (!doConsume) {
             double totalAvailable = 0;
@@ -42,6 +60,14 @@ public class CoffeeRecipe {
         }
     }
 
+    /**
+     * Attempts to consume all listed items in the given amounts.
+     *
+     * @param inventory list of storage bins
+     * @param itemNames names of the items
+     * @param amounts   amounts of each item
+     * @return true if all items were successfully consumed
+     */
     private boolean consume(ArrayList<StorageBin> inventory, String[] itemNames, double[] amounts) {
         // Step 1: Check all items are available
         for (int i = 0; i < itemNames.length; i++) {
@@ -61,6 +87,13 @@ public class CoffeeRecipe {
         return true;
     }
 
+    /**
+     * Prepares an Americano coffee if enough ingredients are available.
+     *
+     * @param inventory storage bins containing ingredients
+     * @param drinkSize size of the drink
+     * @return true if successful, false otherwise
+     */
     public boolean makeAmericano(ArrayList<StorageBin> inventory, String drinkSize) {
         double cupOunces = getCupOz(drinkSize);
         double espresso = cupOunces / 3;
@@ -70,6 +103,13 @@ public class CoffeeRecipe {
                 new double[] { CBgrams, water, 1 });
     }
 
+    /**
+     * Prepares a Latte if enough ingredients are available.
+     *
+     * @param inventory storage bins containing ingredients
+     * @param drinkSize size of the drink
+     * @return true if successful, false otherwise
+     */
     public boolean makeLatte(ArrayList<StorageBin> inventory, String drinkSize) {
         double cupOunces = getCupOz(drinkSize);
         double espresso = cupOunces / 5;
@@ -80,6 +120,13 @@ public class CoffeeRecipe {
                 new double[] { CBgrams, water, milk, 1 });
     }
 
+    /**
+     * Prepares a Cappuccino if enough ingredients are available.
+     *
+     * @param inventory storage bins containing ingredients
+     * @param drinkSize size of the drink
+     * @return true if successful, false otherwise
+     */
     public boolean makeCappuccino(ArrayList<StorageBin> inventory, String drinkSize) {
         double cupOunces = getCupOz(drinkSize);
         double espresso = cupOunces / 3;

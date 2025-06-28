@@ -1,14 +1,25 @@
 package model;
 
+/**
+ * Represents a storage container for an inventory item.
+ */
 public class StorageBin {
     private Item storedItem;
     private double maxQuantity;
 
+    /**
+     * Constructs a StorageBin with a specified item.
+     *
+     * @param item item to store
+     */
     public StorageBin(Item item) {
         this.maxQuantity = item.getMaxQuantity();
         this.storedItem = item;
     }
 
+    /**
+     * Constructs an empty StorageBin.
+     */
     public StorageBin() {
         this.maxQuantity = 0;
         this.storedItem = null;

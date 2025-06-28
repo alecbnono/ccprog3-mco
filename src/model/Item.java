@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * Abstract class representing an inventory item.
+ */
 public abstract class Item {
 
     protected String name;
@@ -7,6 +10,12 @@ public abstract class Item {
     protected double quantity;
     protected double maxQuantity;
 
+    /**
+     * Constructs an Item with a given quantity and maximum quantity.
+     *
+     * @param quantity     initial quantity
+     * @param maxQuantity  maximum allowed quantity
+     */
     public Item(double quantity, double maxQuantity) {
         this.maxQuantity = maxQuantity;
 
@@ -19,6 +28,12 @@ public abstract class Item {
         }
     }
 
+
+    /**
+     * Constructs an Item with max quantity and zero initial quantity.
+     *
+     * @param maxQuantity the max allowed quantity
+     */
     public Item(double maxQuantity) {
         this.maxQuantity = maxQuantity;
     }
