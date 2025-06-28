@@ -17,46 +17,48 @@ public class CoffeeRecipe {
 
     private boolean consumeChecker(ArrayList<StorageBin> inventory, String itemName, double amount, boolean doConsume) {
         if (!doConsume) {
-            // CHECK phase: sum all matching quantities
             double totalAvailable = 0;
             for (StorageBin bin : inventory) {
-                if (bin.hasItem(itemName))
-                    totalAvailable += bin.getBox().getQuantity();
+                if (bin.hasItem(itemName)) {
+                    double q = bin.getBox().getQuantity();
+                    totalAvailable += q;
+                }
             }
             return totalAvailable >= amount;
         } else {
-            // CONSUME phase: subtract progressively across bins
             double remaining = amount;
             for (StorageBin bin : inventory) {
                 if (bin.hasItem(itemName)) {
                     double available = bin.getBox().getQuantity();
                     double toConsume = Math.min(remaining, available);
-                    bin.consume(toConsume);
-                    remaining -= toConsume;
-                    if (remaining <= 0)
-                        return true; // done consuming
+                    if (toConsume > 0) {
+                        bin.consume(toConsume);
+                        remaining -= toConsume;
+                        if (remaining <= 0) return true;
+                    }
                 }
             }
-            System.out.println("1");
-            return false; // not enough total
+            return false;
         }
     }
 
     private boolean consume(ArrayList<StorageBin> inventory, String[] itemNames, double[] amounts) {
-        boolean valid = true;
-
+        // Step 1: Check all items are available
         for (int i = 0; i < itemNames.length; i++) {
             if (!consumeChecker(inventory, itemNames[i], amounts[i], false)) {
-                System.out.println("2");
-                valid = false;
+                return false;
             }
         }
 
+        // Step 2: Consume all items (only if all are available)
         for (int i = 0; i < itemNames.length; i++) {
-            consumeChecker(inventory, itemNames[i], amounts[i], true);
+            boolean success = consumeChecker(inventory, itemNames[i], amounts[i], true);
+            if (!success) {
+                return false;
+            }
         }
 
-        return valid;
+        return true;
     }
 
     public boolean makeAmericano(ArrayList<StorageBin> inventory, String drinkSize) {
@@ -64,7 +66,7 @@ public class CoffeeRecipe {
         double espresso = cupOunces / 3;
         double CBgrams = espresso * BEAN_RATIO * FLOZ_TO_GRAMS;
         double water = (cupOunces - espresso) + (1 - BEAN_RATIO) * espresso;
-        return consume(inventory, new String[] { "coffee beans", "water", drinkSize.toLowerCase() },
+        return consume(inventory, new String[] { "coffee beans", "water", drinkSize.toLowerCase() + " Cup" },
                 new double[] { CBgrams, water, 1 });
     }
 
@@ -74,7 +76,7 @@ public class CoffeeRecipe {
         double CBgrams = espresso * BEAN_RATIO * FLOZ_TO_GRAMS;
         double water = espresso * (1 - BEAN_RATIO);
         double milk = cupOunces - espresso;
-        return consume(inventory, new String[] { "coffee beans", "water", "milk", drinkSize.toLowerCase() },
+        return consume(inventory, new String[] { "coffee beans", "water", "milk", drinkSize.toLowerCase() + " Cup" },
                 new double[] { CBgrams, water, milk, 1 });
     }
 
@@ -84,7 +86,7 @@ public class CoffeeRecipe {
         double CBgrams = espresso * BEAN_RATIO * FLOZ_TO_GRAMS;
         double water = espresso * (1 - BEAN_RATIO);
         double milk = cupOunces - espresso;
-        return consume(inventory, new String[] { "coffee beans", "water", "milk", drinkSize.toLowerCase() },
+        return consume(inventory, new String[] { "coffee beans", "water", "milk", drinkSize.toLowerCase() + " Cup" },
                 new double[] { CBgrams, water, milk, 1 });
     }
 }
