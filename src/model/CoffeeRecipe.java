@@ -86,7 +86,17 @@ public class CoffeeRecipe {
 
         return true;
     }
+    public double makeEspresso(double ounces, double ratio){
+        return ounces/ratio;
+    }
 
+    public double getCoffeeBeanGrams(double espresso){
+        return espresso * BEAN_RATIO * FLOZ_TO_GRAMS;
+    }
+
+    public double getWater(double espresso){
+        return (1 - BEAN_RATIO) * espresso;
+    }
     /**
      * Prepares an Americano coffee if enough ingredients are available.
      *
@@ -96,9 +106,9 @@ public class CoffeeRecipe {
      */
     public boolean makeAmericano(ArrayList<StorageBin> inventory, String drinkSize) {
         double cupOunces = getCupOz(drinkSize);
-        double espresso = cupOunces / 3;
-        double CBgrams = espresso * BEAN_RATIO * FLOZ_TO_GRAMS;
-        double water = (cupOunces - espresso) + (1 - BEAN_RATIO) * espresso;
+        double espresso = makeEspresso(cupOunces, 3.0);
+        double CBgrams = getCoffeeBeanGrams(espresso);
+        double water = (cupOunces - espresso) + getWater(espresso);
         return consume(inventory, new String[] { "coffee beans", "water", drinkSize.toLowerCase() + " Cup" },
                 new double[] { CBgrams, water, 1 });
     }
@@ -112,9 +122,9 @@ public class CoffeeRecipe {
      */
     public boolean makeLatte(ArrayList<StorageBin> inventory, String drinkSize) {
         double cupOunces = getCupOz(drinkSize);
-        double espresso = cupOunces / 5;
-        double CBgrams = espresso * BEAN_RATIO * FLOZ_TO_GRAMS;
-        double water = espresso * (1 - BEAN_RATIO);
+        double espresso = makeEspresso(cupOunces, 5.0);
+        double CBgrams =  getCoffeeBeanGrams(espresso);
+        double water = getWater(espresso);
         double milk = cupOunces - espresso;
         return consume(inventory, new String[] { "coffee beans", "water", "milk", drinkSize.toLowerCase() + " Cup" },
                 new double[] { CBgrams, water, milk, 1 });
@@ -129,9 +139,9 @@ public class CoffeeRecipe {
      */
     public boolean makeCappuccino(ArrayList<StorageBin> inventory, String drinkSize) {
         double cupOunces = getCupOz(drinkSize);
-        double espresso = cupOunces / 3;
-        double CBgrams = espresso * BEAN_RATIO * FLOZ_TO_GRAMS;
-        double water = espresso * (1 - BEAN_RATIO);
+        double espresso = makeEspresso(cupOunces, 3.0);
+        double CBgrams = getCoffeeBeanGrams(espresso);
+        double water = getWater(espresso);
         double milk = cupOunces - espresso;
         return consume(inventory, new String[] { "coffee beans", "water", "milk", drinkSize.toLowerCase() + " Cup" },
                 new double[] { CBgrams, water, milk, 1 });
