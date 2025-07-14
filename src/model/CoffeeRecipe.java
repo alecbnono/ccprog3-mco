@@ -24,6 +24,15 @@ public class CoffeeRecipe {
         };
     }
 
+    private double getBeanRatio(String brew) {
+        return switch (brew.toLowerCase()) {
+            case "standard" -> 1.0 / 19.0;
+            case "strong" -> 1.0 / 16.0;
+            case "light" -> 1.0 / 21.0;
+            default -> 1.0 / (Double.parseDouble(brew) + 1);
+        };
+    }
+
     /**
      * Checks and optionally consumes the required amount of a specific item.
      *
@@ -86,64 +95,43 @@ public class CoffeeRecipe {
 
         return true;
     }
-    public double makeEspresso(double ounces, double ratio){
-        return ounces/ratio;
+
+    public double makeEspresso(double ounces, double ratio) {
+        return ounces / ratio;
     }
 
-    public double getCoffeeBeanGrams(double espresso){
-        return espresso * BEAN_RATIO * FLOZ_TO_GRAMS;
+    public double getCoffeeBeanGrams(double espresso, double beanRatio) {
+        return espresso * beanRatio * FLOZ_TO_GRAMS;
     }
 
-    public double getWater(double espresso){
-        return (1 - BEAN_RATIO) * espresso;
+    public double getWater(double espresso, double beanRatio) {
+        return (1 - beanRatio) * espresso;
     }
-    /**
-     * Prepares an Americano coffee if enough ingredients are available.
-     *
-     * @param inventory storage bins containing ingredients
-     * @param drinkSize size of the drink
-     * @return true if successful, false otherwise
-     */
-    public boolean makeAmericano(ArrayList<StorageBin> inventory, String drinkSize) {
+
+    public boolean makeDrink(ArrayList<StorageBin> inventory, String drinkSize, String order, String brew) {
         double cupOunces = getCupOz(drinkSize);
-        double espresso = makeEspresso(cupOunces, 3.0);
-        double CBgrams = getCoffeeBeanGrams(espresso);
-        double water = (cupOunces - espresso) + getWater(espresso);
-        return consume(inventory, new String[] { "coffee beans", "water", drinkSize.toLowerCase() + " Cup" },
-                new double[] { CBgrams, water, 1 });
-    }
-
-    /**
-     * Prepares a Latte if enough ingredients are available.
-     *
-     * @param inventory storage bins containing ingredients
-     * @param drinkSize size of the drink
-     * @return true if successful, false otherwise
-     */
-    public boolean makeLatte(ArrayList<StorageBin> inventory, String drinkSize) {
-        double cupOunces = getCupOz(drinkSize);
-        double espresso = makeEspresso(cupOunces, 5.0);
-        double CBgrams =  getCoffeeBeanGrams(espresso);
-        double water = getWater(espresso);
-        double milk = cupOunces - espresso;
-        return consume(inventory, new String[] { "coffee beans", "water", "milk", drinkSize.toLowerCase() + " Cup" },
-                new double[] { CBgrams, water, milk, 1 });
-    }
-
-    /**
-     * Prepares a Cappuccino if enough ingredients are available.
-     *
-     * @param inventory storage bins containing ingredients
-     * @param drinkSize size of the drink
-     * @return true if successful, false otherwise
-     */
-    public boolean makeCappuccino(ArrayList<StorageBin> inventory, String drinkSize) {
-        double cupOunces = getCupOz(drinkSize);
-        double espresso = makeEspresso(cupOunces, 3.0);
-        double CBgrams = getCoffeeBeanGrams(espresso);
-        double water = getWater(espresso);
-        double milk = cupOunces - espresso;
-        return consume(inventory, new String[] { "coffee beans", "water", "milk", drinkSize.toLowerCase() + " Cup" },
-                new double[] { CBgrams, water, milk, 1 });
+        double espresso = switch (order.toLowerCase()) {
+            case "americano", "cappuccino" -> makeEspresso(cupOunces, 3.0);
+            case "latte" -> makeEspresso(cupOunces, 5.0);
+            default -> 0;
+        };
+        double beanRatio = getBeanRatio(brew);
+        double CBgrams = getCoffeeBeanGrams(espresso, beanRatio);
+        double water = switch (order.toLowerCase()) {
+            case "americano" -> (cupOunces - espresso) + getWater(espresso, beanRatio);
+            case "latte", "cappuccino" -> getWater(espresso, beanRatio);
+            default -> 0;
+        };
+        double milk = switch (order.toLowerCase()) {
+            case "latte", "cappuccino" -> cupOunces - espresso;
+            default -> 0;
+        };
+        if (order.equalsIgnoreCase("americano")) {
+            return consume(inventory, new String[]{"coffee beans", "water", drinkSize.toLowerCase() + " Cup"},
+                    new double[]{CBgrams, water, 1});
+        } else {
+            return consume(inventory, new String[]{"coffee beans", "water", "milk", drinkSize.toLowerCase() + " Cup"},
+                    new double[]{CBgrams, water, milk, 1});
+        }
     }
 }
