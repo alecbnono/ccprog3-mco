@@ -1,5 +1,4 @@
-import view.ConsoleView;
-import controller.CoffeeTruckController;
+import view.MainMenuView;
 
 /**
  * Driver
@@ -7,8 +6,6 @@ import controller.CoffeeTruckController;
 public class Driver {
 
     public static void main(String[] args) {
-        ConsoleView view = new ConsoleView();
-        CoffeeTruckController controller = new CoffeeTruckController(view);
-        controller.run();
+        MainMenuView view = new MainMenuView();
     }
 }
