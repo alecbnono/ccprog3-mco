@@ -1,5 +1,6 @@
-import view.ConsoleView;
-import controller.CoffeeTruckController;
+import controller.MasterController;
+import view.RootView;
+// import model.CoffeeBusiness;
 
 /**
  * Driver
@@ -7,8 +8,11 @@ import controller.CoffeeTruckController;
 public class Driver {
 
     public static void main(String[] args) {
-        ConsoleView view = new ConsoleView();
-        CoffeeTruckController controller = new CoffeeTruckController(view);
-        controller.run();
+
+        // CoffeeBusiness model = new CoffeeBusiness();
+
+        RootView view = new RootView();
+
+        MasterController controller = new MasterController(view);
     }
 }
