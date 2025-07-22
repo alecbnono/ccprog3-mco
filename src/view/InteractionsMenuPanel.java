@@ -1,0 +1,115 @@
+package view;
+
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+/**
+ * InteractionsMenuPanel
+ */
+public class InteractionsMenuPanel extends JPanel {
+
+    private JButton mainMenuButton;
+    private JButton simulateTruckButton;
+    private JButton viewTruckButton;
+    private JButton restockButton;
+    private JButton viewPricesButton;
+    private JButton changeLocationButton;
+    private JLabel title;
+    private String[] truckList = { "Alabang", "Ortigas", "Makati" }; // test data
+    private JComboBox<String> truckListComboBox;
+
+    public InteractionsMenuPanel() {
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60)); // padding
+
+        title = new JLabel("Manage Existing Trucks");
+        title.setFont(new Font("Arial", Font.BOLD, 25));
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        mainMenuButton = new JButton("Main Menu");
+        simulateTruckButton = new JButton("Simulate Truck");
+        viewTruckButton = new JButton("View Truck Information");
+        restockButton = new JButton("Restock/Maintain Truck");
+        viewPricesButton = new JButton("View/Update Truck Prices");
+        changeLocationButton = new JButton("Change Truck Location");
+
+        truckListComboBox = new JComboBox<>(truckList);
+
+        mainMenuButton.setFont(new Font("Arial", Font.BOLD, 20));
+        simulateTruckButton.setFont(new Font("Arial", Font.BOLD, 20));
+        viewTruckButton.setFont(new Font("Arial", Font.BOLD, 20));
+        restockButton.setFont(new Font("Arial", Font.BOLD, 20));
+        viewPricesButton.setFont(new Font("Arial", Font.BOLD, 20));
+        changeLocationButton.setFont(new Font("Arial", Font.BOLD, 20));
+        truckListComboBox.setFont(new Font("Arial", Font.BOLD, 20));
+
+        Dimension buttonSize = new Dimension(325, 50);
+
+        truckListComboBox.setMaximumSize(new Dimension(250, 50));
+
+        mainMenuButton.setMaximumSize(buttonSize);
+        simulateTruckButton.setMaximumSize(buttonSize);
+        viewTruckButton.setMaximumSize(buttonSize);
+        restockButton.setMaximumSize(buttonSize);
+        viewPricesButton.setMaximumSize(buttonSize);
+        changeLocationButton.setMaximumSize(buttonSize);
+
+        mainMenuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        simulateTruckButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        viewTruckButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        restockButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        viewPricesButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        changeLocationButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        this.add(title);
+        this.add(Box.createRigidArea(new Dimension(0, 30)));
+        this.add(truckListComboBox);
+        this.add(Box.createRigidArea(new Dimension(0, 30)));
+        this.add(simulateTruckButton);
+        this.add(Box.createRigidArea(new Dimension(0, 15)));
+        this.add(viewTruckButton);
+        this.add(Box.createRigidArea(new Dimension(0, 15)));
+        this.add(restockButton);
+        this.add(Box.createRigidArea(new Dimension(0, 15)));
+        this.add(viewPricesButton);
+        this.add(Box.createRigidArea(new Dimension(0, 15)));
+        this.add(changeLocationButton);
+        this.add(Box.createRigidArea(new Dimension(0, 50)));
+        this.add(mainMenuButton);
+    }
+
+    public void addSimulateTruckListener(ActionListener listener) {
+        simulateTruckButton.addActionListener(listener);
+    }
+
+    public void addViewTruckListener(ActionListener listener) {
+        viewTruckButton.addActionListener(listener);
+    }
+
+    public void addRestockListener(ActionListener listener) {
+        restockButton.addActionListener(listener);
+    }
+
+    public void addViewPricesListener(ActionListener listener) {
+        viewPricesButton.addActionListener(listener);
+    }
+
+    public void addChangeLocationListener(ActionListener listener) {
+        changeLocationButton.addActionListener(listener);
+    }
+
+    public void addMainMenuListener(ActionListener listener) {
+        mainMenuButton.addActionListener(listener);
+    }
+}
