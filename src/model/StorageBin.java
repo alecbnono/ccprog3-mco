@@ -1,73 +1,37 @@
 package model;
 
-/**
- * Represents a storage container for an inventory item.
- */
 public class StorageBin {
-    private Item storedItem;
-    private double maxQuantity;
+    private Item item;
 
-    /**
-     * Constructs a StorageBin with a specified item.
-     *
-     * @param item item to store
-     */
     public StorageBin(Item item) {
-        this.maxQuantity = item.getMaxQuantity();
-        this.storedItem = item;
-    }
-
-    /**
-     * Constructs an empty StorageBin.
-     */
-    public StorageBin() {
-        this.maxQuantity = 0;
-        this.storedItem = null;
-    }
-
-    public boolean emptyBox() {
-        this.maxQuantity = 0;
-        storedItem = null;
-        return true;
-    }
-
-    public boolean setBox(Item item) {
-        this.maxQuantity = item.getMaxQuantity();
-        if (storedItem != null)
-            return false;
-        storedItem = item;
-        return true;
-    }
-
-    public Item getBox() {
-        return storedItem;
+        this.item = item;
     }
 
     public boolean isEmpty() {
-        return storedItem == null;
+        return item == null;
     }
 
     public boolean isDepleted() {
-        return storedItem != null && storedItem.isDepleted();
+        return item != null && item.isDepleted();
+    }
+
+    public Item getItem() {
+        return item;
     }
 
     public boolean restock(double amount) {
-        if (storedItem == null)
-            return false;
-        return storedItem.restock(amount);
+        return item != null && item.restock(amount);
     }
 
     public boolean consume(double amount) {
-        if (storedItem == null)
-            return false;
-        return storedItem.consume(amount);
+        return item != null && item.consume(amount);
+    }
+
+    public boolean hasItem(String name) {
+        return item != null && item.getName().equalsIgnoreCase(name);
     }
 
     public boolean canConsume(double amount) {
-        return storedItem != null && storedItem.getQuantity() >= amount;
-    }
-
-    public boolean hasItem(String itemName) {
-        return storedItem != null && storedItem.getName().toLowerCase().equalsIgnoreCase(itemName);
+        return item != null && item.getQuantity() >= amount;
     }
 }
