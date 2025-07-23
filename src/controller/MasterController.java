@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 import view.RootView;
 
 /**
@@ -7,30 +9,25 @@ import view.RootView;
  */
 public class MasterController {
 
-    private CreateTruckController createTruckController;
-    private MainMenuController mainMenuController;
-    private InteractionsMenuController interactionsMenuController;
+    private ArrayList<AbstractPageController> controllers;
 
     public MasterController(RootView view) {
 
-        mainMenuController = new MainMenuController(view, this);
-        createTruckController = new CreateTruckController(view, this);
-        interactionsMenuController = new InteractionsMenuController(view, this);
+        this.controllers = new ArrayList<AbstractPageController>();
 
-        mainMenuController.goTo();
+        controllers.add(new MainMenuController(view, this));
+        controllers.add(new CreateTruckController(view, this));
+        controllers.add(new InteractionsMenuController(view, this));
 
+        this.getController("MainMenu").goTo();
     }
 
-    public MainMenuController getMainMenuController() {
-        return mainMenuController;
+    public AbstractPageController getController(String name) {
+        for (AbstractPageController controller : controllers) {
+            if (controller.getPageName().equalsIgnoreCase(name)) {
+                return controller;
+            }
+        }
+        return null;
     }
-
-    public CreateTruckController getCreateTruckController() {
-        return createTruckController;
-    }
-
-    public InteractionsMenuController getInteractionsMenuController() {
-        return interactionsMenuController;
-    }
-
 }

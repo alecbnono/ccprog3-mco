@@ -3,14 +3,14 @@ package model;
 import java.util.ArrayList;
 
 /**
- * Represents a coffee truck with a specific location, type, inventory, and recipe handler.
+ * Represents a coffee truck with a specific location, type, inventory, and
+ * recipe handler.
  */
-public class CoffeeTruck {
+public abstract class CoffeeTruck {
     protected String location;
-    protected String type;
     protected ArrayList<StorageBin> inventory;
     protected int maxBins;
-    protected CoffeeRecipe coffeeRecipe;
+    protected CoffeeMaker coffeeMaker;
 
     /**
      * Constructs a CoffeeTruck at a specified location.
@@ -20,7 +20,8 @@ public class CoffeeTruck {
     public CoffeeTruck(String location) {
         this.location = location;
         this.inventory = new ArrayList<StorageBin>();
-        this.coffeeRecipe = new CoffeeRecipe();
+        this.coffeeMaker = new CoffeeMaker();
+        this.maxBins = 8;
     }
 
     public String getLocation() {
@@ -36,9 +37,7 @@ public class CoffeeTruck {
      *
      * @return truck type
      */
-    public String getType() {
-        return type;
-    }
+    public abstract String getType();
 
     /**
      * Gets a specific storage bin by index.
@@ -72,15 +71,7 @@ public class CoffeeTruck {
     // for type: "cappuccino", "americano", "latte"
     // for size: "small", "medium", "large"
     public boolean serveCoffee(String type, String size) {
-        switch (type.toLowerCase()) {
-            case "americano":
-                return coffeeRecipe.makeAmericano(inventory, size);
-            case "cappuccino":
-                return coffeeRecipe.makeCappuccino(inventory, size);
-            case "latte":
-                return coffeeRecipe.makeLatte(inventory, size);
-            default:
-                return false;
-        }
+
+        return false;
     }
 }

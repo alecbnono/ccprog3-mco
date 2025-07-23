@@ -1,8 +1,50 @@
 package model;
 
-public interface Ingredient {
-    String getName();
-    double getQuantity();
-    boolean restock(double amount);
-    boolean consume(double amount);
+public abstract class Ingredient implements Container {
+
+    protected double amount;
+    protected double maxAmount;
+
+    public Ingredient() {
+        this.amount = 0;
+    }
+
+    public Ingredient(double amount) {
+        this.amount = amount;
+    }
+
+    @Override
+    public void fillCompletely() {
+        this.amount = this.maxAmount;
+    }
+
+    public abstract String getType();
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public double getMaxamount() {
+        return maxAmount;
+    }
+
+    public boolean isDepleted() {
+        return amount <= 0;
+    }
+
+    public boolean restock(double amount) {
+        if (this.amount + amount > maxAmount)
+            return false;
+        this.amount += amount;
+        return true;
+    }
+
+    public boolean consume(double amount) {
+        if (this.amount >= amount) {
+            this.amount -= amount;
+            return true;
+        }
+        return false;
+    }
+
 }

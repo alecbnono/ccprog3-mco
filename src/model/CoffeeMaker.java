@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Defines recipes and logic for preparing different coffee drinks.
  */
-public class CoffeeRecipe {
+public class CoffeeMaker {
     private final double BEAN_RATIO = 1.0 / 19.0;
     private final double FLOZ_TO_GRAMS = 28.34962;
 
@@ -40,7 +40,8 @@ public class CoffeeRecipe {
      * @param itemName  name of the item
      * @param amount    quantity to consume
      * @param doConsume whether to actually consume the item
-     * @return true if sufficient quantity exists (and optionally consumed), false otherwise
+     * @return true if sufficient quantity exists (and optionally consumed), false
+     *         otherwise
      */
     private boolean consumeChecker(ArrayList<StorageBin> inventory, String itemName, double amount, boolean doConsume) {
         if (!doConsume) {
@@ -61,7 +62,8 @@ public class CoffeeRecipe {
                     if (toConsume > 0) {
                         bin.consume(toConsume);
                         remaining -= toConsume;
-                        if (remaining <= 0) return true;
+                        if (remaining <= 0)
+                            return true;
                     }
                 }
             }
@@ -127,11 +129,12 @@ public class CoffeeRecipe {
             default -> 0;
         };
         if (order.equalsIgnoreCase("americano")) {
-            return consume(inventory, new String[]{"coffee beans", "water", drinkSize.toLowerCase() + " Cup"},
-                    new double[]{CBgrams, water, 1});
+            return consume(inventory, new String[] { "coffee beans", "water", drinkSize.toLowerCase() + " Cup" },
+                    new double[] { CBgrams, water, 1 });
         } else {
-            return consume(inventory, new String[]{"coffee beans", "water", "milk", drinkSize.toLowerCase() + " Cup"},
-                    new double[]{CBgrams, water, milk, 1});
+            return consume(inventory,
+                    new String[] { "coffee beans", "water", "milk", drinkSize.toLowerCase() + " Cup" },
+                    new double[] { CBgrams, water, milk, 1 });
         }
     }
 }

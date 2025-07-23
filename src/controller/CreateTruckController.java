@@ -6,7 +6,7 @@ import view.RootView;
 /**
  * CreateTruckController
  */
-public class CreateTruckController extends AbstractPageController implements PageControllerInterface {
+public class CreateTruckController extends AbstractPageController {
 
     private CreateTruckPanel createTruckPanel;
 
@@ -15,6 +15,12 @@ public class CreateTruckController extends AbstractPageController implements Pag
         createTruckPanel = new CreateTruckPanel();
     }
 
+    @Override
+    public String getPageName() {
+        return "CreateTruck";
+    }
+
+    @Override
     public void goTo() {
         view.getFrame().setPage(createTruckPanel);
     }
