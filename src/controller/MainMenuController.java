@@ -9,7 +9,7 @@ import view.RootView;
 /**
  * MainMenuController
  */
-public class MainMenuController extends AbstractPageController implements PageControllerInterface {
+public class MainMenuController extends AbstractPageController {
 
     protected MainMenuPanel mainMenuPanel;
 
@@ -19,13 +19,13 @@ public class MainMenuController extends AbstractPageController implements PageCo
 
         ActionListener navigateCreateTruck = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                controller.getCreateTruckController().goTo();
+                controller.getController("CreateTruck").goTo();
             }
         };
 
         ActionListener navigateInteractionsMenu = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                controller.getInteractionsMenuController().goTo();
+                controller.getController("InteractionsMenu").goTo();
             }
         };
 
@@ -33,6 +33,12 @@ public class MainMenuController extends AbstractPageController implements PageCo
         mainMenuPanel.addManageTrucksListener(navigateInteractionsMenu);
     }
 
+    @Override
+    public String getPageName() {
+        return "MainMenu";
+    }
+
+    @Override
     public void goTo() {
         view.getFrame().setPage(mainMenuPanel);
     }

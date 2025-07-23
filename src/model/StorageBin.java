@@ -1,37 +1,41 @@
 package model;
 
 public class StorageBin {
-    private Item item;
+    private Ingredient ingredient;
 
-    public StorageBin(Item item) {
-        this.item = item;
+    public StorageBin(Ingredient ingredient) {
+        this.ingredient = ingredient;
+    }
+
+    public StorageBin() {
+        this.ingredient = null;
     }
 
     public boolean isEmpty() {
-        return item == null;
+        return ingredient == null;
     }
 
     public boolean isDepleted() {
-        return item != null && item.isDepleted();
+        return ingredient != null && ingredient.isDepleted();
     }
 
-    public Item getItem() {
-        return item;
+    public Ingredient getIngredient() {
+        return ingredient;
     }
 
     public boolean restock(double amount) {
-        return item != null && item.restock(amount);
+        return ingredient != null && ingredient.restock(amount);
     }
 
     public boolean consume(double amount) {
-        return item != null && item.consume(amount);
+        return ingredient != null && ingredient.consume(amount);
     }
 
-    public boolean hasItem(String name) {
-        return item != null && item.getName().equalsIgnoreCase(name);
+    public boolean hasIngredient(String name) {
+        return ingredient != null && ingredient.getType().equalsIgnoreCase(name);
     }
 
     public boolean canConsume(double amount) {
-        return item != null && item.getQuantity() >= amount;
+        return ingredient != null && ingredient.getAmount() >= amount;
     }
 }

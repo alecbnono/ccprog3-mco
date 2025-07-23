@@ -3,50 +3,50 @@ package model;
 /**
  * Abstract representation of a coffee cup.
  */
-public abstract class CoffeeCup extends Item {
-    protected String size;
-    protected int capacityOz;
+public abstract class CoffeeCup implements Binable {
 
-    public CoffeeCup(String name) {
-        super(name, 1, 1); // Always one unit per cup
+    protected int quantity;
+    protected int maxQuantity;
+
+    public CoffeeCup(int quantity) {
+        this.quantity = quantity;
     }
 
+    public abstract String getSize();
 
-    public String getSize() {
-        return size;
-    }
+    public abstract double getCapacity();
 
-    public int getCapacity() {
-        return capacityOz;
+    @Override
+    public String getUnit() {
+        return "pcs";
     }
 
     @Override
-    public double getQuantity() {
-        return (int) quantity;
+    public void fillCompletely() {
+        quantity = maxQuantity;
     }
 
-    @Override
-    public double getMaxQuantity() {
-        return (int) maxQuantity;
+    public int getQuantity() {
+        return quantity;
     }
 
-    @Override
-    public boolean restock(double amount) {
-        int intAmount = (int) amount;
-        if (intAmount <= 0) return false;
-        if (maxQuantity < quantity + intAmount) {
-            quantity = maxQuantity;
-        } else {
-            quantity += intAmount;
+    public int getMaxQuantity() {
+        return maxQuantity;
+    }
+
+    public boolean restock(int quantity) {
+        if (this.quantity + quantity > maxQuantity)
+            return false;
+        this.quantity += quantity;
+        return true;
+    }
+
+    public boolean consume(int quantity) {
+        if (this.quantity >= quantity) {
+            this.quantity -= quantity;
+            return true;
         }
-        return true;
+        return false;
     }
 
-    @Override
-    public boolean consume(double amount) {
-        int intAmount = (int) amount;
-        if (intAmount <= 0 || quantity < intAmount) return false;
-        quantity -= intAmount;
-        return true;
-    }
 }

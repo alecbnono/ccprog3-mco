@@ -1,7 +1,23 @@
 package model;
 
-public class CoffeeBeans extends Item implements Ingredient {
-    public CoffeeBeans(double quantity, double maxQuantity) {
-        super("Coffee Beans", quantity, maxQuantity);
+public class CoffeeBeans extends Ingredient {
+
+    public CoffeeBeans() {
+        super();
+        this.maxAmount = 1008;
+    }
+
+    public CoffeeBeans(double quantity) {
+        super(quantity);
+    }
+
+    @Override
+    public String getType() {
+        return "Coffee Beans";
+    }
+
+    @Override
+    public String getUnit() {
+        return "grams";
     }
 }

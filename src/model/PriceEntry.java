@@ -29,11 +29,11 @@ public class PriceEntry {
      * @param product product name
      * @param size    size of product
      */
-    public PriceEntry(String product, String size) {
+    public PriceEntry(String product, String size, String truck) {
         this.product = product;
         this.size = size;
         this.price = 0;
-        this.truck = "regular";
+        this.truck = truck;
     }
 
     public boolean updatePrice(double price) {

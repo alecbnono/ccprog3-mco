@@ -3,24 +3,19 @@ package model;
 public abstract class Espresso {
     protected Water water;
     protected CoffeeBeans beans;
-    protected double flOz;
 
-    public Espresso(Water water, CoffeeBeans beans, double flOz) {
+    public Espresso(Water water, CoffeeBeans beans) {
         this.water = water;
         this.beans = beans;
-        this.flOz = flOz;
     }
 
     public abstract double getBeanRatio();
 
-    public boolean prepare() {
-        double beanRatio = getBeanRatio();
-        double beanGrams = flOz * beanRatio * 28.3495;
-        double waterOz = flOz - (beanGrams / 28.3495);
+    // amount in fl oz.
+    public boolean prepare(double amount) {
+        double ratio = this.getBeanRatio();
+        double beanGrams = 28.34952 / (ratio + 1) * amount;
+        double waterOz = ratio / (ratio + 1) * amount;
         return beans.consume(beanGrams) && water.consume(waterOz);
-    }
-
-    public double getFlOz() {
-        return flOz;
     }
 }

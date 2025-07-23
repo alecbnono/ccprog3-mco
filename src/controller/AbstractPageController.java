@@ -15,4 +15,7 @@ public abstract class AbstractPageController {
         this.controller = controller;
     }
 
+    public abstract String getPageName();
+
+    public abstract void goTo();
 }
