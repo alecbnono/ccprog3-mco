@@ -8,20 +8,22 @@ import java.util.ArrayList;
  */
 public abstract class CoffeeTruck {
     protected String location;
-    protected ArrayList<StorageBin> inventory;
+    protected StorageBin inventory;
     protected int maxBins;
     protected CoffeeMaker coffeeMaker;
+    protected CoffeeBusiness business;
 
     /**
      * Constructs a CoffeeTruck at a specified location.
      *
      * @param location the truck's location
      */
-    public CoffeeTruck(String location) {
+    public CoffeeTruck(String location, CoffeeBusiness business) {
         this.location = location;
-        this.inventory = new ArrayList<StorageBin>();
-        this.coffeeMaker = new CoffeeMaker();
+        this.inventory = new StorageBin();
+        this.coffeeMaker = new CoffeeMaker(inventory);
         this.maxBins = 8;
+        this.business = business;
     }
 
     public String getLocation() {
@@ -39,39 +41,16 @@ public abstract class CoffeeTruck {
      */
     public abstract String getType();
 
-    /**
-     * Gets a specific storage bin by index.
-     *
-     * @param boxNo the index of the bin
-     * @return the corresponding StorageBin or null
-     */
-    public StorageBin getBin(int boxNo) {
-        if (boxNo >= 0 && boxNo < maxBins) {
-            return inventory.get(boxNo);
-        }
-        return null;
+    public StorageBin getInventory() {
+        return inventory;
     }
 
-    /**
-     * Returns the total number of bins in the truck.
-     *
-     * @return bin count
-     */
-    public int getBinCount() {
-        return maxBins;
+    public CoffeeMaker getCoffeeMaker() {
+        return coffeeMaker;
     }
 
-    /**
-     * Serves a specific coffee based on type and size.
-     *
-     * @param type the coffee type (e.g., "latte")
-     * @param size the drink size
-     * @return true if coffee was successfully served
-     */
-    // for type: "cappuccino", "americano", "latte"
-    // for size: "small", "medium", "large"
-    public boolean serveCoffee(String type, String size) {
+    public boolean serveCoffee(String drink, String size, String espressoType) {
 
-        return false;
     }
+
 }

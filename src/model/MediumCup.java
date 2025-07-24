@@ -2,9 +2,14 @@ package model;
 
 public class MediumCup extends CoffeeCup {
 
-    public MediumCup(int quantity) {
-        super(quantity);
-        this.maxQuantity = 64;
+    public MediumCup(int amount) {
+        super(amount);
+        this.maxAmount = 64;
+    }
+
+    public MediumCup() {
+        super();
+        this.maxAmount = 64;
     }
 
     @Override

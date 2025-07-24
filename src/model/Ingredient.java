@@ -13,18 +13,11 @@ public abstract class Ingredient implements Container {
         this.amount = amount;
     }
 
-    @Override
-    public void fillCompletely() {
-        this.amount = this.maxAmount;
-    }
-
-    public abstract String getType();
-
     public double getAmount() {
         return amount;
     }
 
-    public double getMaxamount() {
+    public double getMaxAmount() {
         return maxAmount;
     }
 
