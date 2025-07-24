@@ -72,9 +72,9 @@ public class CoffeeBusiness {
      */
     public void createTruck(String location, String type) {
         if (type.equalsIgnoreCase("Regular")) {
-            Trucks.add(new RegularCoffeeTruck(location));
+            Trucks.add(new RegularCoffeeTruck(location, this));
         } else if (type.equalsIgnoreCase("Special")) {
-            Trucks.add(new SpecialCoffeeTruck(location));
+            Trucks.add(new SpecialCoffeeTruck(location, this));
         }
     }
 

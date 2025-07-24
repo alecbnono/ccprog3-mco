@@ -5,11 +5,16 @@ package model;
  */
 public interface Binable {
 
-    // public abstract boolean store(Binable item);
-    //
-    // public abstract Binable retrieve();
+    public abstract boolean restock(double amount);
+
+    public abstract boolean consume(double amount);
+
+    public double getAmount();
+
+    public double getMaxAmount();
+
+    public String getType();
 
     public abstract String getUnit();
 
-    public abstract void fillCompletely();
 }

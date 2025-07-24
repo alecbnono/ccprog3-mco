@@ -1,8 +1,8 @@
 package model;
 
 public class StandardBrew extends Espresso {
-    public StandardBrew(Water water, CoffeeBeans beans) {
-        super(water, beans);
+    public StandardBrew(StorageBin inventory) {
+        super(inventory);
     }
 
     @Override

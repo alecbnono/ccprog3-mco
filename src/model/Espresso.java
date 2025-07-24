@@ -1,12 +1,11 @@
 package model;
 
 public abstract class Espresso {
-    protected Water water;
-    protected CoffeeBeans beans;
 
-    public Espresso(Water water, CoffeeBeans beans) {
-        this.water = water;
-        this.beans = beans;
+    private StorageBin inventory;
+
+    public Espresso(StorageBin inventory) {
+        this.inventory = inventory;
     }
 
     public abstract double getBeanRatio();
@@ -16,6 +15,7 @@ public abstract class Espresso {
         double ratio = this.getBeanRatio();
         double beanGrams = 28.34952 / (ratio + 1) * amount;
         double waterOz = ratio / (ratio + 1) * amount;
-        return beans.consume(beanGrams) && water.consume(waterOz);
+        return inventory.consume("Coffee Beans", beanGrams) &&
+                inventory.consume("Water", waterOz);
     }
 }

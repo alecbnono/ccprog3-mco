@@ -10,13 +10,13 @@ public class RegularCoffeeTruck extends CoffeeTruck {
      *
      * @param location location of the truck
      */
-    public RegularCoffeeTruck(String location) {
-        super(location);
+    public RegularCoffeeTruck(String location, CoffeeBusiness business) {
+        super(location, business);
     }
 
     @Override
     public String getType() {
-        return "regular";
+        return "Regular";
     }
 
 }

@@ -10,8 +10,8 @@ public class SpecialCoffeeTruck extends CoffeeTruck {
      *
      * @param location location of the truck
      */
-    public SpecialCoffeeTruck(String location) {
-        super(location);
+    public SpecialCoffeeTruck(String location, CoffeeBusiness business) {
+        super(location, business);
     }
 
     @Override

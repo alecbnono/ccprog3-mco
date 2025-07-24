@@ -5,11 +5,15 @@ package model;
  */
 public abstract class CoffeeCup implements Binable {
 
-    protected int quantity;
-    protected int maxQuantity;
+    protected int amount;
+    protected int maxAmount;
 
-    public CoffeeCup(int quantity) {
-        this.quantity = quantity;
+    public CoffeeCup() {
+        this.amount = 0;
+    }
+
+    public CoffeeCup(int amount) {
+        this.amount = amount;
     }
 
     public abstract String getSize();
@@ -17,33 +21,36 @@ public abstract class CoffeeCup implements Binable {
     public abstract double getCapacity();
 
     @Override
+    public String getType() {
+        return getSize() + " Cup";
+    }
+
+    @Override
     public String getUnit() {
         return "pcs";
     }
 
     @Override
-    public void fillCompletely() {
-        quantity = maxQuantity;
+    public double getAmount() {
+        return amount;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public double getMaxAmount() {
+        return maxAmount;
     }
 
-    public int getMaxQuantity() {
-        return maxQuantity;
-    }
-
-    public boolean restock(int quantity) {
-        if (this.quantity + quantity > maxQuantity)
+    @Override
+    public boolean restock(double amount) {
+        if (this.amount + (int) amount > maxAmount)
             return false;
-        this.quantity += quantity;
+        this.amount += (int) amount;
         return true;
     }
 
-    public boolean consume(int quantity) {
-        if (this.quantity >= quantity) {
-            this.quantity -= quantity;
+    @Override
+    public boolean consume(double amount) {
+        if (this.amount >= (int) amount) {
+            this.amount -= (int) amount;
             return true;
         }
         return false;
