@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 public class PriceList {
     private ArrayList<PriceEntry> Prices;
-    private static String[] menuItems = { "Americano", "Cappuccino", "Latte" };
+    private static String[] menuItems = { "Americano", "Latte", "Cappuccino" };
     private static String[] menuSizes = { "S", "M", "L" };
 
     /**
@@ -15,14 +15,6 @@ public class PriceList {
      */
     public PriceList() {
         this.Prices = new ArrayList<>();
-
-        for (String item : menuItems) {
-            for (String size : menuSizes) {
-                PriceEntry entry = new PriceEntry(item, size);
-
-                Prices.add(entry);
-            }
-        }
     }
 
     /**
@@ -34,22 +26,19 @@ public class PriceList {
         return Prices;
     }
 
-    public int getRegularPricesCount() {
-        return Prices.size();
-    }
-
     public void addPriceEntry(PriceEntry entry) {
         Prices.add(entry);
     }
 
-    /**
-     * Updates all "regular" prices by increasing them by 5%.
-     */
-    public void updateRegularPrices() {
-        for (PriceEntry entry : Prices) {
-            if (entry.getTruck() != null && entry.getTruck().equals("regular")) {
-                entry.updatePrice(entry.getPrice() * 1.05); // increase by 5%
+    public double getPrice(String drinkName, String cupSize) {
+
+        for (PriceEntry priceEntry : Prices) {
+            if (priceEntry.getProduct().equalsIgnoreCase(drinkName) &&
+                    priceEntry.getSize().equalsIgnoreCase(cupSize)) {
+                return priceEntry.getPrice();
             }
         }
+
+        return -1.0;
     }
 }

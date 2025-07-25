@@ -13,6 +13,28 @@ public class Receipt {
     private double price;
 
     public Receipt(String location, CoffeeDrink drink, double price) {
+
+        this.location = location;
+        this.drink = drink;
+        this.price = price;
+        this.transactionTime = LocalDateTime.now();
+
+    }
+
+    public LocalDateTime getTime() {
+        return transactionTime;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public CoffeeDrink getDrink() {
+        return drink;
     }
 
 }

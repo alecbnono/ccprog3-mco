@@ -3,6 +3,8 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import model.CoffeeBusiness;
+
 import view.MainMenuPanel;
 import view.RootView;
 
@@ -13,8 +15,8 @@ public class MainMenuController extends AbstractPageController {
 
     protected MainMenuPanel mainMenuPanel;
 
-    public MainMenuController(RootView view, MasterController controller) {
-        super(view, controller);
+    public MainMenuController(CoffeeBusiness model, RootView view, MasterController controller) {
+        super(model, view, controller);
         mainMenuPanel = new MainMenuPanel();
 
         ActionListener navigateCreateTruck = new ActionListener() {

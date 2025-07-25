@@ -45,11 +45,20 @@ public abstract class CoffeeTruck {
         return inventory;
     }
 
-    public CoffeeMaker getCoffeeMaker() {
-        return coffeeMaker;
-    }
+    public boolean serveCoffee(String drinkName, String size, String espressoType) {
 
-    public boolean serveCoffee(String drink, String size, String espressoType) {
+        CoffeeDrink drink = coffeeMaker.makeDrink(drinkName, size, espressoType);
+        CoffeeCup cup;
+
+        if (drink != null) {
+
+            cup = drink.getCupUsed();
+            business.getPriceList();
+
+            business.getTransactionList().addReceipt(new Receipt(this.location, drink, 100.0));
+            return true;
+        }
+        return false;
 
     }
 

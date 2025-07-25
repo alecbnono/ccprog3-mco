@@ -12,4 +12,8 @@ public class TransactionList {
     public TransactionList() {
         receipts = new ArrayList<Receipt>();
     }
+
+    public void addReceipt(Receipt receipt) {
+        receipts.add(receipt);
+    }
 }
