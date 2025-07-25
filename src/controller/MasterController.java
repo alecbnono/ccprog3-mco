@@ -3,21 +3,26 @@ package controller;
 import java.util.ArrayList;
 
 import view.RootView;
+import model.CoffeeBusiness;
 
 /**
  * MasterController
  */
 public class MasterController {
 
+    private CoffeeBusiness model;
     private ArrayList<AbstractPageController> controllers;
 
-    public MasterController(RootView view) {
+    public MasterController(CoffeeBusiness model, RootView view) {
 
+        this.model = model;
         this.controllers = new ArrayList<AbstractPageController>();
 
-        controllers.add(new MainMenuController(view, this));
-        controllers.add(new CreateTruckController(view, this));
-        controllers.add(new InteractionsMenuController(view, this));
+        controllers.add(new MainMenuController(model, view, this));
+        controllers.add(new CreateTruckController(model, view, this));
+        controllers.add(new InteractionsMenuController(model, view, this));
+        controllers.add(new SetBinsController(model, view, this));
+        controllers.add(new SetPricesController(model, view, this));
 
         this.getController("MainMenu").goTo();
     }

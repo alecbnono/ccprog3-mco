@@ -1,7 +1,5 @@
 package model;
 
-import java.lang.invoke.SwitchPoint;
-
 /**
  * CoffeeMaker
  */
@@ -13,11 +11,11 @@ public class CoffeeMaker {
         this.inventory = inventory;
     }
 
-    public Espresso makeCustomEspresso(double ratio) {
+    private Espresso makeCustomEspresso(double ratio) {
         return new CustomBrew(inventory, ratio);
     }
 
-    public Espresso makeEspresso(String type) {
+    private Espresso makeEspresso(String type) {
         Espresso espresso = switch (type) {
             case "Light" -> new LightBrew(inventory);
             case "Standard" -> new StandardBrew(inventory);
@@ -26,6 +24,16 @@ public class CoffeeMaker {
         };
 
         return espresso;
+    }
+
+    private CoffeeDrink selectDrink(String drinkName) {
+        CoffeeDrink drink = switch (drinkName) {
+            case "Americano" -> new Americano(inventory);
+            case "Latte" -> new Latte(inventory);
+            case "Cappuccino" -> new Cappuccino(inventory);
+            default -> null;
+        };
+        return drink;
     }
 
     public CoffeeCup selectCup(String size) {
@@ -38,19 +46,9 @@ public class CoffeeMaker {
         return cup;
     }
 
-    public CoffeeDrink makeAmericano(String cupSize, String brewType) {
+    public CoffeeDrink makeDrink(String drinkName, String cupSize, String brewType) {
 
-        CoffeeDrink drink = new Americano(inventory);
-
-        if (drink.prepare(selectCup(cupSize), makeEspresso(brewType)))
-            return drink;
-
-        return null;
-    }
-
-    public CoffeeDrink makeLatte(String cupSize, String brewType) {
-
-        CoffeeDrink drink = new Latte(inventory);
+        CoffeeDrink drink = selectDrink(drinkName);
 
         if (drink.prepare(selectCup(cupSize), makeEspresso(brewType)))
             return drink;
@@ -58,11 +56,11 @@ public class CoffeeMaker {
         return null;
     }
 
-    public CoffeeDrink makeCappuccino(String cupSize, String brewType) {
+    public CoffeeDrink makeCustomDrink(String drinkName, String cupSize, double espressoRatio) {
 
-        CoffeeDrink drink = new Cappuccino(inventory);
+        CoffeeDrink drink = selectDrink(drinkName);
 
-        if (drink.prepare(selectCup(cupSize), makeEspresso(brewType)))
+        if (drink.prepare(selectCup(cupSize), makeCustomEspresso(espressoRatio)))
             return drink;
 
         return null;

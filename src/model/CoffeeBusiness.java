@@ -8,11 +8,10 @@ import java.util.ArrayList;
  */
 public class CoffeeBusiness {
 
-    private double cappuccinoSales;
-    private double americanoSales;
-    private double latteSales;
     private ArrayList<CoffeeTruck> Trucks;
     private PriceList priceList;
+    private TransactionList transactionList;
+    private CoffeeTruck selectedTruck;
 
     /**
      * Constructs a CoffeeBusiness with an empty truck list and default price list.
@@ -20,13 +19,19 @@ public class CoffeeBusiness {
     public CoffeeBusiness() {
         this.Trucks = new ArrayList<CoffeeTruck>();
         this.priceList = new PriceList();
-        this.cappuccinoSales = 0;
-        this.americanoSales = 0;
-        this.latteSales = 0;
+        this.transactionList = new TransactionList();
     }
 
-    public ArrayList<PriceEntry> getPriceList() {
-        return this.priceList.getPriceEntries();
+    public PriceList getPriceList() {
+        return priceList;
+    }
+
+    public PriceList setPriceList(PriceList priceList) {
+        return this.priceList = priceList;
+    }
+
+    public TransactionList getTransactionList() {
+        return transactionList;
     }
 
     /**
@@ -71,57 +76,21 @@ public class CoffeeBusiness {
      * @param type     truck type ("regular" or "special")
      */
     public void createTruck(String location, String type) {
+        CoffeeTruck truck;
         if (type.equalsIgnoreCase("Regular")) {
-            Trucks.add(new RegularCoffeeTruck(location, this));
+            truck = new RegularCoffeeTruck(location, this);
         } else if (type.equalsIgnoreCase("Special")) {
-            Trucks.add(new SpecialCoffeeTruck(location, this));
+            truck = new SpecialCoffeeTruck(location, this);
+        } else {
+            truck = null;
         }
+
+        Trucks.add(truck);
+        this.selectedTruck = truck;
     }
 
-    public double getTotalSales() {
-        double sales = cappuccinoSales + americanoSales + latteSales;
-        return sales;
+    public CoffeeTruck getSelectedTruck() {
+        return selectedTruck;
     }
 
-    /**
-     * Adds a sales amount to the corresponding coffee product.
-     *
-     * @param name  the name of the product ("americano", "cappuccino", or "latte")
-     * @param price the sales amount to be added
-     */
-    public void addSales(String name, double price) {
-
-        switch (name.toLowerCase()) {
-            case "americano":
-                americanoSales += price;
-                break;
-            case "cappuccino":
-                cappuccinoSales += price;
-                break;
-            case "latte":
-                latteSales += price;
-                break;
-        }
-    }
-
-    /**
-     * Returns the total sales accumulated for a specific coffee product.
-     *
-     * @param name the name of the product ("americano", "cappuccino", or "latte")
-     * @return the total sales for the specified product, or 0 if the name is
-     *         invalid
-     */
-    public double getSales(String name) {
-
-        switch (name.toLowerCase()) {
-            case "americano":
-                return americanoSales;
-            case "cappuccino":
-                return cappuccinoSales;
-            case "latte":
-                return latteSales;
-            default:
-                return 0;
-        }
-    }
 }

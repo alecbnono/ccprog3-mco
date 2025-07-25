@@ -19,4 +19,21 @@ public class SpecialCoffeeTruck extends CoffeeTruck {
         return "Special";
     }
 
+    public boolean serveCustomCoffee(String drinkName, String size, double ratio) {
+
+        CoffeeDrink drink = coffeeMaker.makeCustomDrink(drinkName, size, ratio);
+        CoffeeCup cup;
+
+        if (drink != null) {
+
+            cup = drink.getCupUsed();
+            business.getPriceList();
+
+            business.getTransactionList().addReceipt(new Receipt(this.location, drink, 100.0));
+            return true;
+        }
+        return false;
+
+    }
+
 }

@@ -3,7 +3,7 @@ package view;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.util.ArrayList;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -16,7 +16,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 /**
- * MainMenuPanel
+ * CreateTruckPanel
  */
 public class CreateTruckPanel extends JPanel {
 
@@ -76,14 +76,22 @@ public class CreateTruckPanel extends JPanel {
         this.add(createTruckButton);
     }
 
-    public String getSelectedTruck() {
+    public String getTruckLocation() {
+        return truckNameField.getText();
+    }
+
+    public String getTruckType() {
         if (regularTruck.isSelected()) {
-            return "regular";
+            return "Regular";
         }
         if (specialTruck.isSelected()) {
-            return "special";
+            return "Special";
         }
         return null;
+    }
+
+    public void addCreateTruckListener(ActionListener listener) {
+        createTruckButton.addActionListener(listener);
     }
 
 }

@@ -3,6 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import model.CoffeeBusiness;
 import view.InteractionsMenuPanel;
 import view.RootView;
 
@@ -13,8 +14,8 @@ public class InteractionsMenuController extends AbstractPageController {
 
     private InteractionsMenuPanel interactionsMenuPanel;
 
-    public InteractionsMenuController(RootView view, MasterController controller) {
-        super(view, controller);
+    public InteractionsMenuController(CoffeeBusiness model, RootView view, MasterController controller) {
+        super(model, view, controller);
 
         interactionsMenuPanel = new InteractionsMenuPanel();
 
