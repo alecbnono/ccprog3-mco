@@ -24,6 +24,8 @@ public class CreateTruckPanel extends JPanel {
     private Color pastelGrayOrange;
     private Color brown;
     private Color darkBrown;
+    private Color lightGray;
+    private Color peachyOrange;
     private JRadioButton regularTruck;
     private JRadioButton specialTruck;
     private JButton createTruckButton;
@@ -38,6 +40,8 @@ public class CreateTruckPanel extends JPanel {
         pastelGrayOrange = new Color(216, 175, 157);
         brown = new Color(108, 78, 49);
         darkBrown = new Color(96, 63, 38);
+        lightGray = new Color(217, 217, 217);
+        peachyOrange = new Color(255, 243, 224);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60)); // padding
@@ -64,12 +68,13 @@ public class CreateTruckPanel extends JPanel {
         nameLabel = new JLabel("Truck Name:");
         nameLabel.setFont(new Font("Arial", Font.PLAIN, 18));
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        nameLabel.setForeground(lightRed);
+        nameLabel.setForeground(darkBrown);
 
         truckNameField = new JTextField();
         truckNameField.setMaximumSize(new Dimension(350, 40));
         truckNameField.setFont(new Font("Arial", Font.PLAIN, 16));
         truckNameField.setAlignmentX(Component.CENTER_ALIGNMENT);
+        truckNameField.setBackground(peachyOrange);
 
         regularTruck = new JRadioButton("Regular");
         specialTruck = new JRadioButton("Special");
@@ -79,6 +84,18 @@ public class CreateTruckPanel extends JPanel {
         radioButtons.add(regularTruck);
         radioButtons.add(specialTruck);
         radioButtons.setBackground(pastelGrayOrange);
+
+
+        regularTruck.setBackground(lightRed);
+        regularTruck.setForeground(darkBrown);
+        regularTruck.setFocusPainted(false);
+        regularTruck.setOpaque(true);
+
+
+        specialTruck.setBackground(lightRed);
+        specialTruck.setForeground(darkBrown);
+        specialTruck.setFocusPainted(false);
+        specialTruck.setOpaque(true);
 
         ButtonGroup group = new ButtonGroup();
         group.add(regularTruck);

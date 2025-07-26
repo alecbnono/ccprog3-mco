@@ -15,6 +15,7 @@ public class CoffeeFrame extends JFrame {
     private Color red;
     private Color cream;
     private Color brown;
+    private Color lightRed;
     private Color textColor;
 
     public CoffeeFrame() {
@@ -22,12 +23,14 @@ public class CoffeeFrame extends JFrame {
         red = new Color(0xdb380e);
         cream = new Color(0xFFDBB5);
         brown = new Color(0x603F26);
+        lightRed = new Color(248, 218, 217);
 
         this.setTitle("JavaJeeps Dashboard");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.setSize(1280, 720);
         this.setVisible(true);
+        this.setBackground(lightRed);
 
         ImageIcon image = new ImageIcon("../assets/logo.png");
         this.setIconImage(image.getImage());
