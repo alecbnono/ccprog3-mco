@@ -6,7 +6,6 @@ package model;
 public class PriceEntry {
     private String product;
     private String size;
-    private String truck;
     private double price;
 
     /**
@@ -20,20 +19,6 @@ public class PriceEntry {
         this.product = product;
         this.size = size;
         this.price = price;
-    }
-
-    /**
-     * Constructs a PriceEntry with a product and size.
-     * Price is set to 0 and truck is "regular".
-     *
-     * @param product product name
-     * @param size    size of product
-     */
-    public PriceEntry(String product, String size, String truck) {
-        this.product = product;
-        this.size = size;
-        this.price = 0;
-        this.truck = truck;
     }
 
     public boolean updatePrice(double price) {
@@ -66,15 +51,7 @@ public class PriceEntry {
         };
     }
 
-    public String getTruck() {
-        return truck;
-    }
-
     public void setSize(String size) {
         this.size = size;
-    }
-
-    public void setTruck(String truck) {
-        this.truck = truck;
     }
 }

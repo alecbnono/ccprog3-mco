@@ -47,16 +47,13 @@ public class MainMenuPanel extends JPanel {
         createTruckButton.setForeground(darkBrown);
         createTruckButton.setBackground(pastelGrayOrange);
 
-
         manageTrucksButton.setFont(new Font("Arial", Font.BOLD, 20));
         manageTrucksButton.setForeground(darkBrown);
         manageTrucksButton.setBackground(pastelGrayOrange);
 
-
         viewDashboardButton.setFont(new Font("Arial", Font.BOLD, 20));
         viewDashboardButton.setForeground(darkBrown);
         viewDashboardButton.setBackground(pastelGrayOrange);
-
 
         Dimension buttonSize = new Dimension(350, 100);
         createTruckButton.setMaximumSize(buttonSize);
@@ -75,6 +72,7 @@ public class MainMenuPanel extends JPanel {
         this.add(Box.createRigidArea(new Dimension(0, 15)));
         this.add(viewDashboardButton);
     }
+
     private JLabel createImageLabel(String imagePath, int width, int height) {
         ImageIcon icon = new ImageIcon(imagePath);
         Image scaledImage = icon.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);

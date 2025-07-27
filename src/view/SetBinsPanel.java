@@ -4,21 +4,16 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.text.ParseException;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
-import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
 /**
@@ -27,10 +22,16 @@ import javax.swing.SpinnerNumberModel;
 public class SetBinsPanel extends JPanel {
 
     private JButton submitButton;
-    private ArrayList<JPanel> storageBins;
+    private ArrayList<JPanel> regularStorageBins;
+    private ArrayList<JPanel> specialStorageBins;
+    private JPanel regularMenu;
+    private JPanel specialMenu;
+    private JPanel allMenus;
     private ArrayList<JComboBox<String>> binTypeSelectors = new ArrayList<>();
     private ArrayList<JSpinner> binAmountFields = new ArrayList<>();
-    private final String[] options = { "", "Small Cup", "Medium Cup", "Large Cup", "Coffee Beans", "Milk", "Water" };
+    private final String[] regularOptions = { "", "Small Cup", "Medium Cup", "Large Cup", "Coffee Beans", "Milk",
+            "Water" };
+    private final String[] specialOptions = { "", "Hazelnut", "Vanilla", "Chocolate", "Almond", "Sucrose" };
     private JLabel nameLabel;
     private JLabel typeLabel;
     private JLabel title;
@@ -39,11 +40,11 @@ public class SetBinsPanel extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60)); // padding
 
-        title = new JLabel("Create Coffee Truck");
+        title = new JLabel("Set Truck Inventory");
         title.setFont(new Font("Arial", Font.BOLD, 25));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        submitButton = new JButton("Create Coffee Truck");
+        submitButton = new JButton("Set Truck Inventory");
 
         submitButton.setFont(new Font("Arial", Font.BOLD, 20));
 
@@ -56,64 +57,81 @@ public class SetBinsPanel extends JPanel {
         typeLabel = new JLabel("");
         typeLabel.setFont(new Font("Arial", Font.BOLD, 20));
 
-        storageBins = new ArrayList<JPanel>();
+        binTypeSelectors = new ArrayList<>();
+        binAmountFields = new ArrayList<>();
+
+        regularStorageBins = new ArrayList<JPanel>();
+        regularMenu = new JPanel();
+        regularMenu.setLayout(new BoxLayout(regularMenu, BoxLayout.Y_AXIS));
+        specialMenu = new JPanel();
+        specialMenu.setLayout(new BoxLayout(specialMenu, BoxLayout.Y_AXIS));
+        specialMenu.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
+
+        allMenus = new JPanel();
+        allMenus.setLayout(new BoxLayout(allMenus, BoxLayout.X_AXIS));
+        allMenus.setMaximumSize(new Dimension(1000, 720));
 
         for (int i = 0; i < 8; i++) {
-            storageBins.add(i, new JPanel());
-            storageBins.get(i).setLayout(new BoxLayout(storageBins.get(i), BoxLayout.X_AXIS));
+            JPanel panel = new JPanel();
+            regularStorageBins.add(i, panel);
+            regularStorageBins.get(i).setLayout(new BoxLayout(regularStorageBins.get(i), BoxLayout.X_AXIS));
             JLabel label = new JLabel("Box #" + (i + 1));
             label.setFont(new Font("Arial", Font.BOLD, 20));
-            storageBins.get(i).add(label);
-            storageBins.get(i).add(Box.createRigidArea(new Dimension(30, 0))); // spacing
+            regularStorageBins.get(i).add(label);
+            regularStorageBins.get(i).add(Box.createRigidArea(new Dimension(30, 0))); // spacing
 
-            JComboBox<String> comboBox = new JComboBox<String>(options);
+            JComboBox<String> comboBox = new JComboBox<String>(regularOptions);
             comboBox.setSelectedIndex(0);
             comboBox.setFont(new Font("Arial", Font.BOLD, 20));
-            comboBox.setMaximumSize(new Dimension(350, 40));
+            comboBox.setMaximumSize(new Dimension(150, 40));
             binTypeSelectors.add(comboBox);
-            storageBins.get(i).add(comboBox);
-            storageBins.get(i).add(Box.createRigidArea(new Dimension(30, 0))); // spacing
+            regularStorageBins.get(i).add(comboBox);
+            regularStorageBins.get(i).add(Box.createRigidArea(new Dimension(30, 0))); // spacing
 
             SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1); // (initial, min, max,
                                                                                                   // step)
             JSpinner spinner = new JSpinner(spinnerModel);
             spinner.setFont(new Font("Arial", Font.BOLD, 20));
-            spinner.setMaximumSize(new Dimension(350, 40));
+            spinner.setPreferredSize(new Dimension(150, 40));
+            spinner.setMaximumSize(new Dimension(160, 40));
             binAmountFields.add(spinner);
-            storageBins.get(i).add(spinner);
+            regularStorageBins.get(i).add(spinner);
 
-            comboBox.addActionListener(e -> {
-                String selected = (String) comboBox.getSelectedItem();
-
-                int max = getMax(selected);
-
-                SpinnerNumberModel model = (SpinnerNumberModel) spinner.getModel();
-
-                int current = (int) model.getValue();
-                model.setMaximum(max);
-                if (current > max) {
-                    model.setValue(max); // clamp
-                }
-            });
-
+            regularMenu.add(panel);
         }
 
-        submitButton.addActionListener(e -> {
-            for (JSpinner spinner : binAmountFields) {
+        specialStorageBins = new ArrayList<JPanel>();
 
-                SpinnerNumberModel model = (SpinnerNumberModel) spinner.getModel();
-                int value = (int) model.getValue();
-                int min = ((Number) model.getMinimum()).intValue();
-                int max = ((Number) model.getMaximum()).intValue();
+        for (int i = 0; i < 2; i++) {
+            JPanel panel = new JPanel();
+            specialStorageBins.add(i, panel);
+            specialStorageBins.get(i).setLayout(new BoxLayout(specialStorageBins.get(i), BoxLayout.X_AXIS));
+            JLabel label = new JLabel("Special Box #" + (i + 1));
+            label.setFont(new Font("Arial", Font.BOLD, 20));
+            specialStorageBins.get(i).add(label);
+            specialStorageBins.get(i).add(Box.createRigidArea(new Dimension(30, 0))); // spacing
 
-                if (value < min) {
-                    model.setValue(min); // Clamp underflow
-                } else if (value > max) {
-                    model.setValue(max); // Clamp overflow
-                }
-            }
+            JComboBox<String> comboBox = new JComboBox<String>(specialOptions);
+            comboBox.setSelectedIndex(0);
+            comboBox.setFont(new Font("Arial", Font.BOLD, 20));
+            comboBox.setMaximumSize(new Dimension(150, 40));
+            binTypeSelectors.add(comboBox);
+            specialStorageBins.get(i).add(comboBox);
+            specialStorageBins.get(i).add(Box.createRigidArea(new Dimension(30, 0))); // spacing
 
-        });
+            SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1); // (initial, min, max,
+                                                                                                  // step)
+            JSpinner spinner = new JSpinner(spinnerModel);
+            spinner.setFont(new Font("Arial", Font.BOLD, 20));
+            spinner.setPreferredSize(new Dimension(150, 40));
+            spinner.setMaximumSize(new Dimension(160, 40));
+            binAmountFields.add(spinner);
+            specialStorageBins.get(i).add(spinner);
+
+            specialMenu.add(panel);
+        }
+
+        allMenus.add(regularMenu);
 
         this.add(title);
         this.add(Box.createRigidArea(new Dimension(0, 30))); // spacing
@@ -122,39 +140,10 @@ public class SetBinsPanel extends JPanel {
         this.add(typeLabel);
         this.add(Box.createRigidArea(new Dimension(0, 15)));
 
-        for (int i = 0; i < 8; i++) {
-            this.add(storageBins.get(i));
-            this.add(Box.createRigidArea(new Dimension(0, 15)));
-        }
+        this.add(allMenus);
+        this.add(Box.createRigidArea(new Dimension(0, 15)));
 
         this.add(submitButton);
-    }
-
-    private int getMax(String item) {
-
-        int max;
-        switch (item) {
-            case "Small Cup":
-                max = 80;
-                break;
-            case "Medium Cup":
-                max = 64;
-                break;
-            case "Large Cup":
-                max = 40;
-                break;
-            case "Coffee Beans":
-                max = 1008;
-                break;
-            case "Milk":
-            case "Water":
-                max = 640;
-                break;
-            default:
-                max = 1008;
-                break;
-        }
-        return max;
     }
 
     public ArrayList<JSpinner> getSpinners() {
@@ -171,6 +160,14 @@ public class SetBinsPanel extends JPanel {
 
     public void setTruckTypeText(String text) {
         typeLabel.setText(text);
+        allMenus.remove(specialMenu);
+
+        if (text.equals("Special")) {
+            allMenus.add(specialMenu);
+        }
+
+        allMenus.revalidate();
+        allMenus.repaint();
     }
 
     public void addSetBinsListener(ActionListener listener) {

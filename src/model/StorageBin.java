@@ -2,14 +2,13 @@ package model;
 
 import java.util.ArrayList;
 
-import javax.naming.InvalidNameException;
-
 public class StorageBin {
     private ArrayList<Binable> inventory;
-    private final int MAX_BINS = 8;
+    private int maxBins;
 
-    public StorageBin() {
-        inventory = new ArrayList<Binable>();
+    public StorageBin(int maxBins) {
+        this.inventory = new ArrayList<Binable>();
+        this.maxBins = maxBins;
     }
 
     // move to controller
@@ -21,13 +20,18 @@ public class StorageBin {
             case "small cup" -> new SmallCup((int) amount);
             case "medium cup" -> new MediumCup((int) amount);
             case "large cup" -> new LargeCup((int) amount);
+            case "hazelnut" -> new HazelnutSyrup((int) amount);
+            case "chocolate" -> new ChocolateSyrup((int) amount);
+            case "vanilla" -> new VanillaSyrup((int) amount);
+            case "almond" -> new AlmondSyrup((int) amount);
+            case "sucrose" -> new SucroseSyrup((int) amount);
             default -> null;
         };
         return item;
     }
 
     public boolean setItem(String itemName, int binNumber, double amount) {
-        if (inventory.size() <= MAX_BINS && binNumber <= 8) {
+        if (inventory.size() <= maxBins && binNumber <= maxBins) {
             inventory.add(binNumber - 1, generateItem(itemName, amount));
             return true;
         }

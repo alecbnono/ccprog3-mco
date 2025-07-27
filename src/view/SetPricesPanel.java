@@ -35,11 +35,11 @@ public class SetPricesPanel extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60)); // padding
 
-        title = new JLabel("Create Coffee Truck");
+        title = new JLabel("Set Truck Prices");
         title.setFont(new Font("Arial", Font.BOLD, 25));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        submitButton = new JButton("Create Coffee Truck");
+        submitButton = new JButton("Set Truck Prices");
 
         submitButton.setFont(new Font("Arial", Font.BOLD, 20));
 
@@ -73,27 +73,26 @@ public class SetPricesPanel extends JPanel {
 
                 JSpinner spinner = new JSpinner(spinnerModel);
                 spinner.setFont(new Font("Arial", Font.BOLD, 20));
-                spinner.setMaximumSize(new Dimension(350, 40));
+                spinner.setMaximumSize(new Dimension(150, 40));
                 priceFields.add(spinner);
                 priceEntries.get(i).add(spinner);
                 i++;
             }
         }
+        priceEntries.add(i, new JPanel());
+        priceEntries.get(i).setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        JLabel label = new JLabel("Add-ons");
+        label.setFont(new Font("Arial", Font.BOLD, 20));
+        priceEntries.get(i).add(label);
+        priceEntries.get(i).add(Box.createRigidArea(new Dimension(30, 0))); // spacing
 
-        submitButton.addActionListener(e -> {
-            for (JSpinner spinner : priceFields) {
-
-                SpinnerNumberModel model = (SpinnerNumberModel) spinner.getModel();
-                int value = (int) model.getValue();
-                int min = 0;
-                int max = ((Number) model.getMaximum()).intValue();
-
-                if (value < min) {
-                    model.setValue(min); // Clamp underflow
-                }
-            }
-
-        });
+        SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1); // (initial, min,
+        // max,
+        JSpinner spinner = new JSpinner(spinnerModel);
+        spinner.setFont(new Font("Arial", Font.BOLD, 20));
+        spinner.setMaximumSize(new Dimension(150, 40));
+        priceFields.add(spinner);
+        priceEntries.get(i).add(spinner);
 
         this.add(title);
         this.add(Box.createRigidArea(new Dimension(0, 30))); // spacing
@@ -102,9 +101,9 @@ public class SetPricesPanel extends JPanel {
         this.add(typeLabel);
         this.add(Box.createRigidArea(new Dimension(0, 15)));
 
-        for (i = 0; i < 9; i++) {
+        for (i = 0; i < 10; i++) {
             menus.add(priceEntries.get(i));
-            menus.add(Box.createRigidArea(new Dimension(0, 5)));
+            menus.add(Box.createRigidArea(new Dimension(0, 2)));
         }
         this.add(menus);
 
