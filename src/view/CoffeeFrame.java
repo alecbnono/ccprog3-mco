@@ -1,10 +1,8 @@
 package view;
 
-import java.awt.Color;
+import java.awt.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * CoffeeFrame
@@ -19,6 +17,7 @@ public class CoffeeFrame extends JFrame {
     private Color textColor;
 
     public CoffeeFrame() {
+
         blue = new Color(0x73a1fb);
         red = new Color(0xdb380e);
         cream = new Color(0xFFDBB5);
@@ -31,6 +30,10 @@ public class CoffeeFrame extends JFrame {
         this.setSize(1280, 720);
         this.setVisible(true);
         this.setBackground(lightRed);
+
+        // Use a JLayeredPane to hold background + content
+        JLayeredPane layeredPane = new JLayeredPane();
+        layeredPane.setPreferredSize(new Dimension(1280, 720));
 
         ImageIcon image = new ImageIcon("../assets/logo.png");
         this.setIconImage(image.getImage());
