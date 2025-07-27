@@ -3,6 +3,8 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import model.CoffeeBusiness;
 
 import view.CreateTruckPanel;
@@ -27,6 +29,9 @@ public class CreateTruckController extends AbstractPageController {
                 if (truckType != null && !(truckLocation.trim().isEmpty() || truckLocation == null)) {
                     model.createTruck(truckLocation, truckType);
                     controller.getController("SetBins").goTo();
+                } else {
+                    JOptionPane.showMessageDialog(createTruckPanel, "Invalid Name and/or No Selected Truck type",
+                            "Failed", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
 

@@ -23,6 +23,7 @@ public class MasterController {
         controllers.add(new InteractionsMenuController(model, view, this));
         controllers.add(new SetBinsController(model, view, this));
         controllers.add(new SetPricesController(model, view, this));
+        controllers.add(new DisplayPricesController(model, view, this));
 
         this.getController("MainMenu").goTo();
     }

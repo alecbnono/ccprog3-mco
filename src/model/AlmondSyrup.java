@@ -1,6 +1,6 @@
 package model;
 
-public class AlmondSyrup extends AddOn{
+public class AlmondSyrup extends AddOn {
     public AlmondSyrup() {
         super();
     }
@@ -10,7 +10,12 @@ public class AlmondSyrup extends AddOn{
     }
 
     @Override
-    public String getFlavor() {
+    public String getType() {
         return "Almond";
+    }
+
+    @Override
+    public String getUnit() {
+        return "fl. oz.";
     }
 }

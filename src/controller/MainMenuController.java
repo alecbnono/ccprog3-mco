@@ -3,6 +3,8 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import model.CoffeeBusiness;
 
 import view.MainMenuPanel;
@@ -13,7 +15,7 @@ import view.RootView;
  */
 public class MainMenuController extends AbstractPageController {
 
-    protected MainMenuPanel mainMenuPanel;
+    private MainMenuPanel mainMenuPanel;
 
     public MainMenuController(CoffeeBusiness model, RootView view, MasterController controller) {
         super(model, view, controller);
@@ -27,12 +29,31 @@ public class MainMenuController extends AbstractPageController {
 
         ActionListener navigateInteractionsMenu = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                controller.getController("InteractionsMenu").goTo();
+                if (model.getTruckCount() != 0) {
+                    controller.getController("InteractionsMenu").goTo();
+                } else {
+                    JOptionPane.showMessageDialog(mainMenuPanel, "No Trucks Yet! Please add trucks first",
+                            "Failed", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        };
+
+        ActionListener navigateViewDashBoard = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                if (model.getTruckCount() != 0) {
+                    controller.getController("ViewDashBoard").goTo();
+                } else {
+                    JOptionPane.showMessageDialog(mainMenuPanel, "No Trucks Yet! Please add trucks first",
+                            "Failed", JOptionPane.INFORMATION_MESSAGE);
+                }
+
             }
         };
 
         mainMenuPanel.addCreateTruckListener(navigateCreateTruck);
         mainMenuPanel.addManageTrucksListener(navigateInteractionsMenu);
+        mainMenuPanel.addViewDashboardListener(navigateViewDashBoard);
     }
 
     @Override
@@ -43,6 +64,7 @@ public class MainMenuController extends AbstractPageController {
     @Override
     public void goTo() {
         view.getFrame().setPage(mainMenuPanel);
+        model.clearSelectedTruck();
     }
 
 }

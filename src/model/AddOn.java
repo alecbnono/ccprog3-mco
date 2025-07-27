@@ -1,6 +1,6 @@
 package model;
 
-public abstract class AddOn {
+public abstract class AddOn implements Container {
     protected double amount;
     protected final double MAX_AMOUNT = 640.0;
 
@@ -43,5 +43,4 @@ public abstract class AddOn {
         this.amount = MAX_AMOUNT;
     }
 
-    public abstract String getFlavor();
 }

@@ -10,7 +10,12 @@ public class ChocolateSyrup extends AddOn {
     }
 
     @Override
-    public String getFlavor() {
+    public String getType() {
         return "Chocolate";
+    }
+
+    @Override
+    public String getUnit() {
+        return "fl. oz.";
     }
 }

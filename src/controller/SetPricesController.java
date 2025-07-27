@@ -41,9 +41,16 @@ public class SetPricesController extends AbstractPageController {
                         if ((int) spinner.getValue() <= 0) {
                             isValid = false;
                         } else {
-                            priceList.addPriceEntry(new PriceEntry(drink, size, "Regular"));
+                            priceList.addPriceEntry(new PriceEntry(drink, size, (int) spinner.getValue()));
                         }
+                        i++;
                     }
+                }
+
+                if ((int) spinners.get(i).getValue() <= 0) {
+                    isValid = false;
+                } else {
+                    priceList.addPriceEntry(new PriceEntry("Add-Ons", "", (int) spinners.get(i).getValue()));
                 }
 
                 if (isValid == true) {

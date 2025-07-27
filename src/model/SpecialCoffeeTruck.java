@@ -5,6 +5,8 @@ package model;
  */
 public class SpecialCoffeeTruck extends CoffeeTruck {
 
+    private StorageBin specialInventory;
+
     /**
      * Constructs a RegularCoffeeTruck with 6 empty bins.
      *
@@ -12,11 +14,16 @@ public class SpecialCoffeeTruck extends CoffeeTruck {
      */
     public SpecialCoffeeTruck(String location, CoffeeBusiness business) {
         super(location, business);
+        specialInventory = new StorageBin(2);
     }
 
     @Override
     public String getType() {
         return "Special";
+    }
+
+    public StorageBin getSpecialBin() {
+        return specialInventory;
     }
 
     public boolean serveCustomCoffee(String drinkName, String size, double ratio) {

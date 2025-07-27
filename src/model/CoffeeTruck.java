@@ -20,7 +20,7 @@ public abstract class CoffeeTruck {
      */
     public CoffeeTruck(String location, CoffeeBusiness business) {
         this.location = location;
-        this.inventory = new StorageBin();
+        this.inventory = new StorageBin(8);
         this.coffeeMaker = new CoffeeMaker(inventory);
         this.maxBins = 8;
         this.business = business;

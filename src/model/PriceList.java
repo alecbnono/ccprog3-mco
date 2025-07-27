@@ -7,8 +7,6 @@ import java.util.ArrayList;
  */
 public class PriceList {
     private ArrayList<PriceEntry> Prices;
-    private static String[] menuItems = { "Americano", "Latte", "Cappuccino" };
-    private static String[] menuSizes = { "S", "M", "L" };
 
     /**
      * Constructs a PriceList with default entries.

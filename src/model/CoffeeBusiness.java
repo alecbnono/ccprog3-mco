@@ -26,8 +26,8 @@ public class CoffeeBusiness {
         return priceList;
     }
 
-    public PriceList setPriceList(PriceList priceList) {
-        return this.priceList = priceList;
+    public void setPriceList(PriceList priceList) {
+        this.priceList = priceList;
     }
 
     public TransactionList getTransactionList() {
@@ -91,6 +91,20 @@ public class CoffeeBusiness {
 
     public CoffeeTruck getSelectedTruck() {
         return selectedTruck;
+    }
+
+    public boolean setSelectedTruck(String truck) {
+        for (CoffeeTruck coffeeTruck : Trucks) {
+            if (coffeeTruck.getLocation().equals(truck)) {
+                this.selectedTruck = coffeeTruck;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void clearSelectedTruck() {
+        this.selectedTruck = null;
     }
 
 }

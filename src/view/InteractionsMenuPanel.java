@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.Color;
+
+import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -27,10 +29,11 @@ public class InteractionsMenuPanel extends JPanel {
     private JButton simulateTruckButton;
     private JButton viewTruckButton;
     private JButton restockButton;
+    private JButton changeInventoryButton;
     private JButton viewPricesButton;
     private JButton changeLocationButton;
     private JLabel title;
-    private String[] truckList = { "Alabang", "Ortigas", "Makati" }; // test data
+    private String[] truckList = { "" }; // test data
     private JComboBox<String> truckListComboBox;
 
     public InteractionsMenuPanel() {
@@ -50,6 +53,7 @@ public class InteractionsMenuPanel extends JPanel {
         simulateTruckButton = new JButton("Simulate Truck");
         viewTruckButton = new JButton("View Truck Information");
         restockButton = new JButton("Restock/Maintain Truck");
+        changeInventoryButton = new JButton("Change Truck Inventory");
         viewPricesButton = new JButton("View/Update Truck Prices");
         changeLocationButton = new JButton("Change Truck Location");
 
@@ -58,6 +62,7 @@ public class InteractionsMenuPanel extends JPanel {
         mainMenuButton.setFont(new Font("Arial", Font.BOLD, 20));
         simulateTruckButton.setFont(new Font("Arial", Font.BOLD, 20));
         viewTruckButton.setFont(new Font("Arial", Font.BOLD, 20));
+        changeInventoryButton.setFont(new Font("Arial", Font.BOLD, 20));
         restockButton.setFont(new Font("Arial", Font.BOLD, 20));
         viewPricesButton.setFont(new Font("Arial", Font.BOLD, 20));
         changeLocationButton.setFont(new Font("Arial", Font.BOLD, 20));
@@ -71,6 +76,7 @@ public class InteractionsMenuPanel extends JPanel {
         simulateTruckButton.setMaximumSize(buttonSize);
         viewTruckButton.setMaximumSize(buttonSize);
         restockButton.setMaximumSize(buttonSize);
+        changeInventoryButton.setMaximumSize(buttonSize);
         viewPricesButton.setMaximumSize(buttonSize);
         changeLocationButton.setMaximumSize(buttonSize);
 
@@ -78,6 +84,7 @@ public class InteractionsMenuPanel extends JPanel {
         simulateTruckButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         viewTruckButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         restockButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        changeInventoryButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         viewPricesButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         changeLocationButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -91,11 +98,28 @@ public class InteractionsMenuPanel extends JPanel {
         this.add(Box.createRigidArea(new Dimension(0, 15)));
         this.add(restockButton);
         this.add(Box.createRigidArea(new Dimension(0, 15)));
+        this.add(changeInventoryButton);
+        this.add(Box.createRigidArea(new Dimension(0, 15)));
         this.add(viewPricesButton);
         this.add(Box.createRigidArea(new Dimension(0, 15)));
         this.add(changeLocationButton);
         this.add(Box.createRigidArea(new Dimension(0, 50)));
         this.add(mainMenuButton);
+    }
+
+    public void addTruckList(String[] truckList) {
+        truckListComboBox.removeAllItems();
+        for (String truck : truckList) {
+            truckListComboBox.addItem(truck);
+        }
+    }
+
+    public String getSelectedString() {
+        return (String) truckListComboBox.getSelectedItem();
+    }
+
+    public void addComboBoxListener(ActionListener listener) {
+        truckListComboBox.addActionListener(listener);
     }
 
     public void addSimulateTruckListener(ActionListener listener) {

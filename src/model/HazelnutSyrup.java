@@ -1,6 +1,6 @@
 package model;
 
-public class HazelnutSyrup extends AddOn{
+public class HazelnutSyrup extends AddOn {
     public HazelnutSyrup() {
         super();
     }
@@ -10,7 +10,12 @@ public class HazelnutSyrup extends AddOn{
     }
 
     @Override
-    public String getFlavor() {
+    public String getType() {
         return "Hazelnut";
+    }
+
+    @Override
+    public String getUnit() {
+        return "fl. oz.";
     }
 }
