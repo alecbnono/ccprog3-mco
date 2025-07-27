@@ -28,8 +28,10 @@ public class MainMenuPanel extends JPanel {
         brown = new Color(108, 78, 49);
         darkBrown = new Color(96, 63, 38);
 
+        this.setOpaque(false);
+
         JLabel image = createImageLabel("src/assets/pic.png", 150, 150);
-        this.setBackground(lightRed);
+        //this.setBackground(lightRed);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60)); // padding
         this.add(image);

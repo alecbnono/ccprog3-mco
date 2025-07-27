@@ -45,7 +45,8 @@ public class CreateTruckPanel extends JPanel {
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60)); // padding
-        this.setBackground(lightRed);
+        this.setOpaque(false);
+
 /*
         createTruckButton.setForeground(darkBrown);
         createTruckButton.setBackground(pastelGrayOrange);
