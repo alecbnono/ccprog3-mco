@@ -44,6 +44,7 @@ public class InteractionsMenuPanel extends JPanel {
         darkBrown = new Color(96, 63, 38);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60)); // padding
+        this.setOpaque(false);
 
         title = new JLabel("Manage Existing Trucks");
         title.setFont(new Font("Arial", Font.BOLD, 25));

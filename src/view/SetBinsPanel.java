@@ -39,6 +39,7 @@ public class SetBinsPanel extends JPanel {
     public SetBinsPanel() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60)); // padding
+        this.setOpaque(false);
 
         title = new JLabel("Set Truck Inventory");
         title.setFont(new Font("Arial", Font.BOLD, 25));
