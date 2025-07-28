@@ -45,6 +45,10 @@ public abstract class CoffeeTruck {
         return inventory;
     }
 
+    public void setInventory(StorageBin storageBin) {
+        this.inventory = storageBin;
+    }
+
     public boolean serveCoffee(String drinkName, String size, String espressoType) {
 
         CoffeeDrink drink = coffeeMaker.makeDrink(drinkName, size, espressoType);

@@ -30,6 +30,10 @@ public class StorageBin {
         return item;
     }
 
+    public ArrayList<Binable> getInventory() {
+        return inventory;
+    }
+
     public boolean setItem(String itemName, int binNumber, double amount) {
         if (inventory.size() <= maxBins && binNumber <= maxBins) {
             inventory.add(binNumber - 1, generateItem(itemName, amount));

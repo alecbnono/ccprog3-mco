@@ -22,8 +22,12 @@ public class SpecialCoffeeTruck extends CoffeeTruck {
         return "Special";
     }
 
-    public StorageBin getSpecialBin() {
+    public StorageBin getSpecialInventory() {
         return specialInventory;
+    }
+
+    public void setSpecialInventory(StorageBin specialInventory) {
+        this.specialInventory = specialInventory;
     }
 
     public boolean serveCustomCoffee(String drinkName, String size, double ratio) {

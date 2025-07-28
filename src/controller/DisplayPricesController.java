@@ -3,13 +3,11 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 import model.CoffeeBusiness;
 import model.PriceEntry;
 import model.PriceList;
-import model.TransactionList;
 import view.DisplayPricesPanel;
 import view.RootView;
 
@@ -47,12 +45,22 @@ public class DisplayPricesController extends AbstractPageController {
         model.addColumn("Size");
         model.addColumn("Price");
 
-        for (PriceEntry entry : list.getPriceEntries()) {
+        int counter = 9;
+
+        if (this.model.getSelectedTruck().getType().equals("special")) {
+            counter += 1;
+        }
+
+        for (int i = 0; i < counter; i++) {
+
+            PriceEntry entry = list.getPriceEntries().get(i);
+
             model.addRow(
                     new Object[] { entry.getProduct(), entry.getSize(), String.format("₱%.2f", entry.getPrice()) });
         }
 
         return model;
+
     }
 
     @Override
