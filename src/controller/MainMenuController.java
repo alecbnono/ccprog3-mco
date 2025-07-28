@@ -63,8 +63,9 @@ public class MainMenuController extends AbstractPageController {
 
     @Override
     public void goTo() {
-        view.getFrame().setPage(mainMenuPanel);
         model.clearSelectedTruck();
+        controller.setCurrentOperation("");
+        view.getFrame().setPage(mainMenuPanel);
     }
 
 }

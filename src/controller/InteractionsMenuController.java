@@ -41,7 +41,15 @@ public class InteractionsMenuController extends AbstractPageController {
             }
         };
 
+        ActionListener navigateViewInventory = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                model.setSelectedTruck(interactionsMenuPanel.getSelectedString());
+                controller.getController("DisplayInventory").goTo();
+            }
+        };
+
         interactionsMenuPanel.addViewPricesListener(navigateViewPrices);
+        interactionsMenuPanel.addViewInventoryListener(navigateViewInventory);
         interactionsMenuPanel.addComboBoxListener(selectTruck);
         interactionsMenuPanel.addMainMenuListener(navigateMainMenu);
     }
@@ -64,6 +72,7 @@ public class InteractionsMenuController extends AbstractPageController {
 
     @Override
     public void goTo() {
+        controller.setCurrentOperation("InteractionMenu");
         interactionsMenuPanel.addTruckList(listTrucks());
         view.getFrame().setPage(interactionsMenuPanel);
     }

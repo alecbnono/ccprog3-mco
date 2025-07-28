@@ -48,6 +48,7 @@ public class CreateTruckController extends AbstractPageController {
 
     @Override
     public void goTo() {
+        controller.setCurrentOperation("CreateTruck");
         view.getFrame().setPage(createTruckPanel);
     }
 

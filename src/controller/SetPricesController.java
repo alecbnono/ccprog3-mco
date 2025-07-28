@@ -55,7 +55,12 @@ public class SetPricesController extends AbstractPageController {
 
                 if (isValid == true) {
                     model.setPriceList(priceList);
-                    controller.getController("MainMenu").goTo();
+                    if (controller.getCurrentOperation().equals("CreateTruck")) {
+                        controller.getController("MainMenu").goTo();
+                    } else {
+                        controller.getController("DisplayPrices").goTo();
+                    }
+
                 }
             }
         };

@@ -12,6 +12,7 @@ public class MasterController {
 
     private CoffeeBusiness model;
     private ArrayList<AbstractPageController> controllers;
+    private String currentOperation = "";
 
     public MasterController(CoffeeBusiness model, RootView view) {
 
@@ -24,8 +25,17 @@ public class MasterController {
         controllers.add(new SetBinsController(model, view, this));
         controllers.add(new SetPricesController(model, view, this));
         controllers.add(new DisplayPricesController(model, view, this));
+        controllers.add(new DisplayInventoryController(model, view, this));
 
         this.getController("MainMenu").goTo();
+    }
+
+    public String getCurrentOperation() {
+        return currentOperation;
+    }
+
+    public void setCurrentOperation(String currentOperation) {
+        this.currentOperation = currentOperation;
     }
 
     public AbstractPageController getController(String name) {

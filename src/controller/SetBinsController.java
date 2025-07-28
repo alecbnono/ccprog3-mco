@@ -10,6 +10,7 @@ import javax.swing.SpinnerNumberModel;
 
 import model.CoffeeBusiness;
 import model.SpecialCoffeeTruck;
+import model.StorageBin;
 import view.RootView;
 import view.SetBinsPanel;
 
@@ -18,6 +19,8 @@ import view.SetBinsPanel;
  */
 public class SetBinsController extends AbstractPageController {
 
+    private static final int REGULAR_BINS = 8;
+    private static final int SPECIAL_BINS = 2;
     private SetBinsPanel setBinsPanel;
 
     public SetBinsController(CoffeeBusiness model, RootView view, MasterController controller) {
@@ -28,7 +31,10 @@ public class SetBinsController extends AbstractPageController {
         ActionListener navigateSetPrices = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                if (validateInputs(model.getSelectedTruck().getType()) == true) {
+                if (validateInputs(model.getSelectedTruck().getType())) {
+
+                    StorageBin regularBin = new StorageBin(8);
+
                     ArrayList<JSpinner> spinners = setBinsPanel.getSpinners();
                     ArrayList<JComboBox<String>> selectors = setBinsPanel.getComboBoxes();
 
@@ -39,11 +45,15 @@ public class SetBinsController extends AbstractPageController {
                         SpinnerNumberModel spinnerModel = (SpinnerNumberModel) spinner.getModel();
 
                         if (!combo.getSelectedItem().equals(""))
-                            model.getSelectedTruck().getInventory().setItem((String) combo.getSelectedItem(), i + 1,
+                            regularBin.setItem((String) combo.getSelectedItem(), i + 1,
                                     (Integer) spinnerModel.getValue());
                     }
 
+                    model.getSelectedTruck().setInventory(regularBin);
+
                     if (model.getSelectedTruck().getType().equals("Special")) {
+
+                        StorageBin specialBin = new StorageBin(2);
 
                         for (int i = 8; i < 10; i++) {
 
@@ -52,20 +62,22 @@ public class SetBinsController extends AbstractPageController {
                             SpinnerNumberModel spinnerModel = (SpinnerNumberModel) spinner.getModel();
 
                             if (!combo.getSelectedItem().equals(""))
-                                ((SpecialCoffeeTruck) model.getSelectedTruck()).getSpecialBin().setItem(
-                                        (String) combo.getSelectedItem(), i + 1,
+                                specialBin.setItem((String) combo.getSelectedItem(), i - 7,
                                         (Integer) spinnerModel.getValue());
                         }
+
+                        ((SpecialCoffeeTruck) model.getSelectedTruck()).setSpecialInventory(specialBin);
                     }
 
-                    controller.getController("SetPrices").goTo();
-                } else {
-
+                    if (controller.getCurrentOperation().equals("CreateTruck")) {
+                        controller.getController("SetPrices").goTo();
+                    } else {
+                        controller.getController("DisplayInventory").goTo();
+                    }
                 }
             }
         };
 
-        setBinsPanel.addSetBinsListener(navigateSetPrices);
         setBinsPanel.addSetBinsListener(navigateSetPrices);
     }
 
