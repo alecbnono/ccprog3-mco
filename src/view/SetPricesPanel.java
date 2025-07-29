@@ -58,9 +58,11 @@ public class SetPricesPanel extends JPanel {
         nameLabel = new JLabel("");
         nameLabel.setFont(new Font("Arial", Font.BOLD, 20));
         nameLabel.setForeground(darkBrown);
+        nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         typeLabel = new JLabel("");
         typeLabel.setFont(new Font("Arial", Font.BOLD, 20));
         typeLabel.setForeground(darkBrown);
+        typeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         priceEntries = new ArrayList<JPanel>();
         menus = new JPanel();
@@ -73,16 +75,17 @@ public class SetPricesPanel extends JPanel {
         for (String drink : drinks) {
             for (String size : sizes) {
                 priceEntries.add(i, new JPanel());
-                priceEntries.get(i).setLayout(new java.awt.FlowLayout(FlowLayout.RIGHT));
+                priceEntries.get(i).setLayout(new BoxLayout(priceEntries.get(i), BoxLayout.X_AXIS));
                 priceEntries.get(i).setBackground(lightRed);
+
                 JLabel label = new JLabel(drink + " (" + size + ")");
                 label.setFont(new Font("Arial", Font.BOLD, 20));
                 label.setForeground(darkBrown);
                 priceEntries.get(i).add(label);
-                priceEntries.get(i).add(Box.createRigidArea(new Dimension(30, 0))); // spacing
+                priceEntries.get(i).add(Box.createHorizontalGlue()); // spacing
 
                 SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1); // (initial, min,
-                                                                                                      // max,
+                // max,
 
                 JSpinner spinner = new JSpinner(spinnerModel);
                 spinner.setFont(new Font("Arial", Font.BOLD, 20));
@@ -91,6 +94,7 @@ public class SetPricesPanel extends JPanel {
                 priceEntries.get(i).add(spinner);
                 JComponent editor = spinner.getEditor();
                 JFormattedTextField spinnerTextField = ((JSpinner.DefaultEditor) editor).getTextField();
+
                 spinnerTextField.setBackground(peachyOrange);
                 spinnerTextField.setForeground(darkBrown);
                 for (Component comp : spinner.getComponents()) {
@@ -105,13 +109,14 @@ public class SetPricesPanel extends JPanel {
             }
         }
         priceEntries.add(i, new JPanel());
-        priceEntries.get(i).setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        priceEntries.get(i).setLayout(new BoxLayout(priceEntries.get(i), BoxLayout.X_AXIS));
         priceEntries.get(i).setBackground(lightRed);
+
         JLabel label = new JLabel("Add-ons");
         label.setFont(new Font("Arial", Font.BOLD, 20));
         label.setForeground(darkBrown);
         priceEntries.get(i).add(label);
-        priceEntries.get(i).add(Box.createRigidArea(new Dimension(30, 0))); // spacing
+        priceEntries.get(i).add(Box.createHorizontalGlue()); // spacing
 
         SpinnerNumberModel spinnerModel = new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1); // (initial, min,
         // max,
@@ -120,6 +125,7 @@ public class SetPricesPanel extends JPanel {
         spinner.setMaximumSize(new Dimension(150, 40));
         priceFields.add(spinner);
         priceEntries.get(i).add(spinner);
+
         JComponent editor = spinner.getEditor();
         JFormattedTextField spinnerTextField = ((JSpinner.DefaultEditor) editor).getTextField();
         spinnerTextField.setBackground(peachyOrange);
