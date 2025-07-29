@@ -13,6 +13,11 @@ public class CustomBrew extends Espresso {
     }
 
     @Override
+    public String getType() {
+        return "Custom Brew";
+    }
+
+    @Override
     public double getBeanRatio() {
         return ratio;
     }

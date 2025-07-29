@@ -81,6 +81,7 @@ public class InteractionsMenuController extends AbstractPageController {
     @Override
     public void goTo() {
         controller.setCurrentOperation("InteractionMenu");
+        controller.setCurrentReceipt("");
         interactionsMenuPanel.addTruckList(listTrucks());
         view.getFrame().setPage(interactionsMenuPanel);
     }

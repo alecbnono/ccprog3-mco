@@ -47,6 +47,7 @@ public abstract class CoffeeTruck {
 
     public void setInventory(StorageBin storageBin) {
         this.inventory = storageBin;
+        coffeeMaker.setInventory(storageBin);
     }
 
     public Receipt serveCoffee(String drinkName, String size, String espressoType) {
@@ -57,7 +58,7 @@ public abstract class CoffeeTruck {
         if (drink != null) {
 
             cup = drink.getCupUsed();
-            Receipt receipt = new Receipt(this.location, (Binable) drink,
+            Receipt receipt = new Receipt(this.location, drink,
                     business.getPriceList().getPrice(drinkName, cup.getSize()));
 
             business.getTransactionList().addReceipt(receipt);

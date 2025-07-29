@@ -6,6 +6,11 @@ public class LightBrew extends Espresso {
     }
 
     @Override
+    public String getType() {
+        return "Light Brew";
+    }
+
+    @Override
     public double getBeanRatio() {
         return 21.0;
     }

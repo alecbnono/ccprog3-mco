@@ -61,23 +61,37 @@ public class StorageBin {
             if (remaining <= 0)
                 return true;
         }
-        return false;
+        return remaining <= 0;
     }
 
     public boolean consume(String itemName, double amount) {
-        double remaining = amount;
+        double totalAvailable = 0;
 
+        for (Binable bin : inventory) {
+            if (bin.getType().equalsIgnoreCase(itemName)) {
+                totalAvailable += bin.getAmount();
+            }
+        }
+
+        if (totalAvailable < amount)
+            return false;
+
+        // now actually consume
+        double remaining = amount;
         for (Binable bin : inventory) {
             if (bin.getType().equalsIgnoreCase(itemName)) {
                 double available = bin.getAmount();
                 double use = Math.min(available, remaining);
                 bin.consume(use);
                 remaining -= use;
+
+                if (remaining <= 0.0001) {
+                    return true;
+                }
             }
 
-            if (remaining <= 0)
-                return true;
         }
-        return false;
+
+        return remaining <= 0.0001;
     }
 }

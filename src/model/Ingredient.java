@@ -2,9 +2,10 @@ package model;
 
 /**
  * An abstract class representing a measurable and consumable ingredient.
- * Implements the {@code Container} interface, allowing it to be filled or tracked.
+ * Implements the {@code Container} interface, allowing it to be filled or
+ * tracked.
  */
-public abstract class   Ingredient implements Container {
+public abstract class Ingredient implements Container {
 
     /** Current amount of the ingredient available */
     protected double amount;
@@ -59,7 +60,8 @@ public abstract class   Ingredient implements Container {
      * Attempts to restock the ingredient by a certain amount.
      *
      * @param amount the amount to add
-     * @return {@code true} if restock was successful; {@code false} if it exceeds maxAmount
+     * @return {@code true} if restock was successful; {@code false} if it exceeds
+     *         maxAmount
      */
     public boolean restock(double amount) {
         if (this.amount + amount > maxAmount)

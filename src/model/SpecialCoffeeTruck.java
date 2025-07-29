@@ -30,15 +30,15 @@ public class SpecialCoffeeTruck extends CoffeeTruck {
         this.specialInventory = specialInventory;
     }
 
-    public Receipt serveCustomCoffee(String drinkName, String size, double espressoRatio) {
+    public Receipt serveCoffee(String drinkName, String size, double espressoRatio) {
 
-        CoffeeDrink drink = coffeeMaker.makeCustomDrink(drinkName, size, espressoRatio);
+        CoffeeDrink drink = coffeeMaker.makeDrink(drinkName, size, espressoRatio);
         CoffeeCup cup;
 
         if (drink != null) {
 
             cup = drink.getCupUsed();
-            Receipt receipt = new Receipt(this.location, (Binable) drink,
+            Receipt receipt = new Receipt(this.location, drink,
                     business.getPriceList().getPrice(drinkName, cup.getSize()));
 
             business.getTransactionList().addReceipt(receipt);
@@ -49,10 +49,10 @@ public class SpecialCoffeeTruck extends CoffeeTruck {
 
     public Receipt applyAddOn(String addOnName) {
 
-        AddOn addOn = coffeeMaker.applyAddOn(addOnName);
+        AddOn addOn = coffeeMaker.makeAddOn(addOnName);
 
         if (addOn != null) {
-            Receipt reciept = new Receipt(this.location, (Binable) addOn, business.getPriceList().getAddOnPrice());
+            Receipt reciept = new Receipt(this.location, addOn, business.getPriceList().getAddOnPrice());
 
             business.getTransactionList().addReceipt(reciept);
             return reciept;
@@ -65,7 +65,20 @@ public class SpecialCoffeeTruck extends CoffeeTruck {
         Espresso shot = coffeeMaker.makeEspresso(espressoType);
 
         if (shot != null) {
-            Receipt receipt = new Receipt(this.location, (Binable) shot, business.getPriceList().getAddOnPrice());
+            Receipt receipt = new Receipt(this.location, shot, business.getPriceList().getAddOnPrice());
+
+            business.getTransactionList().addReceipt(receipt);
+            return receipt;
+        }
+        return null;
+    }
+
+    public Receipt applyExtraShot(double espressoRatio) {
+
+        Espresso shot = coffeeMaker.makeEspresso(espressoRatio);
+
+        if (shot != null) {
+            Receipt receipt = new Receipt(this.location, shot, business.getPriceList().getAddOnPrice());
 
             business.getTransactionList().addReceipt(receipt);
             return receipt;

@@ -263,6 +263,34 @@ public class SimulateTruckPanel extends JPanel {
         fullMenuPanel.repaint();
     }
 
+    public String getDrinkName() {
+        return (String) drinkComboBox.getSelectedItem();
+    }
+
+    public String getCupName() {
+        return (String) sizeComboBox.getSelectedItem();
+    }
+
+    public String getAddOn() {
+        return (String) addOnSyrups.getSelectedItem();
+    }
+
+    public String getBaseShot() {
+        return (String) baseEspresso.getSelectedItem();
+    }
+
+    public int getBaseRatio() {
+        return (Integer) baseRatio.getValue();
+    }
+
+    public String getAddOnShot() {
+        return (String) baseEspresso.getSelectedItem();
+    }
+
+    public int getAddOnRatio() {
+        return (Integer) addOnRatio.getValue();
+    }
+
     public void addSubmitButtonListener(ActionListener listener) {
         submitButton.addActionListener(listener);
     }
