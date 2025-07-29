@@ -27,10 +27,11 @@ public class Cappuccino extends CoffeeDrink {
 
     /**
      * {@inheritDoc}
+     * 
      * @return "Cappuccino"
      */
     @Override
-    public String getName() {
+    public String getType() {
         return "Cappuccino";
     }
 }

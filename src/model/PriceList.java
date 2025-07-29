@@ -39,4 +39,13 @@ public class PriceList {
 
         return -1.0;
     }
+
+    public double getAddOnPrice() {
+        for (PriceEntry priceEntry : Prices) {
+            if (priceEntry.getProduct().equalsIgnoreCase("Add-Ons")) {
+                return priceEntry.getPrice();
+            }
+        }
+        return -1.0;
+    }
 }

@@ -11,11 +11,11 @@ public class CoffeeMaker {
         this.inventory = inventory;
     }
 
-    private Espresso makeCustomEspresso(double ratio) {
+    public Espresso makeCustomEspresso(double ratio) {
         return new CustomBrew(inventory, ratio);
     }
 
-    private Espresso makeEspresso(String type) {
+    public Espresso makeEspresso(String type) {
         Espresso espresso = switch (type) {
             case "Light" -> new LightBrew(inventory);
             case "Standard" -> new StandardBrew(inventory);
@@ -31,6 +31,18 @@ public class CoffeeMaker {
             case "Americano" -> new Americano(inventory);
             case "Latte" -> new Latte(inventory);
             case "Cappuccino" -> new Cappuccino(inventory);
+            default -> null;
+        };
+        return drink;
+    }
+
+    public AddOn selectAddOn(String drinkName) {
+        AddOn drink = switch (drinkName) {
+            case "Hazelnut" -> new HazelnutSyrup();
+            case "Vanilla" -> new VanillaSyrup();
+            case "Chocolate" -> new ChocolateSyrup();
+            case "Almond" -> new AlmondSyrup();
+            case "Sucrose" -> new SucroseSyrup();
             default -> null;
         };
         return drink;
@@ -65,4 +77,15 @@ public class CoffeeMaker {
 
         return null;
     }
+
+    public AddOn applyAddOn(String addOnName) {
+
+        AddOn addOn = selectAddOn(addOnName);
+
+        if (addOn.consume(1))
+            return addOn;
+
+        return null;
+    }
+
 }

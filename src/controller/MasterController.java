@@ -26,6 +26,7 @@ public class MasterController {
         controllers.add(new SetPricesController(model, view, this));
         controllers.add(new DisplayPricesController(model, view, this));
         controllers.add(new DisplayInventoryController(model, view, this));
+        controllers.add(new SimulateTruckController(model, view, this));
 
         this.getController("MainMenu").goTo();
     }

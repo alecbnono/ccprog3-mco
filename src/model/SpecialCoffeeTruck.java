@@ -30,21 +30,47 @@ public class SpecialCoffeeTruck extends CoffeeTruck {
         this.specialInventory = specialInventory;
     }
 
-    public boolean serveCustomCoffee(String drinkName, String size, double ratio) {
+    public Receipt serveCustomCoffee(String drinkName, String size, double espressoRatio) {
 
-        CoffeeDrink drink = coffeeMaker.makeCustomDrink(drinkName, size, ratio);
+        CoffeeDrink drink = coffeeMaker.makeCustomDrink(drinkName, size, espressoRatio);
         CoffeeCup cup;
 
         if (drink != null) {
 
             cup = drink.getCupUsed();
-            business.getPriceList();
+            Receipt receipt = new Receipt(this.location, (Binable) drink,
+                    business.getPriceList().getPrice(drinkName, cup.getSize()));
 
-            business.getTransactionList().addReceipt(new Receipt(this.location, drink, 100.0));
-            return true;
+            business.getTransactionList().addReceipt(receipt);
+            return receipt;
         }
-        return false;
+        return null;
+    }
 
+    public Receipt applyAddOn(String addOnName) {
+
+        AddOn addOn = coffeeMaker.applyAddOn(addOnName);
+
+        if (addOn != null) {
+            Receipt reciept = new Receipt(this.location, (Binable) addOn, business.getPriceList().getAddOnPrice());
+
+            business.getTransactionList().addReceipt(reciept);
+            return reciept;
+        }
+        return null;
+    }
+
+    public Receipt applyExtraShot(String espressoType) {
+
+        Espresso shot = coffeeMaker.makeEspresso(espressoType);
+
+        if (shot != null) {
+            Receipt receipt = new Receipt(this.location, (Binable) shot, business.getPriceList().getAddOnPrice());
+
+            business.getTransactionList().addReceipt(receipt);
+            return receipt;
+        }
+        return null;
     }
 
 }

@@ -22,9 +22,6 @@ public class TransactionList {
         receipts.add(receipt);
     }
 
-    public ArrayList<Receipt> getReceipts() {
-        return receipts;
-    }
 
     /**
      * Builds a DefaultTableModel containing all receipts
@@ -89,14 +86,7 @@ public class TransactionList {
     /**
      * Saves any DefaultTableModel to a .txt file
      */
-    public void saveTableModelToTxt(DefaultTableModel model, String fileName) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
-            // Write headers
-            for (int i = 0; i < model.getColumnCount(); i++) {
-                writer.write(String.format("%-20s", model.getColumnName(i)));
-            }
-            writer.write("\n");
-            writer.write("--------------------------------------------------------------------------------\n");
+
 
             // Write rows
             for (int row = 0; row < model.getRowCount(); row++) {
@@ -127,4 +117,5 @@ public class TransactionList {
             saveTableModelToTxt(entry.getValue(), "transactions_" + location + ".txt");
         }
     }
+      
 }

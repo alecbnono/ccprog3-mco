@@ -48,6 +48,14 @@ public class InteractionsMenuController extends AbstractPageController {
             }
         };
 
+        ActionListener navigateSimulateTruck = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                model.setSelectedTruck(interactionsMenuPanel.getSelectedString());
+                controller.getController("SimulateTruck").goTo();
+            }
+        };
+
+        interactionsMenuPanel.addSimulateTruckListener(navigateSimulateTruck);
         interactionsMenuPanel.addViewPricesListener(navigateViewPrices);
         interactionsMenuPanel.addViewInventoryListener(navigateViewInventory);
         interactionsMenuPanel.addComboBoxListener(selectTruck);
