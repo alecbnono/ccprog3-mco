@@ -126,6 +126,8 @@ public class SetPricesPanel extends JPanel {
         priceFields.add(spinner);
         priceEntries.get(i).add(spinner);
 
+
+        
         JComponent editor = spinner.getEditor();
         JFormattedTextField spinnerTextField = ((JSpinner.DefaultEditor) editor).getTextField();
         spinnerTextField.setBackground(peachyOrange);
