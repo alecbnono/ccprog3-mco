@@ -4,7 +4,7 @@ package model;
  * An abstract class representing a measurable and consumable ingredient.
  * Implements the {@code Container} interface, allowing it to be filled or tracked.
  */
-public abstract class Ingredient implements Container {
+public abstract class   Ingredient implements Container {
 
     /** Current amount of the ingredient available */
     protected double amount;

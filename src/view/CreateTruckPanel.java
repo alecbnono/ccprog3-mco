@@ -76,6 +76,7 @@ public class CreateTruckPanel extends JPanel {
         truckNameField.setFont(new Font("Arial", Font.PLAIN, 16));
         truckNameField.setAlignmentX(Component.CENTER_ALIGNMENT);
         truckNameField.setBackground(peachyOrange);
+        truckNameField.setForeground(darkBrown);
 
         regularTruck = new JRadioButton("Regular");
         specialTruck = new JRadioButton("Special");
