@@ -48,6 +48,7 @@ public class DisplayPricesPanel extends JPanel {
         title = new JLabel("Current Truck Prices");
         title.setFont(new Font("Arial", Font.BOLD, 25));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        title.setForeground(grayRed);
 
         pricesTable = new JTable();
         JTableHeader header = pricesTable.getTableHeader();
