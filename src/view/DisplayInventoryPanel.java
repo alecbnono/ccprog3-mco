@@ -1,8 +1,6 @@
 package view;
 
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
@@ -19,6 +17,13 @@ import javax.swing.table.TableModel;
  * DisplayInventoryPanel
  */
 public class DisplayInventoryPanel extends JPanel {
+    private Color grayRed;
+    private Color lightRed;
+    private Color pastelGrayOrange;
+    private Color brown;
+    private Color darkBrown;
+    private Color lightGray;
+    private Color peachyOrange;
     private JButton updateInventoryButton;
     private JButton restockInventoryButton;
     private JButton mainMenuButton;
@@ -27,6 +32,13 @@ public class DisplayInventoryPanel extends JPanel {
     private JScrollPane tableScrollPane;
 
     public DisplayInventoryPanel() {
+        grayRed = new Color(194, 133, 131);
+        lightRed = new Color(248, 218, 217);
+        pastelGrayOrange = new Color(216, 175, 157);
+        brown = new Color(108, 78, 49);
+        darkBrown = new Color(96, 63, 38);
+        lightGray = new Color(217, 217, 217);
+        peachyOrange = new Color(255, 243, 224);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60)); // padding
         this.setOpaque(false);
@@ -34,6 +46,7 @@ public class DisplayInventoryPanel extends JPanel {
         title = new JLabel("Current Truck Inventory");
         title.setFont(new Font("Arial", Font.BOLD, 25));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        title.setForeground(grayRed);
 
         inventoryTable = new JTable();
         inventoryTable.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -49,8 +62,16 @@ public class DisplayInventoryPanel extends JPanel {
         restockInventoryButton = new JButton("Restock Inventory");
 
         mainMenuButton.setFont(new Font("Arial", Font.BOLD, 20));
+        mainMenuButton.setForeground(darkBrown);
+        mainMenuButton.setBackground(pastelGrayOrange);
+
         updateInventoryButton.setFont(new Font("Arial", Font.BOLD, 20));
+        updateInventoryButton.setForeground(darkBrown);
+        updateInventoryButton.setBackground(pastelGrayOrange);
+
         restockInventoryButton.setFont(new Font("Arial", Font.BOLD, 20));
+        restockInventoryButton.setForeground(darkBrown);
+        restockInventoryButton.setBackground(pastelGrayOrange);
 
         Dimension buttonSize = new Dimension(325, 50);
 

@@ -39,7 +39,7 @@ public class TransactionList {
             model.addRow(new Object[]{
                     receipt.getTime().format(formatter),
                     receipt.getLocation(),
-                    receipt.getDrink().getName(),
+                    receipt.getProduct(),
                     String.format("₱%.2f", receipt.getPrice())
             });
         }
@@ -72,7 +72,7 @@ public class TransactionList {
                 model.addRow(new Object[]{
                         receipt.getTime().format(formatter),
                         receipt.getLocation(),
-                        receipt.getDrink().getName(),
+                        receipt.getProduct(),
                         String.format("₱%.2f", receipt.getPrice())
                 });
             }
@@ -86,7 +86,14 @@ public class TransactionList {
     /**
      * Saves any DefaultTableModel to a .txt file
      */
-
+    public void saveTableModelToTxt(DefaultTableModel model, String filename) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+            // Write column names
+            for (int col = 0; col < model.getColumnCount(); col++) {
+                writer.write(String.format("%-20s", model.getColumnName(col)));
+            }
+            writer.write("\n");
+            writer.write("--------------------------------------------------------------------------------\n");
 
             // Write rows
             for (int row = 0; row < model.getRowCount(); row++) {
@@ -102,6 +109,7 @@ public class TransactionList {
             System.err.println("Failed to save table model: " + e.getMessage());
         }
     }
+
 
     /**
      * Helper method to save both all transactions and grouped tables
