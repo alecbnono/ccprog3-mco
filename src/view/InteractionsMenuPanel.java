@@ -41,6 +41,8 @@ public class InteractionsMenuPanel extends JPanel {
         brown = new Color(108, 78, 49);
         darkBrown = new Color(96, 63, 38);
         peachyOrange = new Color(255, 243, 224);
+        Dimension buttonSize = new Dimension(325, 50);
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60)); // padding
         this.setOpaque(false);
@@ -48,64 +50,56 @@ public class InteractionsMenuPanel extends JPanel {
         title = new JLabel("Manage Existing Trucks");
         title.setFont(new Font("Arial", Font.BOLD, 25));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.setForeground(grayRed);
 
         mainMenuButton = new JButton("Main Menu");
+        mainMenuButton.setFont(new Font("Arial", Font.BOLD, 20));
+        mainMenuButton.setForeground(darkBrown);
+        mainMenuButton.setBackground(pastelGrayOrange);
+        mainMenuButton.setMaximumSize(buttonSize);
+        mainMenuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         simulateTruckButton = new JButton("Simulate Truck");
+        simulateTruckButton.setFont(new Font("Arial", Font.BOLD, 20));
+        simulateTruckButton.setForeground(darkBrown);
+        simulateTruckButton.setBackground(pastelGrayOrange);
+        simulateTruckButton.setMaximumSize(buttonSize);
+        simulateTruckButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         changeLocationButton = new JButton("Change Truck Location");
+        changeLocationButton.setFont(new Font("Arial", Font.BOLD, 20));
+        changeLocationButton.setForeground(darkBrown);
+        changeLocationButton.setBackground(pastelGrayOrange);
+        changeLocationButton.setMaximumSize(buttonSize);
+        changeLocationButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         viewTruckButton = new JButton("View Truck Information");
+        viewTruckButton.setFont(new Font("Arial", Font.BOLD, 20));
+        viewTruckButton.setForeground(darkBrown);
+        viewTruckButton.setBackground(pastelGrayOrange);
+        viewTruckButton.setMaximumSize(buttonSize);
+        viewTruckButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         restockButton = new JButton("Manage Inventory");
+        restockButton.setFont(new Font("Arial", Font.BOLD, 20));
+        restockButton.setForeground(darkBrown);
+        restockButton.setBackground(pastelGrayOrange);
+        restockButton.setMaximumSize(buttonSize);
+        restockButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         viewPricesButton = new JButton("Manage Prices");
+        viewPricesButton.setFont(new Font("Arial", Font.BOLD, 20));
+        viewPricesButton.setForeground(darkBrown);
+        viewPricesButton.setBackground(pastelGrayOrange);
+        viewPricesButton.setMaximumSize(buttonSize);
+        viewPricesButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         truckListComboBox = new JComboBox<>(truckList);
         truckListComboBox.setForeground(darkBrown);
         truckListComboBox.setBackground(peachyOrange);
-
-        mainMenuButton.setFont(new Font("Arial", Font.BOLD, 20));
-        mainMenuButton.setForeground(darkBrown);
-        mainMenuButton.setBackground(pastelGrayOrange);
-
-        simulateTruckButton.setFont(new Font("Arial", Font.BOLD, 20));
-        simulateTruckButton.setForeground(darkBrown);
-        simulateTruckButton.setBackground(pastelGrayOrange);
-
-        viewTruckButton.setFont(new Font("Arial", Font.BOLD, 20));
-        viewTruckButton.setForeground(darkBrown);
-        viewTruckButton.setBackground(pastelGrayOrange);
-
-        restockButton.setFont(new Font("Arial", Font.BOLD, 20));
-        restockButton.setForeground(darkBrown);
-        restockButton.setBackground(pastelGrayOrange);
-
-        viewPricesButton.setFont(new Font("Arial", Font.BOLD, 20));
-        viewPricesButton.setForeground(darkBrown);
-        viewPricesButton.setBackground(pastelGrayOrange);
-
-        changeLocationButton.setFont(new Font("Arial", Font.BOLD, 20));
-        changeLocationButton.setForeground(darkBrown);
-        changeLocationButton.setBackground(pastelGrayOrange);
-
         truckListComboBox.setFont(new Font("Arial", Font.BOLD, 20));
         truckListComboBox.setForeground(darkBrown);
         truckListComboBox.setBackground(pastelGrayOrange);
-
-        Dimension buttonSize = new Dimension(325, 50);
-
         truckListComboBox.setMaximumSize(new Dimension(250, 50));
-
-        mainMenuButton.setMaximumSize(buttonSize);
-        simulateTruckButton.setMaximumSize(buttonSize);
-        viewTruckButton.setMaximumSize(buttonSize);
-        restockButton.setMaximumSize(buttonSize);
-        viewPricesButton.setMaximumSize(buttonSize);
-        changeLocationButton.setMaximumSize(buttonSize);
-
-        mainMenuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        simulateTruckButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        viewTruckButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        restockButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        viewPricesButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        changeLocationButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         this.add(title);
         this.add(Box.createRigidArea(new Dimension(0, 30)));

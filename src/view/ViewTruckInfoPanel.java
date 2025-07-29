@@ -86,6 +86,7 @@ public class ViewTruckInfoPanel extends JPanel{
         sideBySideTables.add(tableScrollPaneInventory);
         sideBySideTables.add(Box.createRigidArea(new Dimension(30, 0))); // spacing between tables
         sideBySideTables.add(tableScrollPanePrices);
+
         this.add(sideBySideTables);
         this.add(Box.createRigidArea(new Dimension(0, 30)));
         this.add(mainMenuButton);

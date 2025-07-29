@@ -36,6 +36,8 @@ public class SetPricesPanel extends JPanel {
         darkBrown = new Color(96, 63, 38);
         lightGray = new Color(217, 217, 217);
         peachyOrange = new Color(255, 243, 224);
+        Dimension buttonSize = new Dimension(350, 100);
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60)); // padding
         this.setOpaque(false);
@@ -48,10 +50,7 @@ public class SetPricesPanel extends JPanel {
         submitButton = new JButton("Set Truck Prices");
         submitButton.setBackground(peachyOrange);
         submitButton.setForeground(darkBrown);
-
         submitButton.setFont(new Font("Arial", Font.BOLD, 20));
-
-        Dimension buttonSize = new Dimension(350, 100);
         submitButton.setMaximumSize(buttonSize);
         submitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -59,6 +58,7 @@ public class SetPricesPanel extends JPanel {
         nameLabel.setFont(new Font("Arial", Font.BOLD, 20));
         nameLabel.setForeground(darkBrown);
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         typeLabel = new JLabel("");
         typeLabel.setFont(new Font("Arial", Font.BOLD, 20));
         typeLabel.setForeground(darkBrown);

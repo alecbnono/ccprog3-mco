@@ -41,6 +41,8 @@ public class DisplayPricesPanel extends JPanel {
         lightGray = new Color(217, 217, 217);
         peachyOrange = new Color(255, 243, 224);
         gray = new Color(115, 115, 115);
+        Dimension buttonSize = new Dimension(325, 50);
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60)); // padding
         this.setOpaque(false);
@@ -68,21 +70,17 @@ public class DisplayPricesPanel extends JPanel {
         tableScrollPane.setBackground(peachyOrange);
 
         mainMenuButton = new JButton("Main Menu");
-        updatePricesButton = new JButton("Update Truck Prices");
-
         mainMenuButton.setFont(new Font("Arial", Font.BOLD, 20));
         mainMenuButton.setForeground(darkBrown);
         mainMenuButton.setBackground(pastelGrayOrange);
+        mainMenuButton.setMaximumSize(buttonSize);
+        mainMenuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        updatePricesButton = new JButton("Update Truck Prices");
         updatePricesButton.setFont(new Font("Arial", Font.BOLD, 20));
         updatePricesButton.setForeground(darkBrown);
         updatePricesButton.setBackground(pastelGrayOrange);
-
-        Dimension buttonSize = new Dimension(325, 50);
-
-        mainMenuButton.setMaximumSize(buttonSize);
         updatePricesButton.setMaximumSize(buttonSize);
-
-        mainMenuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         updatePricesButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         this.add(title);

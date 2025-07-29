@@ -52,6 +52,8 @@ public class SimulateTruckPanel extends JPanel {
         darkBrown = new Color(96, 63, 38);
         lightGray = new Color(217, 217, 217);
         peachyOrange = new Color(255, 243, 224);
+        Dimension vertical = new Dimension(0, 15);
+        Dimension comboBoxSize = new Dimension(150 ,40);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setAlignmentY(Component.CENTER_ALIGNMENT);
         this.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60)); // padding
@@ -66,6 +68,20 @@ public class SimulateTruckPanel extends JPanel {
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setForeground(grayRed);
 
+
+
+        drinkComboBox = new JComboBox<>(drinks);
+        drinkComboBox.setMaximumSize(comboBoxSize);
+        drinkComboBox.setAlignmentX(Component.CENTER_ALIGNMENT);
+        drinkComboBox.setBackground(peachyOrange);
+        drinkComboBox.setForeground(darkBrown);
+
+        sizeComboBox = new JComboBox<>(sizes);
+        sizeComboBox.setMaximumSize(comboBoxSize);
+        sizeComboBox.setAlignmentX(Component.CENTER_ALIGNMENT);
+        sizeComboBox.setBackground(peachyOrange);
+        sizeComboBox.setForeground(darkBrown);
+
         fullMenuPanel = new JPanel();
         fullMenuPanel.setLayout(new BoxLayout(fullMenuPanel, BoxLayout.Y_AXIS));
         fullMenuPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
@@ -75,18 +91,6 @@ public class SimulateTruckPanel extends JPanel {
         baseDrinkPanel.setLayout(new BoxLayout(baseDrinkPanel, BoxLayout.X_AXIS));
         baseDrinkPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         baseDrinkPanel.setOpaque(false);
-
-        drinkComboBox = new JComboBox<>(drinks);
-        drinkComboBox.setMaximumSize(new Dimension(150, 40));
-        drinkComboBox.setAlignmentX(Component.CENTER_ALIGNMENT);
-        drinkComboBox.setBackground(peachyOrange);
-        drinkComboBox.setForeground(darkBrown);
-        sizeComboBox = new JComboBox<>(sizes);
-        sizeComboBox.setMaximumSize(new Dimension(150, 40));
-        sizeComboBox.setAlignmentX(Component.CENTER_ALIGNMENT);
-        sizeComboBox.setBackground(peachyOrange);
-        sizeComboBox.setForeground(darkBrown);
-
         baseDrinkPanel.add(drinkComboBox);
         baseDrinkPanel.add(Box.createRigidArea(new Dimension(10, 0)));
         baseDrinkPanel.add(sizeComboBox);
@@ -97,7 +101,7 @@ public class SimulateTruckPanel extends JPanel {
         baseEspressoPanel.setOpaque(false);
 
         baseEspresso = new JComboBox<String>(baseEspressos);
-        baseEspresso.setMaximumSize(new Dimension(150, 40));
+        baseEspresso.setMaximumSize(comboBoxSize);
         baseEspresso.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
         baseEspresso.setAlignmentX(Component.CENTER_ALIGNMENT);
         baseEspresso.setBackground(peachyOrange);
@@ -110,7 +114,7 @@ public class SimulateTruckPanel extends JPanel {
 
 
         baseRatio = new JSpinner(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1));
-        baseRatio.setMaximumSize(new Dimension(150, 40));
+        baseRatio.setMaximumSize(comboBoxSize);
 
         baseEspresso.addActionListener(e -> {
             if (baseEspresso.getSelectedItem().equals("Custom"))
@@ -126,7 +130,7 @@ public class SimulateTruckPanel extends JPanel {
         specialMenuPanel.setOpaque(false);
 
         addOnSyrups = new JComboBox<>(addOns);
-        addOnSyrups.setMaximumSize(new Dimension(150, 40));
+        addOnSyrups.setMaximumSize(comboBoxSize);
         addOnSyrups.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
         addOnSyrups.setAlignmentX(Component.CENTER_ALIGNMENT);
         addOnSyrups.setBackground(peachyOrange);
@@ -143,7 +147,7 @@ public class SimulateTruckPanel extends JPanel {
         addOnEspressoPanel.setOpaque(false);
 
         addOnEspresso = new JComboBox<>(addOnEspressos);
-        addOnEspresso.setMaximumSize(new Dimension(150, 40));
+        addOnEspresso.setMaximumSize(comboBoxSize);
         addOnEspresso.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
         addOnEspresso.setAlignmentX(Component.CENTER_ALIGNMENT);
         addOnEspresso.setBackground(peachyOrange);
@@ -155,7 +159,7 @@ public class SimulateTruckPanel extends JPanel {
 
 
         addOnRatio = new JSpinner(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 1));
-        addOnRatio.setMaximumSize(new Dimension(150, 40));
+        addOnRatio.setMaximumSize(comboBoxSize);
         fullMenuPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         baseDrinkPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         baseEspressoPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -192,27 +196,27 @@ public class SimulateTruckPanel extends JPanel {
 
 // Add to specialMenuPanel in vertical layout
         specialMenuPanel.add(brewLabelWrapper);
-        specialMenuPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+        specialMenuPanel.add(Box.createRigidArea(vertical));
         specialMenuPanel.add(baseEspressoPanel);
-        specialMenuPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+        specialMenuPanel.add(Box.createRigidArea(vertical));
         specialMenuPanel.add(syrupLabelWrapper);
-        specialMenuPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+        specialMenuPanel.add(Box.createRigidArea(vertical));
         specialMenuPanel.add(addOnSyrupPanel);
-        specialMenuPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+        specialMenuPanel.add(Box.createRigidArea(vertical));
         specialMenuPanel.add(shotLabelWrapper);
-        specialMenuPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+        specialMenuPanel.add(Box.createRigidArea(vertical));
         specialMenuPanel.add(addOnEspressoPanel);
-        specialMenuPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+        specialMenuPanel.add(Box.createRigidArea(vertical));
 
         fullMenuPanel.add(baseDrinkPanel);
-        fullMenuPanel.add(Box.createRigidArea(new Dimension(0, 15)));
+        fullMenuPanel.add(Box.createRigidArea(vertical));
 
         interactionsMenuButton = new JButton("Back");
-        submitButton = new JButton("Submit");
-
         interactionsMenuButton.setFont(new Font("Arial", Font.BOLD, 20));
         interactionsMenuButton.setBackground(peachyOrange);
         interactionsMenuButton.setForeground(darkBrown);
+
+        submitButton = new JButton("Submit");
         submitButton.setFont(new Font("Arial", Font.BOLD, 20));
         submitButton.setBackground(peachyOrange);
         submitButton.setForeground(darkBrown);
@@ -243,11 +247,11 @@ public class SimulateTruckPanel extends JPanel {
         backWrapper.add(interactionsMenuButton);
 
         this.add(labelWrapper);
-        this.add(Box.createRigidArea(new Dimension(0, 15)));
+        this.add(Box.createRigidArea(vertical));
         this.add(menuWrapper);
-        this.add(Box.createRigidArea(new Dimension(0, 15)));
+        this.add(Box.createRigidArea(vertical));
         this.add(submitWrapper);
-        this.add(Box.createRigidArea(new Dimension(0, 15)));
+        this.add(Box.createRigidArea(vertical));
         this.add(backWrapper);
 
     }
