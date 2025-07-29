@@ -49,7 +49,7 @@ public abstract class CoffeeTruck {
         this.inventory = storageBin;
     }
 
-    public boolean serveCoffee(String drinkName, String size, String espressoType) {
+    public Receipt serveCoffee(String drinkName, String size, String espressoType) {
 
         CoffeeDrink drink = coffeeMaker.makeDrink(drinkName, size, espressoType);
         CoffeeCup cup;
@@ -57,13 +57,13 @@ public abstract class CoffeeTruck {
         if (drink != null) {
 
             cup = drink.getCupUsed();
-            business.getPriceList();
+            Receipt receipt = new Receipt(this.location, (Binable) drink,
+                    business.getPriceList().getPrice(drinkName, cup.getSize()));
 
-            business.getTransactionList().addReceipt(new Receipt(this.location, drink, 100.0));
-            return true;
+            business.getTransactionList().addReceipt(receipt);
+            return receipt;
         }
-        return false;
-
+        return null;
     }
 
 }

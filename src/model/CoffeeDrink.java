@@ -1,8 +1,10 @@
 package model;
 
 /**
- * Abstract base class representing a coffee drink made with espresso and another liquid (e.g., water or milk).
- * Subclasses define the name and espresso-to-liquid ratio for each specific drink type.
+ * Abstract base class representing a coffee drink made with espresso and
+ * another liquid (e.g., water or milk).
+ * Subclasses define the name and espresso-to-liquid ratio for each specific
+ * drink type.
  */
 public abstract class CoffeeDrink {
 
@@ -37,7 +39,7 @@ public abstract class CoffeeDrink {
      *
      * @return the name of the drink
      */
-    public abstract String getName();
+    public abstract String getType();
 
     /**
      * Prepares the drink using the provided cup and a given espresso source.
@@ -45,7 +47,8 @@ public abstract class CoffeeDrink {
      *
      * @param cup      the cup used to serve the drink
      * @param espresso the espresso source
-     * @return {@code true} if both espresso and liquid were successfully consumed; {@code false} otherwise
+     * @return {@code true} if both espresso and liquid were successfully consumed;
+     *         {@code false} otherwise
      */
     public boolean prepare(CoffeeCup cup, Espresso espresso) {
         this.cup = cup;

@@ -32,7 +32,7 @@ public class TransactionList {
                 writer.write(String.format("%-20s %-15s %-15s %10.2f%n",
                         r.getTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
                         r.getLocation(),
-                        r.getDrink().getName(),
+                        r.getProduct().getType(),
                         r.getPrice()));
             }
 
@@ -61,7 +61,7 @@ public class TransactionList {
                     writer.write(String.format("%-20s %-15s %-15s %10.2f%n",
                             r.getTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
                             r.getLocation(),
-                            r.getDrink().getName(),
+                            r.getProduct().getType(),
                             r.getPrice()));
                 }
 
