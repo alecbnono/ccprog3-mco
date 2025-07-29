@@ -9,12 +9,32 @@ public class Receipt {
 
     private LocalDateTime transactionTime;
     private String location;
-    private Binable product;
+    private Espresso espresso;
+    private AddOn addOn;
+    private CoffeeDrink drink;
+    private String productType;
     private double price;
 
-    public Receipt(String location, Binable product, double price) {
+    public Receipt(String location, CoffeeDrink product, double price) {
         this.location = location;
-        this.product = product;
+        this.drink = product;
+        this.productType = "Coffee Drink";
+        this.price = price;
+        this.transactionTime = LocalDateTime.now();
+    }
+
+    public Receipt(String location, AddOn product, double price) {
+        this.location = location;
+        this.addOn = product;
+        this.productType = "Add-On";
+        this.price = price;
+        this.transactionTime = LocalDateTime.now();
+    }
+
+    public Receipt(String location, Espresso product, double price) {
+        this.location = location;
+        this.espresso = product;
+        this.productType = "Espresso";
         this.price = price;
         this.transactionTime = LocalDateTime.now();
     }
@@ -31,19 +51,27 @@ public class Receipt {
         return price;
     }
 
-    public Binable getProduct() {
-        return product;
+    public String getProduct() {
+        if (productType.equals("Coffee Drink")) {
+            return drink.getType();
+        } else if (productType.equals("Add-On")) {
+            return addOn.getType();
+        } else if (productType.equals("Espresso")) {
+            return espresso.getType();
+        } else {
+            return null;
+        }
     }
 
     @Override
     public String toString() {
 
-        if (product instanceof CoffeeDrink) {
-            CoffeeDrink drink = (CoffeeDrink) product;
+        if (productType.equals("Coffee Drink")) {
 
-            return String.format("%-20s %6s %.2f", getProduct(), drink.getCupUsed().getSize(), getPrice());
+            return String.format("%-20s (%13s) %6s ₱%.2f", getProduct(), drink.getEspressoUsed().getType(),
+                    drink.getCupUsed().getSize(), getPrice());
         } else {
-            return String.format("%-20s %6s %.2f", getProduct(), "", getPrice());
+            return String.format("%-20s (%13s) %6s ₱%.2f", getProduct(), "", "", getPrice());
         }
 
     }

@@ -62,7 +62,7 @@ public class DisplayInventoryController extends AbstractPageController {
 
         for (Binable binable : bins) {
             model.addRow(
-                    new Object[] { binable.getType(), binable.getAmount(), binable.getUnit() });
+                    new Object[] { binable.getType(), String.format("%.2f", binable.getAmount()), binable.getUnit() });
         }
 
         if (this.model.getSelectedTruck().getType().equals("Special")) {

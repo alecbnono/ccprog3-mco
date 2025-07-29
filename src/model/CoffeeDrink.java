@@ -17,6 +17,9 @@ public abstract class CoffeeDrink {
     /** The coffee cup used to prepare this drink */
     protected CoffeeCup cup;
 
+    /** The coffee cup used to prepare this drink */
+    protected Espresso espresso;
+
     /**
      * Constructs a CoffeeDrink with a given ingredient inventory.
      *
@@ -52,6 +55,7 @@ public abstract class CoffeeDrink {
      */
     public boolean prepare(CoffeeCup cup, Espresso espresso) {
         this.cup = cup;
+        this.espresso = espresso;
         double cupCapacity = cup.getCapacity();
         double ratio = this.getRatio();
 
@@ -59,8 +63,12 @@ public abstract class CoffeeDrink {
         double espressoAmount = cupCapacity * 1 / (ratio + 1);
         double liquidAmount = cupCapacity * ratio / (ratio + 1);
 
+        boolean espressoSuccess = espresso.prepare(espressoAmount);
+        boolean liquidSuccess = inventory.consume(this.liquid, liquidAmount);
+        boolean cupSuccess = inventory.consume(this.cup.getType(), 1);
+
         // Prepare espresso and consume the appropriate liquid
-        return espresso.prepare(espressoAmount) && inventory.consume(this.liquid, liquidAmount);
+        return espressoSuccess && liquidSuccess && cupSuccess;
     }
 
     /**
@@ -70,5 +78,9 @@ public abstract class CoffeeDrink {
      */
     public CoffeeCup getCupUsed() {
         return cup;
+    }
+
+    public Espresso getEspressoUsed() {
+        return espresso;
     }
 }

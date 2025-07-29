@@ -11,7 +11,11 @@ public class CoffeeMaker {
         this.inventory = inventory;
     }
 
-    public Espresso makeCustomEspresso(double ratio) {
+    public void setInventory(StorageBin inventory) {
+        this.inventory = inventory;
+    }
+
+    public Espresso makeEspresso(double ratio) {
         return new CustomBrew(inventory, ratio);
     }
 
@@ -68,17 +72,17 @@ public class CoffeeMaker {
         return null;
     }
 
-    public CoffeeDrink makeCustomDrink(String drinkName, String cupSize, double espressoRatio) {
+    public CoffeeDrink makeDrink(String drinkName, String cupSize, double espressoRatio) {
 
         CoffeeDrink drink = selectDrink(drinkName);
 
-        if (drink.prepare(selectCup(cupSize), makeCustomEspresso(espressoRatio)))
+        if (drink.prepare(selectCup(cupSize), makeEspresso(espressoRatio)))
             return drink;
 
         return null;
     }
 
-    public AddOn applyAddOn(String addOnName) {
+    public AddOn makeAddOn(String addOnName) {
 
         AddOn addOn = selectAddOn(addOnName);
 
