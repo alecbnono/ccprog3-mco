@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 
 /**
@@ -24,6 +25,7 @@ public class DisplayInventoryPanel extends JPanel {
     private Color darkBrown;
     private Color lightGray;
     private Color peachyOrange;
+    private Color gray;
     private JButton updateInventoryButton;
     private JButton restockInventoryButton;
     private JButton mainMenuButton;
@@ -39,6 +41,7 @@ public class DisplayInventoryPanel extends JPanel {
         darkBrown = new Color(96, 63, 38);
         lightGray = new Color(217, 217, 217);
         peachyOrange = new Color(255, 243, 224);
+        gray = new Color(115, 115, 115);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60)); // padding
         this.setOpaque(false);
@@ -49,13 +52,21 @@ public class DisplayInventoryPanel extends JPanel {
         title.setForeground(grayRed);
 
         inventoryTable = new JTable();
+        JTableHeader header = inventoryTable.getTableHeader();
         inventoryTable.setFont(new Font("Arial", Font.PLAIN, 16));
         inventoryTable.setRowHeight(28);
         inventoryTable.setFillsViewportHeight(true);
         inventoryTable.getTableHeader().setFont(new Font("Arial", Font.BOLD, 16));
+        inventoryTable.setForeground(darkBrown);
+        inventoryTable.setBackground(peachyOrange);
+        inventoryTable.setGridColor(gray);
+        header.setBackground(peachyOrange);
+        header.setForeground(darkBrown);
+        header.setBorder(BorderFactory.createLineBorder(gray));
         tableScrollPane = new JScrollPane(inventoryTable);
         tableScrollPane.setPreferredSize(new Dimension(500, 250));
         tableScrollPane.setAlignmentX(Component.CENTER_ALIGNMENT);
+        tableScrollPane.setBackground(peachyOrange);
 
         mainMenuButton = new JButton("Main Menu");
         updateInventoryButton = new JButton("Update Inventory");
