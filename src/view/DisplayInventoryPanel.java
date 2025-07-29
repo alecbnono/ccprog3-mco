@@ -42,6 +42,8 @@ public class DisplayInventoryPanel extends JPanel {
         lightGray = new Color(217, 217, 217);
         peachyOrange = new Color(255, 243, 224);
         gray = new Color(115, 115, 115);
+        Dimension buttonSize = new Dimension(325, 50);
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60)); // padding
         this.setOpaque(false);
@@ -69,29 +71,24 @@ public class DisplayInventoryPanel extends JPanel {
         tableScrollPane.setBackground(peachyOrange);
 
         mainMenuButton = new JButton("Main Menu");
-        updateInventoryButton = new JButton("Update Inventory");
-        restockInventoryButton = new JButton("Restock Inventory");
-
         mainMenuButton.setFont(new Font("Arial", Font.BOLD, 20));
         mainMenuButton.setForeground(darkBrown);
         mainMenuButton.setBackground(pastelGrayOrange);
+        mainMenuButton.setMaximumSize(buttonSize);
+        mainMenuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        updateInventoryButton = new JButton("Update Inventory");
         updateInventoryButton.setFont(new Font("Arial", Font.BOLD, 20));
         updateInventoryButton.setForeground(darkBrown);
         updateInventoryButton.setBackground(pastelGrayOrange);
+        updateInventoryButton.setMaximumSize(buttonSize);
+        updateInventoryButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        restockInventoryButton = new JButton("Restock Inventory");
         restockInventoryButton.setFont(new Font("Arial", Font.BOLD, 20));
         restockInventoryButton.setForeground(darkBrown);
         restockInventoryButton.setBackground(pastelGrayOrange);
-
-        Dimension buttonSize = new Dimension(325, 50);
-
-        mainMenuButton.setMaximumSize(buttonSize);
-        updateInventoryButton.setMaximumSize(buttonSize);
         restockInventoryButton.setMaximumSize(buttonSize);
-
-        mainMenuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        updateInventoryButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         restockInventoryButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         this.add(title);

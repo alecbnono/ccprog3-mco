@@ -27,7 +27,7 @@ public class MainMenuPanel extends JPanel {
         pastelGrayOrange = new Color(216, 175, 157);
         brown = new Color(108, 78, 49);
         darkBrown = new Color(96, 63, 38);
-
+        Dimension buttonSize = new Dimension(350, 100);
 
 
         JLabel image = createImageLabel("src/assets/pic.png", 150, 150);
@@ -43,28 +43,24 @@ public class MainMenuPanel extends JPanel {
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         createTruckButton = new JButton("Create Coffee Truck");
-        manageTrucksButton = new JButton("Manage Existing Trucks");
-        viewDashboardButton = new JButton("View Business Dashboard");
-
         createTruckButton.setFont(new Font("Arial", Font.BOLD, 20));
         createTruckButton.setForeground(darkBrown);
         createTruckButton.setBackground(pastelGrayOrange);
+        createTruckButton.setMaximumSize(buttonSize);
+        createTruckButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        manageTrucksButton = new JButton("Manage Existing Trucks");
         manageTrucksButton.setFont(new Font("Arial", Font.BOLD, 20));
         manageTrucksButton.setForeground(darkBrown);
         manageTrucksButton.setBackground(pastelGrayOrange);
+        manageTrucksButton.setMaximumSize(buttonSize);
+        manageTrucksButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        viewDashboardButton = new JButton("View Business Dashboard");
         viewDashboardButton.setFont(new Font("Arial", Font.BOLD, 20));
         viewDashboardButton.setForeground(darkBrown);
         viewDashboardButton.setBackground(pastelGrayOrange);
-
-        Dimension buttonSize = new Dimension(350, 100);
-        createTruckButton.setMaximumSize(buttonSize);
-        manageTrucksButton.setMaximumSize(buttonSize);
         viewDashboardButton.setMaximumSize(buttonSize);
-
-        createTruckButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        manageTrucksButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         viewDashboardButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         this.add(title);

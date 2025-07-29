@@ -40,6 +40,8 @@ public class SetBinsPanel extends JPanel {
         darkBrown = new Color(96, 63, 38);
         lightGray = new Color(217, 217, 217);
         peachyOrange = new Color(255, 243, 224);
+        Dimension buttonSize = new Dimension(350, 100);
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60)); // padding
         this.setOpaque(false);
@@ -48,19 +50,18 @@ public class SetBinsPanel extends JPanel {
         title.setFont(new Font("Arial", Font.BOLD, 25));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setForeground(grayRed);
+
         submitButton = new JButton("Set Truck Inventory");
         submitButton.setForeground(darkBrown);
         submitButton.setBackground(pastelGrayOrange);
-
         submitButton.setFont(new Font("Arial", Font.BOLD, 20));
-
-        Dimension buttonSize = new Dimension(350, 100);
         submitButton.setMaximumSize(buttonSize);
         submitButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         nameLabel = new JLabel("");
         nameLabel.setFont(new Font("Arial", Font.BOLD, 20));
         nameLabel.setForeground(darkBrown);
+
         typeLabel = new JLabel("");
         typeLabel.setFont(new Font("Arial", Font.BOLD, 20));
         typeLabel.setForeground(darkBrown);

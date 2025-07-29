@@ -30,6 +30,7 @@ public class ReceiptPanel extends JPanel {
         darkBrown = new Color(96, 63, 38);
         lightGray = new Color(217, 217, 217);
         peachyOrange = new Color(255, 243, 224);
+        Dimension buttonSize = new Dimension(350, 100);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60)); // padding
@@ -45,6 +46,7 @@ public class ReceiptPanel extends JPanel {
         interactionsMenuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         interactionsMenuButton.setBackground(pastelGrayOrange);
         interactionsMenuButton.setForeground(darkBrown);
+        interactionsMenuButton.setMaximumSize(buttonSize);
 
         ImageIcon image = new ImageIcon("../assets/receipt.png");
 
