@@ -6,13 +6,18 @@ import view.RootView;
 import model.CoffeeBusiness;
 
 /**
- * The central navigation and coordination controller for the entire application.
+ * The central navigation and coordination controller for the entire
+ * application.
  *
- * <p>It holds references to all individual page controllers and manages the
- * transition between different views (pages) of the coffee truck system.</p>
+ * <p>
+ * It holds references to all individual page controllers and manages the
+ * transition between different views (pages) of the coffee truck system.
+ * </p>
  *
- * <p>This controller also tracks the current operation and receipt status
- * to support contextual behavior across different views.</p>
+ * <p>
+ * This controller also tracks the current operation and receipt status
+ * to support contextual behavior across different views.
+ * </p>
  */
 public class MasterController {
 
@@ -97,7 +102,8 @@ public class MasterController {
      * Retrieves a controller by its page name (case-insensitive).
      *
      * @param name the name of the page (e.g., "MainMenu", "DisplayPrices")
-     * @return the corresponding {@code AbstractPageController}, or {@code null} if not found
+     * @return the corresponding {@code AbstractPageController}, or {@code null} if
+     *         not found
      */
     public AbstractPageController getController(String name) {
         for (AbstractPageController controller : controllers) {
