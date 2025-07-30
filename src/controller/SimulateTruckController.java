@@ -19,7 +19,16 @@ import view.RootView;
 public class SimulateTruckController extends AbstractPageController {
 
     private SimulateTruckPanel simulateTruckPanel;
-
+    /**
+     * Constructs a new SimulateTruckController.
+     *
+     * @param model       The CoffeeBusiness model containing the selected truck and inventory.
+     * @param view        The RootView used for GUI navigation and updates.
+     * @param controller  The MasterController responsible for application-wide control.
+     *
+     * Initializes the SimulateTruckPanel and registers action listeners
+     * for user interactions, including submitting an order and returning to the interactions menu.
+     */
     public SimulateTruckController(CoffeeBusiness model, RootView view, MasterController controller) {
         super(model, view, controller);
 
@@ -133,12 +142,22 @@ public class SimulateTruckController extends AbstractPageController {
         simulateTruckPanel.addSubmitButtonListener(submitButton);
         simulateTruckPanel.addInteractionsMenuListener(navigateInteractionsMenu);
     }
-
+    /**
+     * Returns the name identifier for this page/controller.
+     *
+     * @return "SimulateTruck" — the page name string used for controller routing.
+     */
     @Override
     public String getPageName() {
         return "SimulateTruck";
     }
-
+    /**
+     * Sets up and displays the simulation panel.
+     * <p>
+     * The panel layout is updated based on the selected truck's type
+     * (either "Regular" or "Special"), enabling or disabling features accordingly.
+     * </p>
+     */
     @Override
     public void goTo() {
         simulateTruckPanel.setMenu(model.getSelectedTruck().getType());
