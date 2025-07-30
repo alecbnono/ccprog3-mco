@@ -1,56 +1,71 @@
 package model;
 
 /**
- * Abstract base class representing a coffee drink made with espresso and
- * another liquid (e.g., water or milk).
- * Subclasses define the name and espresso-to-liquid ratio for each specific
- * drink type.
+ * The {@code CoffeeDrink} class serves as an abstract base for all coffee drink types
+ * that combine espresso with another liquid ingredient (e.g., water, milk).
+ * <p>
+ * Subclasses define the specific espresso-to-liquid ratio and drink type name.
+ * This class handles ingredient portioning and consumption from the inventory when
+ * preparing a drink.
+ * </p>
+ *
+ * It uses a {@link StorageBin} to retrieve the required ingredients, and tracks
+ * the {@link CoffeeCup} and {@link Espresso} used in preparation.
+ *
+ * @author
  */
 public abstract class CoffeeDrink {
 
-    /** Inventory used to retrieve ingredients (liquid) */
+    /** The inventory of ingredients, such as water, milk, and cups. */
     protected StorageBin inventory;
 
-    /** Type of liquid to be used (e.g., "Milk", "Water") */
+    /** The name of the liquid ingredient used in this drink (e.g., "Milk", "Water"). */
     protected String liquid;
 
-    /** The coffee cup used to prepare this drink */
+    /** The coffee cup used to serve the drink. */
     protected CoffeeCup cup;
 
-    /** The coffee cup used to prepare this drink */
+    /** The espresso shot used in the drink. */
     protected Espresso espresso;
 
     /**
-     * Constructs a CoffeeDrink with a given ingredient inventory.
+     * Constructs a {@code CoffeeDrink} with the specified storage bin for retrieving ingredients.
      *
-     * @param inventory the storage bin containing liquid ingredients
+     * @param inventory the {@link StorageBin} containing ingredients and cups
      */
     public CoffeeDrink(StorageBin inventory) {
         this.inventory = inventory;
     }
 
     /**
-     * Gets the ratio of liquid to espresso.
-     * For example, 2 means 2 parts liquid to 1 part espresso.
+     * Returns the ratio of liquid to espresso for this drink.
+     * For example, a ratio of 2 means 2 parts liquid for every 1 part espresso.
      *
      * @return the espresso-to-liquid ratio
      */
     public abstract int getRatio();
 
     /**
-     * Returns the display name of the drink.
+     * Returns the display name or type of this coffee drink (e.g., "Americano", "Latte").
      *
      * @return the name of the drink
      */
     public abstract String getType();
 
     /**
-     * Prepares the drink using the provided cup and a given espresso source.
-     * It calculates ingredient portions based on the cup size and the drink ratio.
+     * Prepares the coffee drink using the given cup and espresso.
+     * <p>
+     * It calculates the required amounts of espresso and liquid based on
+     * the drink's ratio and the cup's total capacity. Then, it attempts to:
+     * <ul>
+     *   <li>Prepare the espresso shot</li>
+     *   <li>Consume the required liquid from inventory</li>
+     *   <li>Consume one cup from inventory</li>
+     * </ul>
      *
-     * @param cup      the cup used to serve the drink
-     * @param espresso the espresso source
-     * @return {@code true} if both espresso and liquid were successfully consumed;
+     * @param cup      the {@link CoffeeCup} to use for the drink
+     * @param espresso the {@link Espresso} used to brew the coffee
+     * @return {@code true} if all ingredients were successfully consumed and espresso prepared;
      *         {@code false} otherwise
      */
     public boolean prepare(CoffeeCup cup, Espresso espresso) {
@@ -59,7 +74,7 @@ public abstract class CoffeeDrink {
         double cupCapacity = cup.getCapacity();
         double ratio = this.getRatio();
 
-        // Divide the cup's volume into espresso and liquid based on the defined ratio
+        // Divide the cup's volume based on the espresso-to-liquid ratio
         double espressoAmount = cupCapacity * 1 / (ratio + 1);
         double liquidAmount = cupCapacity * ratio / (ratio + 1);
 
@@ -67,19 +82,23 @@ public abstract class CoffeeDrink {
         boolean liquidSuccess = inventory.consume(this.liquid, liquidAmount);
         boolean cupSuccess = inventory.consume(this.cup.getType(), 1);
 
-        // Prepare espresso and consume the appropriate liquid
         return espressoSuccess && liquidSuccess && cupSuccess;
     }
 
     /**
-     * Returns the cup used in this drink preparation.
+     * Returns the cup used for the most recent preparation of this drink.
      *
-     * @return the cup object
+     * @return the {@link CoffeeCup} instance
      */
     public CoffeeCup getCupUsed() {
         return cup;
     }
 
+    /**
+     * Returns the espresso used for the most recent preparation of this drink.
+     *
+     * @return the {@link Espresso} instance
+     */
     public Espresso getEspressoUsed() {
         return espresso;
     }
