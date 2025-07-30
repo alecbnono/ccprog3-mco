@@ -10,13 +10,14 @@ import javax.swing.*;
 public class DashboardPanel extends JPanel {
 
     private Color grayRed;
-    private Color lightRed;
     private Color pastelGrayOrange;
-    private Color brown;
     private Color darkBrown;
+    private Color peachyOrange;
+    private Color gray;
     private ImageIcon image;
     private ImageIcon asset1;
     private JButton mainMenuButton;
+    private JButton transactionsButton;
     private JTextArea totalSales;
     private JTextArea trucksDeployedInfo;
     private JTextArea allInventoriesInfo;
@@ -37,10 +38,10 @@ public class DashboardPanel extends JPanel {
 
     public DashboardPanel() {
         grayRed = new Color(194, 133, 131);
-        lightRed = new Color(248, 218, 217);
         pastelGrayOrange = new Color(216, 175, 157);
-        brown = new Color(108, 78, 49);
         darkBrown = new Color(96, 63, 38);
+        peachyOrange = new Color(255, 243, 224);
+        gray = new Color(115, 115, 115);
         Dimension buttonSize = new Dimension(350, 100);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -79,6 +80,13 @@ public class DashboardPanel extends JPanel {
         totalSales.setLineWrap(true);
         totalSales.setWrapStyleWord(true);
 
+        transactionsButton = new JButton("Transactions");
+        transactionsButton.setFont(new Font("Arial", Font.BOLD, 20));
+        transactionsButton.setForeground(darkBrown);
+        transactionsButton.setBackground(pastelGrayOrange);
+        transactionsButton.setMaximumSize(buttonSize);
+        transactionsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         mainMenuButton = new JButton("Main Menu");
         mainMenuButton.setFont(new Font("Arial", Font.BOLD, 20));
         mainMenuButton.setForeground(darkBrown);
@@ -87,13 +95,12 @@ public class DashboardPanel extends JPanel {
         mainMenuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         this.add(title);
-        this.add(Box.createRigidArea(new Dimension(0, 15)));
+        this.add(Box.createRigidArea(new Dimension(0, 5)));
         this.add(trucksDeployedInfo);
-        this.add(Box.createRigidArea(new Dimension(0, 15)));
         this.add(allInventoriesInfo);
-        this.add(Box.createRigidArea(new Dimension(0, 15)));
         this.add(totalSales);
-        this.add(Box.createRigidArea(new Dimension(0, 15)));
+        this.add(transactionsButton);
+        this.add(Box.createRigidArea(new Dimension(0, 5)));
         this.add(mainMenuButton);
     }
 
@@ -107,6 +114,10 @@ public class DashboardPanel extends JPanel {
 
     public void setSalesInfo(String output) {
         totalSales.setText(output);
+    }
+
+    public void addTransactionsListener(ActionListener listener) {
+        transactionsButton.addActionListener(listener);
     }
 
     public void addMainMenuListener(ActionListener listener) {

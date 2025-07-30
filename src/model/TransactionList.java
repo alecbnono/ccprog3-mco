@@ -60,7 +60,8 @@ public class TransactionList {
     /**
      * Builds a map of DefaultTableModels grouped by truck location.
      *
-     * @return a map with location names as keys and corresponding transaction tables as values
+     * @return a map with location names as keys and corresponding transaction
+     *         tables as values
      */
     public Map<String, DefaultTableModel> buildGroupedTransactionsTableModels() {
         Map<String, DefaultTableModel> models = new HashMap<>();
@@ -126,7 +127,8 @@ public class TransactionList {
     }
 
     /**
-     * Saves both the full transaction list and the per-location grouped tables to text files.
+     * Saves both the full transaction list and the per-location grouped tables to
+     * text files.
      * The output files are named:
      * - all_transactions.txt
      * - transactions_{location}.txt for each truck location
@@ -144,9 +146,11 @@ public class TransactionList {
     }
 
     /**
-     * Generates a textual summary of all drinks and add-ons sold across all transactions.
+     * Generates a textual summary of all drinks and add-ons sold across all
+     * transactions.
      *
-     * @return a formatted string summarizing sales count and total revenue per category
+     * @return a formatted string summarizing sales count and total revenue per
+     *         category
      */
     public String getAggregateSales() {
 
@@ -179,11 +183,15 @@ public class TransactionList {
                 addOnTotal += receipt.getPrice();
             }
         }
+        double grandTotal = americanoTotal + latteTotal + cappuccinoTotal + addOnTotal;
+        int grandCount = americanoCount + latteCount + cappuccinoCount + addOnCount;
 
-        output.append(String.format("- Americano: %d sold ₱%.2f Total\n", americanoCount, americanoTotal));
-        output.append(String.format("- Latte: %d sold ₱%.2f Total\n", latteCount, latteTotal));
-        output.append(String.format("- Cappuccino: %d sold ₱%.2f Total\n", cappuccinoCount, cappuccinoTotal));
-        output.append(String.format("- Add-Ons: %d sold ₱%.2f Total\n", addOnCount, addOnTotal));
+        output.append(String.format("- %-12s %5d sold ₱%5.2f Total\n", "Americano:", americanoCount, americanoTotal));
+        output.append(String.format("- %-12s %5d sold ₱%5.2f Total\n", "Latte:", latteCount, latteTotal));
+        output.append(
+                String.format("- %-12s %5d sold ₱%5.2f Total\n", "Cappuccino:", cappuccinoCount, cappuccinoTotal));
+        output.append(String.format("- %-12s %5d sold ₱%5.2f Total\n", "Add-Ons:", addOnCount, addOnTotal));
+        output.append(String.format("- %-12s %5d sold ₱%5.2f Total\n", "Grand Total:", grandCount, grandTotal));
 
         return output.toString();
     }
