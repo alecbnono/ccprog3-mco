@@ -50,18 +50,7 @@ public class ReceiptPanel extends JPanel {
         receiptTextArea.setMaximumSize(new Dimension(550, 600));
         receiptTextArea.setLineWrap(true);
         receiptTextArea.setWrapStyleWord(true);
-
-        // Load image from resources
-        URL imageUrl = getClass().getClassLoader().getResource("src/assets/receipt.png");
-        if (imageUrl != null) {
-            ImageIcon image = new ImageIcon(imageUrl);
-            Image scaledImage = image.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-            imageLabel = new JLabel(new ImageIcon(scaledImage));
-        } else {
-            imageLabel = new JLabel("Image not found");
-        }
-
-        imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        
 
         interactionsMenuButton = new JButton("Back");
         interactionsMenuButton.setFont(new Font("Arial", Font.BOLD, 20));
@@ -73,8 +62,6 @@ public class ReceiptPanel extends JPanel {
         this.add(title);
         this.add(Box.createRigidArea(new Dimension(0, 35)));
         this.add(receiptTextArea);
-        this.add(Box.createRigidArea(new Dimension(0, 20)));
-        this.add(imageLabel);
         this.add(Box.createRigidArea(new Dimension(0, 45)));
         this.add(interactionsMenuButton);
     }

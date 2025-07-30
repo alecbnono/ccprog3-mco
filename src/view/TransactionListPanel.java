@@ -97,9 +97,7 @@ public class TransactionListPanel extends JPanel {
         backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         this.add(title);
-        this.add(Box.createRigidArea(new Dimension(0, 30)));
         this.add(tableScrollPane);
-        this.add(Box.createRigidArea(new Dimension(0, 30)));
         this.add(backButton);
         this.add(Box.createRigidArea(new Dimension(0, 15)));
         this.add(mainMenuButton);
