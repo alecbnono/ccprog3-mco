@@ -8,24 +8,45 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
+/**
+ * The {@code SetLocationPanel} class is a GUI panel that allows the user
+ * to input and set the location (name) of a coffee truck.
+ * It also provides a button to go back to the interactions menu.
+ */
 public class SetLocationPanel extends JPanel {
+
+    /** Color used for grayish red components. */
     private Color grayRed;
+    /** Color used for pastel orange-gray components. */
     private Color pastelGrayOrange;
+    /** Color used for dark brown components. */
     private Color darkBrown;
+    /** Color used for light peachy-orange components. */
     private Color peachyOrange;
+
+    /** Button used to submit the location input. */
     private JButton setLocationButton;
+
+    /** Button used to navigate back to the interactions menu. */
     private JButton interactionsMenuButton;
+
+    /** Text field to input the new truck location. */
     private JTextField truckLocationField;
+
+    /** Label describing the name input field. */
     private JLabel nameLabel;
+
+    /** Title label of the panel. */
     private JLabel title;
 
+    /**
+     * Constructs a new {@code SetLocationPanel} and initializes its components.
+     */
     public SetLocationPanel() {
         grayRed = new Color(194, 133, 131);
         pastelGrayOrange = new Color(216, 175, 157);
@@ -33,7 +54,7 @@ public class SetLocationPanel extends JPanel {
         peachyOrange = new Color(255, 243, 224);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60)); // padding
+        this.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60));
         this.setOpaque(false);
 
         title = new JLabel("Change Coffee Truck Location");
@@ -69,25 +90,39 @@ public class SetLocationPanel extends JPanel {
         interactionsMenuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         this.add(title);
-        this.add(Box.createRigidArea(new Dimension(0, 30))); // spacing
+        this.add(Box.createRigidArea(new Dimension(0, 30)));
         this.add(nameLabel);
-        this.add(Box.createRigidArea(new Dimension(0, 30))); // spacing
+        this.add(Box.createRigidArea(new Dimension(0, 30)));
         this.add(truckLocationField);
-        this.add(Box.createRigidArea(new Dimension(0, 30))); // spacing
+        this.add(Box.createRigidArea(new Dimension(0, 30)));
         this.add(setLocationButton);
-        this.add(Box.createRigidArea(new Dimension(0, 30))); // spacing
+        this.add(Box.createRigidArea(new Dimension(0, 30)));
         this.add(interactionsMenuButton);
-
     }
 
+    /**
+     * Returns the user-inputted truck location.
+     *
+     * @return the text entered in the location field
+     */
     public String getNewLocation() {
         return truckLocationField.getText();
     }
 
+    /**
+     * Adds an {@code ActionListener} to the back button.
+     *
+     * @param listener the listener to handle back button actions
+     */
     public void addInteractionsMenuListener(ActionListener listener) {
         interactionsMenuButton.addActionListener(listener);
     }
 
+    /**
+     * Adds an {@code ActionListener} to the set location button.
+     *
+     * @param listener the listener to handle set location button actions
+     */
     public void addSetLocationListener(ActionListener listener) {
         setLocationButton.addActionListener(listener);
     }

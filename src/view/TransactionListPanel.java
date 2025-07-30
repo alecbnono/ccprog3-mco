@@ -7,21 +7,47 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 
 /**
- * TransactionListPanel
+ * {@code TransactionListPanel} is a custom Swing panel that displays a table of transactions
+ * along with navigation buttons for returning to the dashboard or main menu.
+ * <p>
+ * The panel uses a vertical layout and custom colors consistent with the JavaJeeps theme.
  */
 public class TransactionListPanel extends JPanel {
 
+    /** Color used for headings and titles. */
     private Color grayRed;
+
+    /** Color used for button backgrounds. */
     private Color pastelGrayOrange;
+
+    /** Color used for text and grid lines. */
     private Color darkBrown;
+
+    /** Color used for table backgrounds. */
     private Color peachyOrange;
+
+    /** Color used for borders and grid lines. */
     private Color gray;
+
+    /** Button to navigate back to the dashboard. */
     private JButton backButton;
+
+    /** Button to return to the main menu. */
     private JButton mainMenuButton;
+
+    /** Table for displaying transaction data. */
     private JTable transactionsTable;
+
+    /** Scroll pane that wraps the transactions table. */
     private JScrollPane tableScrollPane;
+
+    /** Title label displayed at the top of the panel. */
     private JLabel title;
 
+    /**
+     * Constructs a {@code TransactionListPanel} and initializes its layout, components, and styling.
+     * The panel contains a title, a scrollable table, and two navigation buttons.
+     */
     public TransactionListPanel() {
         grayRed = new Color(194, 133, 131);
         pastelGrayOrange = new Color(216, 175, 157);
@@ -31,7 +57,7 @@ public class TransactionListPanel extends JPanel {
         Dimension buttonSize = new Dimension(350, 100);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60)); // padding
+        this.setBorder(BorderFactory.createEmptyBorder(40, 60, 40, 60));
         this.setOpaque(false);
 
         title = new JLabel("Coffee Truck Management");
@@ -71,7 +97,7 @@ public class TransactionListPanel extends JPanel {
         backButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         this.add(title);
-        this.add(Box.createRigidArea(new Dimension(0, 30))); // spacing
+        this.add(Box.createRigidArea(new Dimension(0, 30)));
         this.add(tableScrollPane);
         this.add(Box.createRigidArea(new Dimension(0, 30)));
         this.add(backButton);
@@ -79,6 +105,11 @@ public class TransactionListPanel extends JPanel {
         this.add(mainMenuButton);
     }
 
+    /**
+     * Populates the transactions table with the given table model.
+     *
+     * @param tableModel the {@code TableModel} containing transaction data
+     */
     public void addTransactionsTable(TableModel tableModel) {
         transactionsTable.setModel(tableModel);
         transactionsTable.revalidate();
@@ -87,12 +118,21 @@ public class TransactionListPanel extends JPanel {
         this.repaint();
     }
 
+    /**
+     * Adds an {@code ActionListener} to the dashboard (back) button.
+     *
+     * @param listener the listener to handle dashboard navigation actions
+     */
     public void addDashboardListener(ActionListener listener) {
         backButton.addActionListener(listener);
     }
 
+    /**
+     * Adds an {@code ActionListener} to the main menu button.
+     *
+     * @param listener the listener to handle main menu navigation actions
+     */
     public void addMainMenuListener(ActionListener listener) {
         mainMenuButton.addActionListener(listener);
     }
-
 }

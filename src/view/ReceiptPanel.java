@@ -3,11 +3,12 @@ package view;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.net.URL;
-
 import javax.swing.*;
 
 /**
- * ReceiptPanel
+ * The {@code ReceiptPanel} class represents the panel used to display
+ * a receipt in the Coffee Truck Management system. It contains a title,
+ * a receipt text area, an optional image, and a navigation button.
  */
 public class ReceiptPanel extends JPanel {
     private Color grayRed;
@@ -22,6 +23,10 @@ public class ReceiptPanel extends JPanel {
     private JButton interactionsMenuButton;
     private JLabel title;
 
+    /**
+     * Constructs a new {@code ReceiptPanel}, initializing its layout,
+     * colors, components, and styling.
+     */
     public ReceiptPanel() {
         grayRed = new Color(194, 133, 131);
         pastelGrayOrange = new Color(216, 175, 157);
@@ -46,7 +51,7 @@ public class ReceiptPanel extends JPanel {
         receiptTextArea.setLineWrap(true);
         receiptTextArea.setWrapStyleWord(true);
 
-        // Image
+        // Load image from resources
         URL imageUrl = getClass().getClassLoader().getResource("src/assets/receipt.png");
         if (imageUrl != null) {
             ImageIcon image = new ImageIcon(imageUrl);
@@ -74,10 +79,20 @@ public class ReceiptPanel extends JPanel {
         this.add(interactionsMenuButton);
     }
 
+    /**
+     * Sets the text content to be displayed in the receipt area.
+     *
+     * @param string the receipt text to display
+     */
     public void setOutputString(String string) {
         receiptTextArea.setText(string);
     }
 
+    /**
+     * Adds an {@code ActionListener} to the "Back" button.
+     *
+     * @param listener the {@code ActionListener} to attach
+     */
     public void addInteractionsMenuListener(ActionListener listener) {
         interactionsMenuButton.addActionListener(listener);
     }
