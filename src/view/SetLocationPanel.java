@@ -1,4 +1,5 @@
 package view;
+
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -14,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-public class ChangeTruckLocationPanel extends JPanel {
+public class SetLocationPanel extends JPanel {
     private Color grayRed;
     private Color lightRed;
     private Color pastelGrayOrange;
@@ -22,14 +23,13 @@ public class ChangeTruckLocationPanel extends JPanel {
     private Color darkBrown;
     private Color lightGray;
     private Color peachyOrange;
-    private JButton createTruckButton;
-    private JButton mainMenuButton;
-    private JTextField truckNameField;
+    private JButton setLocationButton;
+    private JButton interactionsMenuButton;
+    private JTextField truckLocationField;
     private JLabel nameLabel;
     private JLabel title;
 
-
-    public ChangeTruckLocationPanel() {
+    public SetLocationPanel() {
         grayRed = new Color(194, 133, 131);
         lightRed = new Color(248, 218, 217);
         pastelGrayOrange = new Color(216, 175, 157);
@@ -47,42 +47,55 @@ public class ChangeTruckLocationPanel extends JPanel {
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         title.setForeground(grayRed);
 
-        createTruckButton = new JButton("Create Coffee Truck");
-        createTruckButton.setFont(new Font("Arial", Font.BOLD, 20));
-        createTruckButton.setForeground(darkBrown);
-        createTruckButton.setBackground(pastelGrayOrange);
+        setLocationButton = new JButton("Create Coffee Truck");
+        setLocationButton.setFont(new Font("Arial", Font.BOLD, 20));
+        setLocationButton.setForeground(darkBrown);
+        setLocationButton.setBackground(pastelGrayOrange);
         Dimension buttonSize = new Dimension(350, 100);
-        createTruckButton.setMaximumSize(buttonSize);
-        createTruckButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        setLocationButton.setMaximumSize(buttonSize);
+        setLocationButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         nameLabel = new JLabel("Truck Name:");
         nameLabel.setFont(new Font("Arial", Font.PLAIN, 18));
         nameLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         nameLabel.setForeground(darkBrown);
 
-        truckNameField = new JTextField();
-        truckNameField.setMaximumSize(new Dimension(350, 40));
-        truckNameField.setFont(new Font("Arial", Font.PLAIN, 16));
-        truckNameField.setAlignmentX(Component.CENTER_ALIGNMENT);
-        truckNameField.setBackground(peachyOrange);
-        truckNameField.setForeground(darkBrown);
+        truckLocationField = new JTextField();
+        truckLocationField.setMaximumSize(new Dimension(350, 40));
+        truckLocationField.setFont(new Font("Arial", Font.PLAIN, 16));
+        truckLocationField.setAlignmentX(Component.CENTER_ALIGNMENT);
+        truckLocationField.setBackground(peachyOrange);
+        truckLocationField.setForeground(darkBrown);
 
-        mainMenuButton = new JButton("Main Menu");
-        mainMenuButton.setFont(new Font("Arial", Font.BOLD, 20));
-        mainMenuButton.setForeground(darkBrown);
-        mainMenuButton.setBackground(pastelGrayOrange);
-        mainMenuButton.setMaximumSize(buttonSize);
-        mainMenuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        interactionsMenuButton = new JButton("Back");
+        interactionsMenuButton.setFont(new Font("Arial", Font.BOLD, 20));
+        interactionsMenuButton.setForeground(darkBrown);
+        interactionsMenuButton.setBackground(pastelGrayOrange);
+        interactionsMenuButton.setMaximumSize(buttonSize);
+        interactionsMenuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         this.add(title);
         this.add(Box.createRigidArea(new Dimension(0, 30))); // spacing
         this.add(nameLabel);
         this.add(Box.createRigidArea(new Dimension(0, 30))); // spacing
-        this.add(truckNameField);
+        this.add(truckLocationField);
         this.add(Box.createRigidArea(new Dimension(0, 30))); // spacing
-        this.add(createTruckButton);
+        this.add(setLocationButton);
         this.add(Box.createRigidArea(new Dimension(0, 30))); // spacing
-        this.add(mainMenuButton);
+        this.add(interactionsMenuButton);
 
     }
+
+    public String getNewLocation() {
+        return truckLocationField.getText();
+    }
+
+    public void addInteractionsMenuListener(ActionListener listener) {
+        interactionsMenuButton.addActionListener(listener);
+    }
+
+    public void addSetLocationListener(ActionListener listener) {
+        setLocationButton.addActionListener(listener);
+    }
+
 }

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 
 import model.CoffeeBusiness;
@@ -61,6 +62,10 @@ public class SetPricesController extends AbstractPageController {
                         controller.getController("DisplayPrices").goTo();
                     }
 
+                } else {
+                    JOptionPane.showMessageDialog(setPricesPanel,
+                            "Invalid Prices",
+                            "Missing Information", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         };

@@ -72,13 +72,6 @@ public class InteractionsMenuPanel extends JPanel {
         changeLocationButton.setMaximumSize(buttonSize);
         changeLocationButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        viewTruckButton = new JButton("View Truck Information");
-        viewTruckButton.setFont(new Font("Arial", Font.BOLD, 20));
-        viewTruckButton.setForeground(darkBrown);
-        viewTruckButton.setBackground(pastelGrayOrange);
-        viewTruckButton.setMaximumSize(buttonSize);
-        viewTruckButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-
         restockButton = new JButton("Manage Inventory");
         restockButton.setFont(new Font("Arial", Font.BOLD, 20));
         restockButton.setForeground(darkBrown);
@@ -107,8 +100,6 @@ public class InteractionsMenuPanel extends JPanel {
         this.add(Box.createRigidArea(new Dimension(0, 30)));
         this.add(simulateTruckButton);
         this.add(Box.createRigidArea(new Dimension(0, 15)));
-        this.add(viewTruckButton);
-        this.add(Box.createRigidArea(new Dimension(0, 15)));
         this.add(changeLocationButton);
         this.add(Box.createRigidArea(new Dimension(0, 15)));
         this.add(restockButton);
@@ -135,10 +126,6 @@ public class InteractionsMenuPanel extends JPanel {
 
     public void addSimulateTruckListener(ActionListener listener) {
         simulateTruckButton.addActionListener(listener);
-    }
-
-    public void addViewTruckListener(ActionListener listener) {
-        viewTruckButton.addActionListener(listener);
     }
 
     public void addViewInventoryListener(ActionListener listener) {

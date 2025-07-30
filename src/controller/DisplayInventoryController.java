@@ -30,15 +30,9 @@ public class DisplayInventoryController extends AbstractPageController {
         super(model, view, controller);
         displayInventoryPanel = new DisplayInventoryPanel();
 
-        ActionListener navigateMainMenu = new ActionListener() {
+        ActionListener navigateInteractionsMenu = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                controller.getController("MainMenu").goTo();
-            }
-        };
-
-        ActionListener navigateRestock = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                controller.getController("Restock").goTo();
+                controller.getController("InteractionsMenu").goTo();
             }
         };
 
@@ -48,9 +42,8 @@ public class DisplayInventoryController extends AbstractPageController {
             }
         };
 
-        displayInventoryPanel.addRestockInventoryListener(navigateRestock);
         displayInventoryPanel.addUpdateInventoryListener(navigateUpdateInventory);
-        displayInventoryPanel.addMainMenuListener(navigateMainMenu);
+        displayInventoryPanel.addInteractionsMenuListener(navigateInteractionsMenu);
     }
 
     private DefaultTableModel buildInventoryTableModel() {

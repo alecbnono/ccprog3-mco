@@ -42,6 +42,18 @@ public class StorageBin {
         return false;
     }
 
+    public double getTotalAmount(String itemName) {
+        double total = 0;
+
+        for (Binable bin : inventory) {
+            if (bin.getType().equalsIgnoreCase(itemName)) {
+                total += bin.getAmount();
+            }
+        }
+
+        return total;
+    }
+
     public boolean restock(String itemName, double amount) {
         double remaining = amount;
 
@@ -85,13 +97,13 @@ public class StorageBin {
                 bin.consume(use);
                 remaining -= use;
 
-                if (remaining <= 0.0001) {
+                if (remaining <= 0) {
                     return true;
                 }
             }
 
         }
 
-        return remaining <= 0.0001;
+        return remaining <= 0;
     }
 }

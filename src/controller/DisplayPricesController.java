@@ -22,9 +22,9 @@ public class DisplayPricesController extends AbstractPageController {
         super(model, view, controller);
         displayPricesPanel = new DisplayPricesPanel();
 
-        ActionListener navigateMainMenu = new ActionListener() {
+        ActionListener navigateInteractionsMenu = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                controller.getController("MainMenu").goTo();
+                controller.getController("InteractionsMenu").goTo();
             }
         };
 
@@ -36,7 +36,7 @@ public class DisplayPricesController extends AbstractPageController {
 
         displayPricesPanel.addUpdatePricesListener(navigateSetPrices);
 
-        displayPricesPanel.addMainMenuListener(navigateMainMenu);
+        displayPricesPanel.addInteractionsMenuListener(navigateInteractionsMenu);
     }
 
     private DefaultTableModel buildPriceTableModel(PriceList list) {
