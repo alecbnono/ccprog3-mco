@@ -79,7 +79,7 @@ public class DashboardPanel extends JPanel {
         totalSales.setLineWrap(true);
         totalSales.setWrapStyleWord(true);
 
-        mainMenuButton = new JButton("Create Coffee Truck");
+        mainMenuButton = new JButton("Main Menu");
         mainMenuButton.setFont(new Font("Arial", Font.BOLD, 20));
         mainMenuButton.setForeground(darkBrown);
         mainMenuButton.setBackground(pastelGrayOrange);
@@ -89,7 +89,11 @@ public class DashboardPanel extends JPanel {
         this.add(title);
         this.add(Box.createRigidArea(new Dimension(0, 15)));
         this.add(trucksDeployedInfo);
-        this.add(Box.createRigidArea(new Dimension(0, 30))); // spacing
+        this.add(Box.createRigidArea(new Dimension(0, 15)));
+        this.add(allInventoriesInfo);
+        this.add(Box.createRigidArea(new Dimension(0, 15)));
+        this.add(totalSales);
+        this.add(Box.createRigidArea(new Dimension(0, 15)));
         this.add(mainMenuButton);
     }
 

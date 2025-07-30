@@ -61,7 +61,7 @@ public class DashboardController extends AbstractPageController {
             }
 
             if (item instanceof CoffeeCup) {
-                inventoryOutput.append(String.format("- %20s %7d %s\n", item.getType(), total, item.getUnit()));
+                inventoryOutput.append(String.format("- %20s %7.0f %s\n", item.getType(), total, item.getUnit()));
             } else {
                 inventoryOutput.append(String.format("- %20s %7.2f %s\n", item.getType(), total, item.getUnit()));
             }
@@ -86,7 +86,7 @@ public class DashboardController extends AbstractPageController {
         ActionListener navigateMainMenu = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
-                controller.getController("ViewDashBoard").goTo();
+                controller.getController("MainMenu").goTo();
 
             }
         };

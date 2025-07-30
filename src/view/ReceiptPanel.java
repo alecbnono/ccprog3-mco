@@ -19,7 +19,6 @@ public class ReceiptPanel extends JPanel {
 
     private JTextArea receiptTextArea;
     private JLabel imageLabel;
-
     private JButton interactionsMenuButton;
     private JLabel title;
 
@@ -65,14 +64,6 @@ public class ReceiptPanel extends JPanel {
         interactionsMenuButton.setBackground(pastelGrayOrange);
         interactionsMenuButton.setForeground(darkBrown);
         interactionsMenuButton.setMaximumSize(buttonSize);
-
-
-        ImageIcon image = new ImageIcon("src/assets/receipt.png");
-
-        receipt = new JLabel();
-        receipt.setIcon(image);
-        receipt.setAlignmentX(Component.CENTER_ALIGNMENT);
-
 
         this.add(title);
         this.add(Box.createRigidArea(new Dimension(0, 35)));
