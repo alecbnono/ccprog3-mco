@@ -48,7 +48,7 @@ public class ReceiptPanel extends JPanel {
         receiptTextArea.setWrapStyleWord(true);
 
         // Image
-        URL imageUrl = getClass().getClassLoader().getResource("assets/receipt.png");
+        URL imageUrl = getClass().getClassLoader().getResource("src/assets/receipt.png");
         if (imageUrl != null) {
             ImageIcon image = new ImageIcon(imageUrl);
             Image scaledImage = image.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);

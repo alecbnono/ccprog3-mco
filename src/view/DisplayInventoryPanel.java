@@ -25,7 +25,7 @@ public class DisplayInventoryPanel extends JPanel {
     private Color gray;
     private JButton updateInventoryButton;
     private JButton restockInventoryButton;
-    private JButton mainMenuButton;
+    private JButton interactionsMenuButton;
     private JTable inventoryTable;
     private JLabel title;
     private JScrollPane tableScrollPane;
@@ -64,12 +64,12 @@ public class DisplayInventoryPanel extends JPanel {
         tableScrollPane.setAlignmentX(Component.CENTER_ALIGNMENT);
         tableScrollPane.setBackground(peachyOrange);
 
-        mainMenuButton = new JButton("Main Menu");
-        mainMenuButton.setFont(new Font("Arial", Font.BOLD, 20));
-        mainMenuButton.setForeground(darkBrown);
-        mainMenuButton.setBackground(pastelGrayOrange);
-        mainMenuButton.setMaximumSize(buttonSize);
-        mainMenuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        interactionsMenuButton = new JButton("Back");
+        interactionsMenuButton.setFont(new Font("Arial", Font.BOLD, 20));
+        interactionsMenuButton.setForeground(darkBrown);
+        interactionsMenuButton.setBackground(pastelGrayOrange);
+        interactionsMenuButton.setMaximumSize(buttonSize);
+        interactionsMenuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         updateInventoryButton = new JButton("Update Inventory");
         updateInventoryButton.setFont(new Font("Arial", Font.BOLD, 20));
@@ -78,22 +78,13 @@ public class DisplayInventoryPanel extends JPanel {
         updateInventoryButton.setMaximumSize(buttonSize);
         updateInventoryButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        restockInventoryButton = new JButton("Restock Inventory");
-        restockInventoryButton.setFont(new Font("Arial", Font.BOLD, 20));
-        restockInventoryButton.setForeground(darkBrown);
-        restockInventoryButton.setBackground(pastelGrayOrange);
-        restockInventoryButton.setMaximumSize(buttonSize);
-        restockInventoryButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-
         this.add(title);
         this.add(Box.createRigidArea(new Dimension(0, 30)));
         this.add(tableScrollPane);
         this.add(Box.createRigidArea(new Dimension(0, 30)));
-        this.add(restockInventoryButton);
-        this.add(Box.createRigidArea(new Dimension(0, 30)));
         this.add(updateInventoryButton);
         this.add(Box.createRigidArea(new Dimension(0, 10)));
-        this.add(mainMenuButton);
+        this.add(interactionsMenuButton);
     }
 
     public void addInventoryTable(TableModel tableModel) {
@@ -108,11 +99,7 @@ public class DisplayInventoryPanel extends JPanel {
         updateInventoryButton.addActionListener(listener);
     }
 
-    public void addRestockInventoryListener(ActionListener listener) {
-        restockInventoryButton.addActionListener(listener);
-    }
-
-    public void addMainMenuListener(ActionListener listener) {
-        mainMenuButton.addActionListener(listener);
+    public void addInteractionsMenuListener(ActionListener listener) {
+        interactionsMenuButton.addActionListener(listener);
     }
 }

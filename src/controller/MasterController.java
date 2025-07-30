@@ -29,6 +29,7 @@ public class MasterController {
         controllers.add(new DisplayInventoryController(model, view, this));
         controllers.add(new SimulateTruckController(model, view, this));
         controllers.add(new ReceiptController(model, view, this));
+        controllers.add(new SetLocationController(model, view, this));
 
         this.getController("MainMenu").goTo();
     }

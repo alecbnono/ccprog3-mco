@@ -63,6 +63,14 @@ public class Receipt {
         }
     }
 
+    public  getName() {
+        if (productType.equals("Coffee Drink")) {
+
+            return;         } else {
+            return;
+        }
+    }
+
     @Override
     public String toString() {
 

@@ -37,7 +37,6 @@ public class ReceiptController extends AbstractPageController {
 
     @Override
     public void goTo() {
-        model.clearSelectedTruck();
         receiptPanel.setOutputString(controller.getCurrentReceipt());
         view.getFrame().setPage(receiptPanel);
     }

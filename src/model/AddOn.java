@@ -42,5 +42,4 @@ public abstract class AddOn implements Container {
     public void fillCompletely() {
         this.amount = MAX_AMOUNT;
     }
-
 }

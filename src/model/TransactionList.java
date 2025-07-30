@@ -22,7 +22,6 @@ public class TransactionList {
         receipts.add(receipt);
     }
 
-
     /**
      * Builds a DefaultTableModel containing all receipts
      */
@@ -36,7 +35,7 @@ public class TransactionList {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         for (Receipt receipt : receipts) {
-            model.addRow(new Object[]{
+            model.addRow(new Object[] {
                     receipt.getTime().format(formatter),
                     receipt.getLocation(),
                     receipt.getProduct(),
@@ -69,7 +68,7 @@ public class TransactionList {
             model.addColumn("Price");
 
             for (Receipt receipt : grouped.get(location)) {
-                model.addRow(new Object[]{
+                model.addRow(new Object[] {
                         receipt.getTime().format(formatter),
                         receipt.getLocation(),
                         receipt.getProduct(),
@@ -110,7 +109,6 @@ public class TransactionList {
         }
     }
 
-
     /**
      * Helper method to save both all transactions and grouped tables
      */
@@ -125,5 +123,43 @@ public class TransactionList {
             saveTableModelToTxt(entry.getValue(), "transactions_" + location + ".txt");
         }
     }
-      
+
+    public String getAggregateSales() {
+
+        StringBuilder output = new StringBuilder();
+
+        output.append(String.format("Combined Transaction Summary:\n"));
+
+        int americanoCount = 0;
+        double americanoTotal = 0;
+        int latteCount = 0;
+        double latteTotal = 0;
+        int cappuccinoCount = 0;
+        double cappuccinoTotal = 0;
+
+        int addOnCount = 0;
+        double addOnTotal = 0;
+
+        for (Receipt receipt : receipts) {
+            if (receipt.getProduct().equals("Americano")) {
+                americanoCount++;
+                americanoTotal += receipt.getPrice();
+            } else if (receipt.getProduct().equals("Latte")) {
+                latteCount++;
+                latteTotal += receipt.getPrice();
+            } else if (receipt.getProduct().equals("Cappuccino")) {
+                cappuccinoCount++;
+                cappuccinoTotal += receipt.getPrice();
+            } else {
+                addOnCount++;
+                addOnTotal += receipt.getPrice();
+            }
+        }
+
+        output.append(String.format("- Americano: %d sold ₱%.2f Total\n", americanoCount, americanoTotal));
+        output.append(String.format("- Latte: %d sold ₱%.2f Total\n", latteCount, latteTotal));
+        output.append(String.format("- Cappuccino: %d sold ₱%.2f Total\n", cappuccinoCount, cappuccinoTotal));
+        output.append(String.format("- Add-Ons: %d sold ₱%.2f Total\n", addOnCount, addOnTotal));
+        return output.toString();
+    }
 }

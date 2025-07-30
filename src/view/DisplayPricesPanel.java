@@ -24,7 +24,7 @@ public class DisplayPricesPanel extends JPanel {
     private Color peachyOrange;
     private Color gray;
     private JButton updatePricesButton;
-    private JButton mainMenuButton;
+    private JButton interactionsMenuButton;
     private JTable pricesTable;
     private JLabel title;
     private JScrollPane tableScrollPane;
@@ -63,12 +63,12 @@ public class DisplayPricesPanel extends JPanel {
         tableScrollPane.setAlignmentX(Component.CENTER_ALIGNMENT);
         tableScrollPane.setBackground(peachyOrange);
 
-        mainMenuButton = new JButton("Main Menu");
-        mainMenuButton.setFont(new Font("Arial", Font.BOLD, 20));
-        mainMenuButton.setForeground(darkBrown);
-        mainMenuButton.setBackground(pastelGrayOrange);
-        mainMenuButton.setMaximumSize(buttonSize);
-        mainMenuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        interactionsMenuButton = new JButton("Back");
+        interactionsMenuButton.setFont(new Font("Arial", Font.BOLD, 20));
+        interactionsMenuButton.setForeground(darkBrown);
+        interactionsMenuButton.setBackground(pastelGrayOrange);
+        interactionsMenuButton.setMaximumSize(buttonSize);
+        interactionsMenuButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         updatePricesButton = new JButton("Update Truck Prices");
         updatePricesButton.setFont(new Font("Arial", Font.BOLD, 20));
@@ -83,7 +83,7 @@ public class DisplayPricesPanel extends JPanel {
         this.add(Box.createRigidArea(new Dimension(0, 30)));
         this.add(updatePricesButton);
         this.add(Box.createRigidArea(new Dimension(0, 10)));
-        this.add(mainMenuButton);
+        this.add(interactionsMenuButton);
     }
 
     public void addPriceTable(TableModel tableModel) {
@@ -98,7 +98,7 @@ public class DisplayPricesPanel extends JPanel {
         updatePricesButton.addActionListener(listener);
     }
 
-    public void addMainMenuListener(ActionListener listener) {
-        mainMenuButton.addActionListener(listener);
+    public void addInteractionsMenuListener(ActionListener listener) {
+        interactionsMenuButton.addActionListener(listener);
     }
 }

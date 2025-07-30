@@ -53,6 +53,15 @@ public class CoffeeBusiness {
         return Trucks.size();
     }
 
+    public boolean isLocationTaken(String location) {
+        for (CoffeeTruck coffeeTruck : Trucks) {
+            if (coffeeTruck.getLocation().equals(location)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Returns the number of trucks of a specific type.
      *
