@@ -98,7 +98,7 @@ public class SimulateTruckController extends AbstractPageController {
                                     "Failed", JOptionPane.INFORMATION_MESSAGE);
                             isValid = false;
                         } else {
-                            outputBuilder.append(String.format("- Add-On: -\n", receipt.toString()));
+                            outputBuilder.append("- Add-On: -\n");
                             outputBuilder.append(String.format("%s\n", receipt.toString()));
                         }
                     }

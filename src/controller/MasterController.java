@@ -51,6 +51,7 @@ public class MasterController {
         controllers.add(new ReceiptController(model, view, this));
         controllers.add(new SetLocationController(model, view, this));
         controllers.add(new DashboardController(model, view, this));
+        controllers.add(new TransactionListController(model, view, this));
 
         // Show the main menu initially
         this.getController("MainMenu").goTo();

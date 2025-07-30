@@ -81,9 +81,9 @@ public class DashboardController extends AbstractPageController {
             }
 
             if (item instanceof CoffeeCup) {
-                inventoryOutput.append(String.format("- %20s %7.0f %s\n", item.getType(), total, item.getUnit()));
+                inventoryOutput.append(String.format("- %-20s %7.0f %s\n", item.getType(), total, item.getUnit()));
             } else {
-                inventoryOutput.append(String.format("- %20s %7.2f %s\n", item.getType(), total, item.getUnit()));
+                inventoryOutput.append(String.format("- %-20s %7.2f %s\n", item.getType(), total, item.getUnit()));
             }
         }
 
@@ -95,7 +95,10 @@ public class DashboardController extends AbstractPageController {
                     total += ((SpecialCoffeeTruck) truck).getSpecialInventory().getTotalAmount(item.getType());
                 }
             }
-            inventoryOutput.append(String.format("- %20s %7.2f %s\n", item.getType(), total, item.getUnit()));
+
+
+            inventoryOutput.append(String.format("- %-20s %7.2f %s\n", item.getType(), total, item.getUnit()));
+
         }
 
         dashboardPanel.setInventoryInfo(inventoryOutput.toString());
@@ -110,6 +113,14 @@ public class DashboardController extends AbstractPageController {
             }
         };
 
+        ActionListener navigateTransactions = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+                controller.getController("TransactionList").goTo();
+
+            }
+        };
+        dashboardPanel.addTransactionsListener(navigateTransactions);
         dashboardPanel.addMainMenuListener(navigateMainMenu);
     }
 
@@ -129,7 +140,6 @@ public class DashboardController extends AbstractPageController {
      */
     @Override
     public void goTo() {
-        model.clearSelectedTruck();
         controller.setCurrentOperation("ViewDashboard");
         view.getFrame().setPage(dashboardPanel);
     }

@@ -180,10 +180,11 @@ public class TransactionList {
             }
         }
 
-        output.append(String.format("- Americano: %d sold ₱%.2f Total\n", americanoCount, americanoTotal));
-        output.append(String.format("- Latte: %d sold ₱%.2f Total\n", latteCount, latteTotal));
-        output.append(String.format("- Cappuccino: %d sold ₱%.2f Total\n", cappuccinoCount, cappuccinoTotal));
-        output.append(String.format("- Add-Ons: %d sold ₱%.2f Total\n", addOnCount, addOnTotal));
+        output.append(String.format("- %-11s %5d sold ₱%5.2f Total\n", "Americano:", americanoCount, americanoTotal));
+        output.append(String.format("- %-11s %5d sold ₱%5.2f Total\n", "Latte:", latteCount, latteTotal));
+        output.append(
+                String.format("- %-11s %5d sold ₱%5.2f Total\n", "Cappuccino:", cappuccinoCount, cappuccinoTotal));
+        output.append(String.format("- %-11s %5d sold ₱%5.2f Total\n", "Add-Ons:", addOnCount, addOnTotal));
 
         return output.toString();
     }
