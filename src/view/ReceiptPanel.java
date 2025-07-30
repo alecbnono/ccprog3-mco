@@ -48,7 +48,7 @@ public class ReceiptPanel extends JPanel {
         interactionsMenuButton.setForeground(darkBrown);
         interactionsMenuButton.setMaximumSize(buttonSize);
 
-        ImageIcon image = new ImageIcon("../assets/receipt.png");
+        ImageIcon image = new ImageIcon("src/assets/receipt.png");
 
         receipt = new JLabel();
         receipt.setIcon(image);
