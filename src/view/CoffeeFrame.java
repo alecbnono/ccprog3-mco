@@ -4,15 +4,27 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
- * CoffeeFrame with bean trail on the left side.
+ * The {@code CoffeeFrame} class represents the main window of the JavaJeeps Dashboard.
+ * It uses a layered pane to display a decorative background with a bean trail and
+ * provides an area for switching between different panels or views.
  */
 public class CoffeeFrame extends JFrame {
 
+    /** The background color used for the frame, a light red tone. */
     private Color lightRed = new Color(248, 218, 217);
+
+    /** The layered pane that allows stacking of the background and content panels. */
     private JLayeredPane layeredPane;
+
+    /** The panel used to display the currently active page or screen. */
     private JPanel contentPanel;
 
+    /**
+     * Constructs a new {@code CoffeeFrame} with a decorative background,
+     * a layered pane for content, and sets frame properties such as size and icon.
+     */
     public CoffeeFrame() {
         this.setTitle("JavaJeeps Dashboard");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,6 +56,11 @@ public class CoffeeFrame extends JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * Sets the current page to be displayed on the content panel.
+     *
+     * @param panel the panel to display in the center of the frame
+     */
     public void setPage(JPanel panel) {
         panel.setOpaque(false); // allow transparency
         contentPanel.removeAll();
@@ -53,18 +70,27 @@ public class CoffeeFrame extends JFrame {
     }
 
     /**
-     * Custom background panel with bean trail and right-side decorations.
+     * A custom panel that paints a decorative background with a bean trail
+     * on the left and images on the right side.
      */
     private static class BackgroundPanel extends JPanel {
+
+        /** The image used to create the bean trail. */
         private final Image beanImage;
+
+        /** A list of images displayed on the right side of the background. */
         private final List<Image> rightImages = new ArrayList<>();
 
+        /**
+         * Constructs the background panel with a solid background color,
+         * loads the bean image and decorative images from assets.
+         */
         public BackgroundPanel() {
             this.setOpaque(true); // paint background
             this.setBackground(new Color(248, 218, 217)); // lightRed
             this.beanImage = new ImageIcon("src/assets/bean.png").getImage();
 
-            // Load right-side decorative assets (add as needed)
+            // Load right-side decorative assets
             rightImages.add(new ImageIcon("src/assets/dahon.png").getImage());
             rightImages.add(new ImageIcon("src/assets/sprinkler.png").getImage());
             rightImages.add(new ImageIcon("src/assets/cup.png").getImage());
@@ -72,6 +98,11 @@ public class CoffeeFrame extends JFrame {
             rightImages.add(new ImageIcon("src/assets/donut.png").getImage());
         }
 
+        /**
+         * Paints the background, bean trail, and decorative images.
+         *
+         * @param g the Graphics context used for rendering
+         */
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -106,4 +137,3 @@ public class CoffeeFrame extends JFrame {
         }
     }
 }
-

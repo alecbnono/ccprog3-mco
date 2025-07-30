@@ -7,33 +7,90 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 /**
- * SimulateTruckPanel
+ * The {@code SimulateTruckPanel} class represents a GUI panel that allows users
+ * to simulate a drink sale, including selecting the drink, size, espresso strength,
+ * and optional add-ons.
  */
 public class SimulateTruckPanel extends JPanel {
+    /** Color used for gray-red accents */
     private Color grayRed;
-    private Color darkBrown;
-    private Color peachyOrange;
-    private JPanel fullMenuPanel;
-    private final String[] drinks = { "Americano", "Latte", "Cappuccino" };
-    private final String[] sizes = { "Small", "Medium", "Large" };
-    private JComboBox<String> drinkComboBox;
-    private JComboBox<String> sizeComboBox;
-    private JPanel baseDrinkPanel;
-    private final String[] baseEspressos = { "Light", "Standard", "Strong", "Custom" };
-    private JComboBox<String> baseEspresso;
-    private JPanel baseEspressoPanel;
-    private JSpinner baseRatio;
-    private final String[] addOns = { "", "Hazelnut", "Vanilla", "Chocolate", "Almond", "Sucrose" };
-    private JComboBox<String> addOnSyrups;
-    private final String[] addOnEspressos = { "", "Light", "Standard", "Strong", "Custom" };
-    private JComboBox<String> addOnEspresso;
-    private JPanel addOnEspressoPanel;
-    private JSpinner addOnRatio;
-    private JPanel specialMenuPanel;
-    private JButton interactionsMenuButton;
-    private JButton submitButton;
-    private JLabel title;
 
+    /** Color used for dark brown text and elements */
+    private Color darkBrown;
+
+    /** Color used for peachy-orange backgrounds */
+    private Color peachyOrange;
+
+    /** Main panel that holds the full menu UI */
+    private JPanel fullMenuPanel;
+
+    /** Array of available drinks */
+    private final String[] drinks = { "Americano", "Latte", "Cappuccino" };
+
+    /** Array of available cup sizes */
+    private final String[] sizes = { "Small", "Medium", "Large" };
+
+    /** Dropdown for selecting the drink type */
+    private JComboBox<String> drinkComboBox;
+
+    /** Dropdown for selecting the cup size */
+    private JComboBox<String> sizeComboBox;
+
+    /** Panel for base drink controls */
+    private JPanel baseDrinkPanel;
+
+    /** Array of base espresso options */
+    private final String[] baseEspressos = { "Light", "Standard", "Strong", "Custom" };
+
+    /** Dropdown for selecting base espresso type */
+    private JComboBox<String> baseEspresso;
+
+    /** Panel for base espresso options */
+    private JPanel baseEspressoPanel;
+
+    /** Spinner for custom base espresso ratio */
+    private JSpinner baseRatio;
+
+    /** Array of syrup add-ons */
+    private final String[] addOns = { "", "Hazelnut", "Vanilla", "Chocolate", "Almond", "Sucrose" };
+
+    /** Dropdown for selecting a syrup add-on */
+    private JComboBox<String> addOnSyrups;
+
+    /** Array of add-on espresso options */
+    private final String[] addOnEspressos = { "", "Light", "Standard", "Strong", "Custom" };
+
+    /** Dropdown for selecting add-on espresso type */
+    private JComboBox<String> addOnEspresso;
+
+    /** Panel for add-on espresso options */
+    private JPanel addOnEspressoPanel;
+
+    /** Spinner for custom add-on espresso ratio */
+    private JSpinner addOnRatio;
+
+    /** Panel that holds special menu items */
+    private JPanel specialMenuPanel;
+
+    /** Button to return to the interactions menu */
+    private JButton interactionsMenuButton;
+
+    /** Button to submit the drink configuration */
+    private JButton submitButton;
+
+    /** Label for the panel title */
+    private JLabel title;
+    /**
+     * Constructs a new {@code SimulateTruckPanel} with all the necessary GUI components
+     * for simulating a coffee drink sale. The panel includes controls for selecting
+     * drink type, cup size, base espresso strength (including custom ratios), syrup add-ons,
+     * and optional espresso shots. It also configures layout, colors, and event handling
+     * for dynamic input components.
+     *
+     * <p>This constructor organizes all interactive components using {@code BoxLayout}
+     * and {@code FlowLayout}, applies consistent visual styling with custom colors and fonts,
+     * and wires listeners to dynamically add or remove custom ratio fields based on selections.</p>
+     */
     public SimulateTruckPanel() {
         grayRed = new Color(194, 133, 131);
         darkBrown = new Color(96, 63, 38);
@@ -246,40 +303,86 @@ public class SimulateTruckPanel extends JPanel {
         fullMenuPanel.repaint();
     }
 
+    /**
+     * Returns the selected drink name from the drink combo box.
+     *
+     * @return the name of the selected drink
+     */
     public String getDrinkName() {
         return (String) drinkComboBox.getSelectedItem();
     }
 
+    /**
+     * Returns the selected cup size from the size combo box.
+     *
+     * @return the name of the selected cup size
+     */
     public String getCupName() {
         return (String) sizeComboBox.getSelectedItem();
     }
 
+    /**
+     * Returns the selected syrup add-on from the syrup combo box.
+     *
+     * @return the name of the selected syrup add-on
+     */
     public String getAddOn() {
         return (String) addOnSyrups.getSelectedItem();
     }
 
+    /**
+     * Returns the selected base espresso shot strength.
+     *
+     * @return the name of the selected base espresso strength
+     */
     public String getBaseShot() {
         return (String) baseEspresso.getSelectedItem();
     }
 
+    /**
+     * Returns the custom ratio value for the base espresso shot.
+     *
+     * @return the base espresso ratio value
+     */
     public int getBaseRatio() {
         return (Integer) baseRatio.getValue();
     }
 
+    /**
+     * Returns the selected additional espresso shot strength.
+     *
+     * @return the name of the selected additional espresso shot
+     */
     public String getAddOnShot() {
         return (String) addOnEspresso.getSelectedItem();
     }
 
+    /**
+     * Returns the custom ratio value for the additional espresso shot.
+     *
+     * @return the add-on espresso ratio value
+     */
     public int getAddOnRatio() {
         return (Integer) addOnRatio.getValue();
     }
 
+    /**
+     * Registers a listener to the submit button.
+     *
+     * @param listener the ActionListener to be triggered when the submit button is clicked
+     */
     public void addSubmitButtonListener(ActionListener listener) {
         submitButton.addActionListener(listener);
     }
 
+    /**
+     * Registers a listener to the back/interactions menu button.
+     *
+     * @param listener the ActionListener to be triggered when the interactions menu button is clicked
+     */
     public void addInteractionsMenuListener(ActionListener listener) {
         interactionsMenuButton.addActionListener(listener);
     }
+
 
 }
