@@ -47,7 +47,7 @@ public abstract class CoffeeTruck {
 
     public void setInventory(StorageBin storageBin) {
         this.inventory = storageBin;
-        coffeeMaker.setInventory(storageBin);
+        this.coffeeMaker.setInventory(storageBin);
     }
 
     public Receipt serveCoffee(String drinkName, String size, String espressoType) {
