@@ -18,11 +18,9 @@ import javax.swing.JPanel;
  * InteractionsMenuPanel
  */
 public class InteractionsMenuPanel extends JPanel {
-    private Color grayRed;
-    private Color lightRed;
     private Color pastelGrayOrange;
-    private Color brown;
     private Color darkBrown;
+    private Color peachyOrange;
     private JButton mainMenuButton;
     private JButton simulateTruckButton;
     private JButton viewTruckButton;
@@ -32,13 +30,10 @@ public class InteractionsMenuPanel extends JPanel {
     private JLabel title;
     private String[] truckList = { "" }; // test data
     private JComboBox<String> truckListComboBox;
-    private Color peachyOrange;
+
 
     public InteractionsMenuPanel() {
-        grayRed = new Color(194, 133, 131);
-        lightRed = new Color(248, 218, 217);
         pastelGrayOrange = new Color(216, 175, 157);
-        brown = new Color(108, 78, 49);
         darkBrown = new Color(96, 63, 38);
         peachyOrange = new Color(255, 243, 224);
         Dimension buttonSize = new Dimension(325, 50);
