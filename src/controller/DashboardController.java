@@ -13,10 +13,8 @@ import view.RootView;
 /**
  * Controller for the dashboard page in the coffee truck management system.
  * <p>
- * This class handles displaying an overview of deployed trucks, inventory
- * totals,
- * and aggregate sales. It also connects the dashboard view with user
- * interactions,
+ * This class handles displaying an overview of deployed trucks, inventory totals,
+ * and aggregate sales. It also connects the dashboard view with user interactions,
  * such as navigating back to the main menu.
  * </p>
  */
@@ -35,9 +33,9 @@ public class DashboardController extends AbstractPageController {
             new LargeCup(0)
     };
 
-    /**
-     * Predefined array of special inventory types tracked across special trucks.
-     */
+
+    /** Predefined array of special inventory types tracked across special trucks. */
+
     private Binable[] specialInventoryTypes = {
             new HazelnutSyrup(0),
             new VanillaSyrup(0),
@@ -144,6 +142,7 @@ public class DashboardController extends AbstractPageController {
     @Override
     public void goTo() {
 
+
         // Retrieve truck counts
         int specialCount = model.getSpecificTruckCount("Special");
         int regularCount = model.getSpecificTruckCount("Regular");
@@ -208,6 +207,7 @@ public class DashboardController extends AbstractPageController {
 
             }
         };
+
 
         controller.setCurrentOperation("ViewDashboard");
         view.getFrame().setPage(dashboardPanel);

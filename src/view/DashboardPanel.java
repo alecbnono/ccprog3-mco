@@ -97,10 +97,13 @@ public class DashboardPanel extends JPanel {
         this.add(title);
         this.add(Box.createRigidArea(new Dimension(0, 5)));
         this.add(trucksDeployedInfo);
-        this.add(allInventoriesInfo);
-        this.add(totalSales);
-        this.add(transactionsButton);
         this.add(Box.createRigidArea(new Dimension(0, 5)));
+        this.add(allInventoriesInfo);
+        this.add(Box.createRigidArea(new Dimension(0, 5)));
+        this.add(totalSales);
+        this.add(Box.createRigidArea(new Dimension(0, 5)));
+        this.add(transactionsButton);
+        this.add(Box.createRigidArea(new Dimension(0, 10)));
         this.add(mainMenuButton);
     }
 

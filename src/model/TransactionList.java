@@ -183,6 +183,7 @@ public class TransactionList {
                 addOnTotal += receipt.getPrice();
             }
         }
+
         double grandTotal = americanoTotal + latteTotal + cappuccinoTotal + addOnTotal;
         int grandCount = americanoCount + latteCount + cappuccinoCount + addOnCount;
 
@@ -192,6 +193,7 @@ public class TransactionList {
                 String.format("- %-12s %5d sold ₱%5.2f Total\n", "Cappuccino:", cappuccinoCount, cappuccinoTotal));
         output.append(String.format("- %-12s %5d sold ₱%5.2f Total\n", "Add-Ons:", addOnCount, addOnTotal));
         output.append(String.format("- %-12s %5d sold ₱%5.2f Total\n", "Grand Total:", grandCount, grandTotal));
+
 
         return output.toString();
     }
