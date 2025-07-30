@@ -8,22 +8,33 @@ import java.util.*;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * TransactionList
+ * Manages a collection of transaction receipts and provides
+ * utilities for reporting and exporting transaction data.
  */
 public class TransactionList {
 
     private ArrayList<Receipt> receipts;
 
+    /**
+     * Constructs an empty TransactionList.
+     */
     public TransactionList() {
         receipts = new ArrayList<>();
     }
 
+    /**
+     * Adds a receipt to the transaction list.
+     *
+     * @param receipt the receipt to add
+     */
     public void addReceipt(Receipt receipt) {
         receipts.add(receipt);
     }
 
     /**
-     * Builds a DefaultTableModel containing all receipts
+     * Builds a DefaultTableModel containing all recorded receipts.
+     *
+     * @return a table model of all transactions
      */
     public DefaultTableModel buildAllTransactionsTableModel() {
         DefaultTableModel model = new DefaultTableModel();
@@ -47,7 +58,9 @@ public class TransactionList {
     }
 
     /**
-     * Builds a map of DefaultTableModels grouped by truck location
+     * Builds a map of DefaultTableModels grouped by truck location.
+     *
+     * @return a map with location names as keys and corresponding transaction tables as values
      */
     public Map<String, DefaultTableModel> buildGroupedTransactionsTableModels() {
         Map<String, DefaultTableModel> models = new HashMap<>();
@@ -83,18 +96,21 @@ public class TransactionList {
     }
 
     /**
-     * Saves any DefaultTableModel to a .txt file
+     * Saves the given DefaultTableModel to a text file with aligned columns.
+     *
+     * @param model    the table model to save
+     * @param filename the file path to save to
      */
     public void saveTableModelToTxt(DefaultTableModel model, String filename) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
-            // Write column names
+            // Write column headers
             for (int col = 0; col < model.getColumnCount(); col++) {
                 writer.write(String.format("%-20s", model.getColumnName(col)));
             }
             writer.write("\n");
             writer.write("--------------------------------------------------------------------------------\n");
 
-            // Write rows
+            // Write table rows
             for (int row = 0; row < model.getRowCount(); row++) {
                 for (int col = 0; col < model.getColumnCount(); col++) {
                     writer.write(String.format("%-20s", model.getValueAt(row, col)));
@@ -110,13 +126,16 @@ public class TransactionList {
     }
 
     /**
-     * Helper method to save both all transactions and grouped tables
+     * Saves both the full transaction list and the per-location grouped tables to text files.
+     * The output files are named:
+     * - all_transactions.txt
+     * - transactions_{location}.txt for each truck location
      */
     public void saveAllTablesToFiles() {
         // Save all transactions
         saveTableModelToTxt(buildAllTransactionsTableModel(), "all_transactions.txt");
 
-        // Save per-location grouped tables
+        // Save grouped tables per location
         Map<String, DefaultTableModel> groupedModels = buildGroupedTransactionsTableModels();
         for (Map.Entry<String, DefaultTableModel> entry : groupedModels.entrySet()) {
             String location = entry.getKey().replaceAll("\\s+", "_").toLowerCase();
@@ -124,11 +143,15 @@ public class TransactionList {
         }
     }
 
+    /**
+     * Generates a textual summary of all drinks and add-ons sold across all transactions.
+     *
+     * @return a formatted string summarizing sales count and total revenue per category
+     */
     public String getAggregateSales() {
 
         StringBuilder output = new StringBuilder();
-
-        output.append(String.format("Combined Transaction Summary:\n"));
+        output.append("Combined Transaction Summary:\n");
 
         int americanoCount = 0;
         double americanoTotal = 0;
@@ -136,18 +159,19 @@ public class TransactionList {
         double latteTotal = 0;
         int cappuccinoCount = 0;
         double cappuccinoTotal = 0;
-
         int addOnCount = 0;
         double addOnTotal = 0;
 
         for (Receipt receipt : receipts) {
-            if (receipt.getProduct().equals("Americano")) {
+            String productName = receipt.getProduct().toString();
+
+            if (productName.equals("Americano")) {
                 americanoCount++;
                 americanoTotal += receipt.getPrice();
-            } else if (receipt.getProduct().equals("Latte")) {
+            } else if (productName.equals("Latte")) {
                 latteCount++;
                 latteTotal += receipt.getPrice();
-            } else if (receipt.getProduct().equals("Cappuccino")) {
+            } else if (productName.equals("Cappuccino")) {
                 cappuccinoCount++;
                 cappuccinoTotal += receipt.getPrice();
             } else {
@@ -161,6 +185,7 @@ public class TransactionList {
         output.append(
                 String.format("- %-11s %5d sold ₱%5.2f Total\n", "Cappuccino:", cappuccinoCount, cappuccinoTotal));
         output.append(String.format("- %-11s %5d sold ₱%5.2f Total\n", "Add-Ons:", addOnCount, addOnTotal));
+
         return output.toString();
     }
 }
