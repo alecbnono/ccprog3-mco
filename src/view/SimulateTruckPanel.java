@@ -11,46 +11,32 @@ import javax.swing.*;
  */
 public class SimulateTruckPanel extends JPanel {
     private Color grayRed;
-    private Color lightRed;
-    private Color pastelGrayOrange;
-    private Color brown;
     private Color darkBrown;
-    private Color lightGray;
     private Color peachyOrange;
     private JPanel fullMenuPanel;
-
     private final String[] drinks = { "Americano", "Latte", "Cappuccino" };
     private final String[] sizes = { "Small", "Medium", "Large" };
     private JComboBox<String> drinkComboBox;
     private JComboBox<String> sizeComboBox;
     private JPanel baseDrinkPanel;
-
     private final String[] baseEspressos = { "Light", "Standard", "Strong", "Custom" };
     private JComboBox<String> baseEspresso;
     private JPanel baseEspressoPanel;
     private JSpinner baseRatio;
-
     private final String[] addOns = { "", "Hazelnut", "Vanilla", "Chocolate", "Almond", "Sucrose" };
     private JComboBox<String> addOnSyrups;
-
     private final String[] addOnEspressos = { "", "Light", "Standard", "Strong", "Custom" };
     private JComboBox<String> addOnEspresso;
     private JPanel addOnEspressoPanel;
     private JSpinner addOnRatio;
-
     private JPanel specialMenuPanel;
-
     private JButton interactionsMenuButton;
     private JButton submitButton;
     private JLabel title;
 
     public SimulateTruckPanel() {
         grayRed = new Color(194, 133, 131);
-        lightRed = new Color(248, 218, 217);
-        pastelGrayOrange = new Color(216, 175, 157);
-        brown = new Color(108, 78, 49);
         darkBrown = new Color(96, 63, 38);
-        lightGray = new Color(217, 217, 217);
         peachyOrange = new Color(255, 243, 224);
         Dimension vertical = new Dimension(0, 15);
         Dimension comboBoxSize = new Dimension(150 ,40);
