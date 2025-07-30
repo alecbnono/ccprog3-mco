@@ -28,6 +28,7 @@ public class SpecialCoffeeTruck extends CoffeeTruck {
 
     public void setSpecialInventory(StorageBin specialInventory) {
         this.specialInventory = specialInventory;
+        this.coffeeMaker.setSpecialInventory(specialInventory);
     }
 
     public Receipt serveCoffee(String drinkName, String size, double espressoRatio) {

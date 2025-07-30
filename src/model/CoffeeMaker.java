@@ -6,6 +6,7 @@ package model;
 public class CoffeeMaker {
 
     private StorageBin inventory;
+    private StorageBin specialInventory;
 
     public CoffeeMaker(StorageBin inventory) {
         this.inventory = inventory;
@@ -13,6 +14,10 @@ public class CoffeeMaker {
 
     public void setInventory(StorageBin inventory) {
         this.inventory = inventory;
+    }
+
+    public void setSpecialInventory(StorageBin inventory) {
+        this.specialInventory = inventory;
     }
 
     public Espresso makeEspresso(double ratio) {
@@ -86,7 +91,7 @@ public class CoffeeMaker {
 
         AddOn addOn = selectAddOn(addOnName);
 
-        if (addOn.consume(1))
+        if (specialInventory.consume(addOnName, 1))
             return addOn;
 
         return null;
