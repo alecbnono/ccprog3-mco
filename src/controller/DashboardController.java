@@ -13,8 +13,10 @@ import view.RootView;
 /**
  * Controller for the dashboard page in the coffee truck management system.
  * <p>
- * This class handles displaying an overview of deployed trucks, inventory totals,
- * and aggregate sales. It also connects the dashboard view with user interactions,
+ * This class handles displaying an overview of deployed trucks, inventory
+ * totals,
+ * and aggregate sales. It also connects the dashboard view with user
+ * interactions,
  * such as navigating back to the main menu.
  * </p>
  */
@@ -33,8 +35,9 @@ public class DashboardController extends AbstractPageController {
             new LargeCup(0)
     };
 
-
-    /** Predefined array of special inventory types tracked across special trucks. */
+    /**
+     * Predefined array of special inventory types tracked across special trucks.
+     */
 
     private Binable[] specialInventoryTypes = {
             new HazelnutSyrup(0),
@@ -56,56 +59,6 @@ public class DashboardController extends AbstractPageController {
     public DashboardController(CoffeeBusiness model, RootView view, MasterController controller) {
         super(model, view, controller);
         dashboardPanel = new DashboardPanel();
-
-        // Retrieve truck counts
-        int specialCount = model.getSpecificTruckCount("Special");
-        int regularCount = model.getSpecificTruckCount("Regular");
-
-        // Prepare truck deployment summary
-        StringBuilder truckOutput = new StringBuilder();
-        truckOutput.append(String.format("Trucks Deployed Total:  %d\n", regularCount + specialCount));
-        truckOutput.append(String.format("- Regular Trucks:  %d\n", regularCount));
-        truckOutput.append(String.format("- Special Trucks:  %d\n", specialCount));
-
-        dashboardPanel.setTruckInfo(truckOutput.toString());
-
-        ArrayList<CoffeeTruck> trucks = model.getTrucks();
-
-        // Build inventory summary
-        StringBuilder inventoryOutput = new StringBuilder();
-        inventoryOutput.append(String.format("Inventory Overview (All Trucks):\n"));
-
-        // Sum regular inventory across all trucks
-        for (Binable item : regularInventoryTypes) {
-            double total = 0;
-            for (CoffeeTruck truck : trucks) {
-                total += truck.getInventory().getTotalAmount(item.getType());
-            }
-
-            if (item instanceof CoffeeCup) {
-                inventoryOutput.append(String.format("- %-20s %7.0f %s\n", item.getType(), total, item.getUnit()));
-            } else {
-                inventoryOutput.append(String.format("- %-20s %7.2f %s\n", item.getType(), total, item.getUnit()));
-            }
-        }
-
-        // Sum special inventory across all special trucks
-        for (Binable item : specialInventoryTypes) {
-            double total = 0;
-            for (CoffeeTruck truck : trucks) {
-                if (truck instanceof SpecialCoffeeTruck) {
-                    total += ((SpecialCoffeeTruck) truck).getSpecialInventory().getTotalAmount(item.getType());
-                }
-            }
-
-            inventoryOutput.append(String.format("- %-20s %7.2f %s\n", item.getType(), total, item.getUnit()));
-
-        }
-
-        dashboardPanel.setInventoryInfo(inventoryOutput.toString());
-
-        // Display total sales
-        dashboardPanel.setSalesInfo(model.getTransactionList().getAggregateSales());
 
         // Set up listener to go back to main menu
         ActionListener navigateMainMenu = new ActionListener() {
@@ -142,7 +95,6 @@ public class DashboardController extends AbstractPageController {
     @Override
     public void goTo() {
 
-
         // Retrieve truck counts
         int specialCount = model.getSpecificTruckCount("Special");
         int regularCount = model.getSpecificTruckCount("Regular");
@@ -192,22 +144,6 @@ public class DashboardController extends AbstractPageController {
 
         // Display total sales
         dashboardPanel.setSalesInfo(model.getTransactionList().getAggregateSales());
-
-        // Set up listener to go back to main menu
-        ActionListener navigateMainMenu = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                controller.getController("MainMenu").goTo();
-            }
-        };
-
-        ActionListener navigateTransactions = new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                controller.getController("TransactionList").goTo();
-
-            }
-        };
-
 
         controller.setCurrentOperation("ViewDashboard");
         view.getFrame().setPage(dashboardPanel);

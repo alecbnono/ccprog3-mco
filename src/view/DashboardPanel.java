@@ -3,14 +3,15 @@ package view;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import javax.swing.*;
+
 /**
  * Represents the Business Dashboard panel used in the JavaJeeps application.
  * <p>
  * Displays summarized information on:
  * <ul>
- *     <li>Trucks deployed</li>
- *     <li>Combined inventory levels</li>
- *     <li>Total sales statistics</li>
+ * <li>Trucks deployed</li>
+ * <li>Combined inventory levels</li>
+ * <li>Total sales statistics</li>
  * </ul>
  * Also includes a button to navigate back to the main menu.
  * </p>
@@ -33,6 +34,7 @@ public class DashboardPanel extends JPanel {
     private ImageIcon image;
     private ImageIcon asset1;
 
+    private JButton transactionsButton;
     private JButton mainMenuButton;
     private JTextArea totalSales;
     private JTextArea trucksDeployedInfo;
@@ -102,6 +104,13 @@ public class DashboardPanel extends JPanel {
         totalSales.setLineWrap(true);
         totalSales.setWrapStyleWord(true);
 
+        transactionsButton = new JButton("Transactions");
+        transactionsButton.setFont(new Font("Arial", Font.BOLD, 20));
+        transactionsButton.setForeground(darkBrown);
+        transactionsButton.setBackground(pastelGrayOrange);
+        transactionsButton.setMaximumSize(buttonSize);
+        transactionsButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         // Main menu button
         mainMenuButton = new JButton("Main Menu");
         mainMenuButton.setFont(new Font("Arial", Font.BOLD, 20));
@@ -112,13 +121,15 @@ public class DashboardPanel extends JPanel {
 
         // Add all components to panel
         this.add(title);
-        this.add(Box.createRigidArea(new Dimension(0, 15)));
+        this.add(Box.createRigidArea(new Dimension(0, 5)));
         this.add(trucksDeployedInfo);
-        this.add(Box.createRigidArea(new Dimension(0, 15)));
+        this.add(Box.createRigidArea(new Dimension(0, 5)));
         this.add(allInventoriesInfo);
-        this.add(Box.createRigidArea(new Dimension(0, 15)));
+        this.add(Box.createRigidArea(new Dimension(0, 5)));
         this.add(totalSales);
-        this.add(Box.createRigidArea(new Dimension(0, 15)));
+        this.add(Box.createRigidArea(new Dimension(0, 5)));
+        this.add(transactionsButton);
+        this.add(Box.createRigidArea(new Dimension(0, 5)));
         this.add(mainMenuButton);
     }
 
@@ -156,5 +167,9 @@ public class DashboardPanel extends JPanel {
      */
     public void addMainMenuListener(ActionListener listener) {
         mainMenuButton.addActionListener(listener);
+    }
+
+    public void addTransactionsListener(ActionListener listener) {
+        transactionsButton.addActionListener(listener);
     }
 }
